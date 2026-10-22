@@ -7,13 +7,13 @@ A complete, interlinked picture of **LLM routing**: systems that decide which mo
 2. [`research/05-gaps-and-agenda.md`](research/05-gaps-and-agenda.md): 13 gaps, how they depend on each other, priorities, and five theses
 3. [`research/06-research-proposals.md`](research/06-research-proposals.md): nine concrete research projects (P1–P9)
 
-Supporting documents: [plan and method](research/00-research-plan.md) · [timeline](research/02-timeline.md) · [taxonomy](research/03-taxonomy.md) · [projects and systems landscape](research/04-projects-landscape.md) · [wiki index](wiki/index.md) · [full bibliography (185 works)](sources/catalog.md)
+Supporting documents: [plan and method](research/00-research-plan.md) · [timeline](research/02-timeline.md) · [taxonomy](research/03-taxonomy.md) · [projects and systems landscape](research/04-projects-landscape.md) · [wiki index](wiki/index.md) · [full bibliography (199 works)](sources/catalog.md)
 
 ## Layout
 ```
 research/          narrative documents (plan, review, timeline, taxonomy, landscape, gaps, proposals)
 wiki/concepts/     concept nodes (hub: llm-routing.md)
-wiki/papers/       notes on about 40 pivotal papers
+wiki/papers/       notes on about 50 pivotal papers
 wiki/systems/      deployed and open-source routers and gateways
 wiki/gaps/         gap nodes G1–G13
 wiki/graph.json    generated link graph (nodes + edges)

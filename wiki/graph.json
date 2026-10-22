@@ -14,7 +14,7 @@
    "type": "index",
    "path": "research/01-literature-review.md",
    "in_degree": 2,
-   "out_degree": 65
+   "out_degree": 71
   },
   {
    "id": "02-timeline",
@@ -22,7 +22,7 @@
    "type": "index",
    "path": "research/02-timeline.md",
    "in_degree": 3,
-   "out_degree": 28
+   "out_degree": 31
   },
   {
    "id": "03-taxonomy",
@@ -54,7 +54,7 @@
    "type": "index",
    "path": "research/06-research-proposals.md",
    "in_degree": 11,
-   "out_degree": 28
+   "out_degree": 33
   },
   {
    "id": "agentic-routing",
@@ -125,7 +125,7 @@
    "title": "CARROT (ICLR WS 2025)",
    "type": "paper",
    "path": "wiki/papers/carrot.md",
-   "in_degree": 5,
+   "in_degree": 4,
    "out_degree": 4
   },
   {
@@ -141,7 +141,7 @@
    "title": "Cascades, deferral and self-assessment",
    "type": "concept",
    "path": "wiki/concepts/cascades.md",
-   "in_degree": 13,
+   "in_degree": 12,
    "out_degree": 9
   },
   {
@@ -197,7 +197,7 @@
    "title": "DialRouter \u2014 sequential multi-turn routing (2026)",
    "type": "paper",
    "path": "wiki/papers/dialrouter.md",
-   "in_degree": 2,
+   "in_degree": 7,
    "out_degree": 2
   },
   {
@@ -229,7 +229,7 @@
    "title": "FlexRouter \u2014 complementary model sets (COLM 2026)",
    "type": "paper",
    "path": "wiki/papers/flexrouter.md",
-   "in_degree": 2,
+   "in_degree": 4,
    "out_degree": 3
   },
   {
@@ -382,7 +382,7 @@
    "type": "index",
    "path": "wiki/index.md",
    "in_degree": 0,
-   "out_degree": 93
+   "out_degree": 101
   },
   {
    "id": "industry-landscape",
@@ -437,7 +437,7 @@
    "title": "LLMs Encode Their Failures (ICLR 2026)",
    "type": "paper",
    "path": "wiki/papers/llms-encode-failures.md",
-   "in_degree": 2,
+   "in_degree": 7,
    "out_degree": 4
   },
   {
@@ -453,7 +453,7 @@
    "title": "Auditing model substitution in LLM APIs (NeurIPS 2025)",
    "type": "paper",
    "path": "wiki/papers/model-substitution-audit.md",
-   "in_degree": 2,
+   "in_degree": 6,
    "out_degree": 3
   },
   {
@@ -493,7 +493,7 @@
    "title": "OpenRouter (gateway + Auto router)",
    "type": "system",
    "path": "wiki/systems/openrouter.md",
-   "in_degree": 5,
+   "in_degree": 4,
    "out_degree": 5
   },
   {
@@ -517,7 +517,7 @@
    "title": "Pandora's AI Model Routing Box (NeurIPS 2026)",
    "type": "paper",
    "path": "wiki/papers/pandora-router.md",
-   "in_degree": 2,
+   "in_degree": 7,
    "out_degree": 4
   },
   {
@@ -533,7 +533,7 @@
    "title": "PersonalizedRouter (TMLR 2025)",
    "type": "paper",
    "path": "wiki/papers/personalizedrouter.md",
-   "in_degree": 8,
+   "in_degree": 7,
    "out_degree": 2
   },
   {
@@ -549,7 +549,7 @@
    "title": "Routing with prefill activations (NVIDIA, 2026)",
    "type": "paper",
    "path": "wiki/papers/prefill-activation-router.md",
-   "in_degree": 10,
+   "in_degree": 9,
    "out_degree": 4
   },
   {
@@ -573,7 +573,7 @@
    "title": "RACER \u2014 risk-controlled set routing (ICML 2026)",
    "type": "paper",
    "path": "wiki/papers/racer.md",
-   "in_degree": 2,
+   "in_degree": 5,
    "out_degree": 2
   },
   {
@@ -589,7 +589,7 @@
    "title": "The Replay Gap (2026)",
    "type": "paper",
    "path": "wiki/papers/replay-gap.md",
-   "in_degree": 3,
+   "in_degree": 7,
    "out_degree": 5
   },
   {
@@ -621,7 +621,7 @@
    "title": "Route to Reason (2025)",
    "type": "paper",
    "path": "wiki/papers/route-to-reason.md",
-   "in_degree": 2,
+   "in_degree": 4,
    "out_degree": 3
   },
   {
@@ -645,7 +645,7 @@
    "title": "Router-R1 (NeurIPS 2025)",
    "type": "paper",
    "path": "wiki/papers/router-r1.md",
-   "in_degree": 11,
+   "in_degree": 10,
    "out_degree": 3
   },
   {
@@ -685,7 +685,7 @@
    "title": "RouterEval (EMNLP Findings 2025)",
    "type": "paper",
    "path": "wiki/papers/routereval.md",
-   "in_degree": 7,
+   "in_degree": 6,
    "out_degree": 1
   },
   {
@@ -757,7 +757,7 @@
    "title": "Unified routing and cascading (ICML 2025)",
    "type": "paper",
    "path": "wiki/papers/unified-routing-cascading.md",
-   "in_degree": 9,
+   "in_degree": 8,
    "out_degree": 3
   },
   {
@@ -781,7 +781,7 @@
    "title": "Routing, Cascades, and User Choice (ICLR 2026)",
    "type": "paper",
    "path": "wiki/papers/user-choice-stackelberg.md",
-   "in_degree": 8,
+   "in_degree": 7,
    "out_degree": 3
   },
   {
@@ -797,7 +797,7 @@
    "title": "vLLM Semantic Router",
    "type": "system",
    "path": "wiki/systems/vllm-semantic-router.md",
-   "in_degree": 6,
+   "in_degree": 7,
    "out_degree": 4
   },
   {
@@ -2008,6 +2008,10 @@
   },
   {
    "source": "index",
+   "target": "dialrouter"
+  },
+  {
+   "source": "index",
    "target": "dsc-robustness"
   },
   {
@@ -2017,6 +2021,10 @@
   {
    "source": "index",
    "target": "embedllm"
+  },
+  {
+   "source": "index",
+   "target": "flexrouter"
   },
   {
    "source": "index",
@@ -2116,7 +2124,15 @@
   },
   {
    "source": "index",
+   "target": "llms-encode-failures"
+  },
+  {
+   "source": "index",
    "target": "martian"
+  },
+  {
+   "source": "index",
+   "target": "model-substitution-audit"
   },
   {
    "source": "index",
@@ -2148,6 +2164,10 @@
   },
   {
    "source": "index",
+   "target": "pandora-router"
+  },
+  {
+   "source": "index",
    "target": "personalized-routing"
   },
   {
@@ -2172,7 +2192,15 @@
   },
   {
    "source": "index",
+   "target": "racer"
+  },
+  {
+   "source": "index",
    "target": "reasoning-effort-routing"
+  },
+  {
+   "source": "index",
+   "target": "replay-gap"
   },
   {
    "source": "index",
@@ -2185,6 +2213,10 @@
   {
    "source": "index",
    "target": "rerouting-llm-routers"
+  },
+  {
+   "source": "index",
+   "target": "route-to-reason"
   },
   {
    "source": "index",
@@ -3060,6 +3092,10 @@
   },
   {
    "source": "01-literature-review",
+   "target": "dialrouter"
+  },
+  {
+   "source": "01-literature-review",
    "target": "dsc-robustness"
   },
   {
@@ -3112,6 +3148,14 @@
   },
   {
    "source": "01-literature-review",
+   "target": "llms-encode-failures"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "model-substitution-audit"
+  },
+  {
+   "source": "01-literature-review",
    "target": "nvidia-llm-router"
   },
   {
@@ -3121,6 +3165,10 @@
   {
    "source": "01-literature-review",
    "target": "p2l"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "pandora-router"
   },
   {
    "source": "01-literature-review",
@@ -3144,7 +3192,15 @@
   },
   {
    "source": "01-literature-review",
+   "target": "racer"
+  },
+  {
+   "source": "01-literature-review",
    "target": "reasoning-effort-routing"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "replay-gap"
   },
   {
    "source": "01-literature-review",
@@ -3252,6 +3308,10 @@
   },
   {
    "source": "02-timeline",
+   "target": "dialrouter"
+  },
+  {
+   "source": "02-timeline",
    "target": "dsc-robustness"
   },
   {
@@ -3273,6 +3333,14 @@
   {
    "source": "02-timeline",
    "target": "llmrouterbench"
+  },
+  {
+   "source": "02-timeline",
+   "target": "llms-encode-failures"
+  },
+  {
+   "source": "02-timeline",
+   "target": "pandora-router"
   },
   {
    "source": "02-timeline",
@@ -3508,15 +3576,19 @@
   },
   {
    "source": "05-gaps-and-agenda",
-   "target": "carrot"
-  },
-  {
-   "source": "05-gaps-and-agenda",
    "target": "dart"
   },
   {
    "source": "05-gaps-and-agenda",
+   "target": "dialrouter"
+  },
+  {
+   "source": "05-gaps-and-agenda",
    "target": "dsc-robustness"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "flexrouter"
   },
   {
    "source": "05-gaps-and-agenda",
@@ -3580,6 +3652,14 @@
   },
   {
    "source": "05-gaps-and-agenda",
+   "target": "llms-encode-failures"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "model-substitution-audit"
+  },
+  {
+   "source": "05-gaps-and-agenda",
    "target": "multimodal-routing"
   },
   {
@@ -3588,11 +3668,11 @@
   },
   {
    "source": "05-gaps-and-agenda",
-   "target": "personalizedrouter"
+   "target": "pandora-router"
   },
   {
    "source": "05-gaps-and-agenda",
-   "target": "prefill-activation-router"
+   "target": "racer"
   },
   {
    "source": "05-gaps-and-agenda",
@@ -3600,15 +3680,11 @@
   },
   {
    "source": "05-gaps-and-agenda",
+   "target": "replay-gap"
+  },
+  {
+   "source": "05-gaps-and-agenda",
    "target": "rerouting-llm-routers"
-  },
-  {
-   "source": "05-gaps-and-agenda",
-   "target": "router-r1"
-  },
-  {
-   "source": "05-gaps-and-agenda",
-   "target": "routereval"
   },
   {
    "source": "05-gaps-and-agenda",
@@ -3624,19 +3700,11 @@
   },
   {
    "source": "05-gaps-and-agenda",
-   "target": "unified-routing-cascading"
-  },
-  {
-   "source": "05-gaps-and-agenda",
    "target": "uniroute"
   },
   {
    "source": "05-gaps-and-agenda",
    "target": "unsolvability-ceiling"
-  },
-  {
-   "source": "05-gaps-and-agenda",
-   "target": "user-choice-stackelberg"
   },
   {
    "source": "05-gaps-and-agenda",
@@ -3676,11 +3744,11 @@
   },
   {
    "source": "06-research-proposals",
-   "target": "cascades"
+   "target": "dart"
   },
   {
    "source": "06-research-proposals",
-   "target": "dart"
+   "target": "dialrouter"
   },
   {
    "source": "06-research-proposals",
@@ -3700,11 +3768,23 @@
   },
   {
    "source": "06-research-proposals",
-   "target": "openrouter"
+   "target": "llms-encode-failures"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "model-substitution-audit"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "pandora-router"
   },
   {
    "source": "06-research-proposals",
    "target": "prefill-activation-router"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "replay-gap"
   },
   {
    "source": "06-research-proposals",
@@ -3713,6 +3793,10 @@
   {
    "source": "06-research-proposals",
    "target": "rerouting-llm-routers"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "route-to-reason"
   },
   {
    "source": "06-research-proposals",
@@ -3753,6 +3837,10 @@
   {
    "source": "06-research-proposals",
    "target": "user-retrials"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "vllm-semantic-router"
   },
   {
    "source": "06-research-proposals",

@@ -18,7 +18,8 @@ title: Wiki index
 **Theory and critique:** [[unified-routing-cascading]] · [[routing-collapse]] · [[routing-plateau]] · [[routing-gap-noise]] · [[unsolvability-ceiling]] · [[task-type-gap]] · [[user-choice-stackelberg]] · [[user-retrials]]
 **Benchmarks:** [[routereval]] · [[llmrouterbench]] · [[routerarena]] · [[dsc-robustness]]
 **New action spaces:** [[router-r1]] · [[best-route]] · [[dart]] · [[citer]] · [[r2r]] · [[agentrouter-agentic]] · [[prefill-activation-router]] · [[arch-router]] · [[personalizedrouter]] · [[routerwise]]
-**Security:** [[rerouting-llm-routers]] · [[rerouteguard]]
+**Security:** [[rerouting-llm-routers]] · [[rerouteguard]] · [[model-substitution-audit]]
+**Added in iteration 2:** [[pandora-router]] · [[llms-encode-failures]] · [[replay-gap]] · [[racer]] · [[dialrouter]] · [[route-to-reason]] · [[flexrouter]]
 
 ## Systems
 [[gpt5-router]] · [[azure-model-router]] · [[bedrock-intelligent-prompt-routing]] · [[not-diamond]] · [[martian]] · [[openrouter]] · [[gateways-and-semantic-router-libs]] · [[vllm-semantic-router]] · [[nvidia-llm-router]] · [[llmrouter-library]]

@@ -24,7 +24,8 @@ Each proposal targets one or more gaps from [[05-gaps-and-agenda]] and is scoped
 **Hypothesis.** A policy that adaptively buys cheap observations before routing beats the query-only plateau at equal total cost.
 **Formulation.** Extend [[cascade-routing]] with *observation actions* o ∈ {none, proxy-model prefill activations, target prefill activations, 16/64-token draft from the cheap model, 2-draft agreement, full cheap answer + verifier}. Each has a cost c_o, and the policy maximizes E[U] − Σ c_o. Train with (a) myopic VOI estimates (expected decision improvement from a learned estimator conditioned on the observation) and (b) RL for multi-step acquisition.
 **Experiments.** On P1's benchmark: (i) the information value of each signal type, (ii) the Pareto frontier vs. the plateau band ([[routing-plateau]]), and (iii) cross-model transfer, i.e. whether one 1B proxy's activations predict success for *other* pool models ([[prefill-activation-router]]).
-**Why novel.** Prior work picks one signal type a priori ([[dart]], [[cascades]], prefill). None of it optimizes the *choice* of signal.
+**Closest prior art (found in iteration 2).** [[pandora-router]] (NeurIPS 2026) already frames *cheap vs expensive value estimation* as Pandora's Box, with closed-form VOI indices under a Gaussian model. [[llms-encode-failures]] (ICLR 2026) shows pre-generation probes are strong routing signals.
+**What is still novel here.** (a) A menu of *heterogeneous* observation types with very different costs and informativeness, rather than one cheap and one expensive estimator. (b) Observations of one model that inform the success of *other* models (cross-model transfer), which breaks Pandora's independence assumption. (c) Multi-step acquisition learned by RL rather than closed-form indices. (d) Evaluation on P1's noise-aware labels. Pandora's Router and probe routers are the baselines to beat.
 **Risk.** Observation costs may be hard to compare across hardware. Report both FLOPs and $.
 
 ## P3: Off-policy router learning and evaluation from logged feedback (G4, G13)
@@ -36,19 +37,20 @@ Each proposal targets one or more gaps from [[05-gaps-and-agenda]] and is scoped
 4. Release the simulator plus a logged dataset format, so that labs with production traffic can share logs safely.
 **Contribution.** It moves the methodology toward how [[gpt5-router]]-style systems actually learn.
 
-## P4: Session-level routing with switching costs (G5, G8)
-**Hypothesis.** Policies that model switching costs (cache loss, style discontinuity) beat per-turn routers on cost per *successful session*.
+## P4: Session-level routing with real switch economics (G5, G8)
+**Re-scoped in iteration 2.** Sequential multi-turn routers already exist ([[dialrouter]], SeqRoute, MTRouter), so this is no longer a first-formulation paper.
+**Hypothesis.** Modelling *real* provider cache economics (write/read tiers, TTLs, timing) and continuity costs changes the optimal policy relative to existing sequential routers. Those routers treat a switch as re-billing the history at the input price.
 **Method.** An MDP over multi-turn conversations whose state is (history features, current model, cache status). Cost includes re-prefill of the context on switch, using real prompt-caching price discounts. Train with fitted Q-iteration on multi-turn datasets (e.g. MT-Bench-101-style or WildChat-style) with simulated outcomes.
 **Measures.** Cost per resolved session, number of switches, and user-model-estimated satisfaction.
 
 ## P5: Credit-assigned agentic routing (G6, G9)
 **Hypothesis.** Step-level routers trained with counterfactual step replays outperform both trajectory-label routers and fixed tiering.
-**Method.** For agent benchmarks (software engineering, web, data analysis), log trajectories with a strong model, then for sampled steps t *replay with a weaker model* and continue, estimating Δsuccess(t) as step-level credit. Train a value model over harness state ([[agentic-routing]]), with escalation triggers on tool errors or loops (a cascade in time). Evaluate against AgentRouter-style tiering ([[agentrouter-agentic]]) and [[router-r1]].
+**Method.** For agent benchmarks (software engineering, web, data analysis), log trajectories with a strong model, then for sampled steps t *replay with a weaker model* and continue, estimating Δsuccess(t) as step-level credit. Train a value model over harness state ([[agentic-routing]]), with escalation triggers on tool errors or loops (a cascade in time). Evaluate against AgentRouter-style tiering ([[agentrouter-agentic]]) and [[router-r1]]. **All evaluation uses live forked re-execution with same-model control forks**, because [[replay-gap]] (2026) shows log-stitching replay mispredicts every success-relevant outcome of model switching on SWE-bench Verified.
 **Security add-on.** Measure how a malicious intermediary or rerouting gadget in tool outputs (indirect injection) can manipulate step routing ([[router-security]]).
 
 ## P6: One budget, all knobs, a unified compute router (G7)
 **Hypothesis.** A shared quality estimator over (model, effort, n samples, aggregation) achieves a better cost–quality frontier than routing each knob separately.
-**Method.** Enumerate configurations for 3 hybrid-reasoning models (thinking off / low / high) × n ∈ {1, 3, 5} × {majority, reward-model best-of-n}. Learn q̂(x, config) with configuration embeddings (an IRT-style ability per config, cf. RADAR and [[irt-router]]), and route by utility. Compare against [[best-route]], [[dart]] and model-only routing. Fit "compute-optimal routing" scaling curves.
+**Method.** Enumerate configurations for 3 hybrid-reasoning models (thinking off / low / high) × n ∈ {1, 3, 5} × {majority, reward-model best-of-n}. Learn q̂(x, config) with configuration embeddings (an IRT-style ability per config, cf. RADAR and [[irt-router]]), and route by utility. Compare against [[best-route]], [[route-to-reason]], [[dart]] and model-only routing. Use a single cost accounting that includes router, verifier and queueing costs, since the 2026 adaptive-computation survey finds most reported savings incomparable without one. Fit "compute-optimal routing" scaling curves.
 
 ## P7: Active cold-start profiling with computerized adaptive testing (G3, G10)
 **Hypothesis.** Adaptive selection of probe queries (CAT on an IRT model) profiles a new model to a target routing-regret level with about 5–10× fewer probes than random anchors ([[zerorouter]], [[uniroute]]).
@@ -58,9 +60,10 @@ Each proposal targets one or more gaps from [[05-gaps-and-agenda]] and is scoped
 **Hypothesis.** Routers can be made robust to confounder gadgets with bounded cost, and a safety floor (risky intents are never routed below an alignment tier) removes the jailbreak-to-weak-model failure.
 **Method.** (i) Adversarial training with gadget search in the loop ([[rerouting-llm-routers]]). (ii) Randomized-smoothing-style certification over token insertions for embedding routers. (iii) Joint router plus guardrail with a constrained objective. (iv) Adaptive attacks against detectors ([[rerouteguard]]). (v) The DSC benchmark ([[dsc-robustness]]) as a safety evaluation, with cost-escalation DoS budgets.
 
-## P9: Auditing routed endpoints (G13)
-**Hypothesis.** Black-box statistical tests can detect, with few queries, when a routed endpoint ("one model name") serves a cheaper model or effort level than claimed.
-**Method.** Response-distribution fingerprints per underlying model (length, token statistics, refusal patterns, latency profile), then sequential hypothesis tests on an endpoint's responses. Applications: consumer audits of provider routers ([[gpt5-router]], [[azure-model-router]]) and verification of third-party gateways ([[openrouter]]). Pair this with a disclosure-norm proposal.
+## P9: Verifiable routing disclosure (G13), re-scoped
+**Why re-scoped.** [[model-substitution-audit]] (NeurIPS 2025) shows software-only detection of model substitution is unreliable, so a purely black-box audit is unlikely to work.
+**Hypothesis.** A routed endpoint can cheaply *prove* which model and effort answered each request, using TEE attestation plus signed per-response routing receipts. Statistical spot-checks then only need to verify the receipts, not infer the model.
+**Method.** Design a receipt format (model id, version hash, effort, router decision features), prototype attestation on an open-weight serving stack with [[vllm-semantic-router]] as the router, and measure overhead. Threat model: dishonest providers ([[gpt5-router]], [[azure-model-router]]) and malicious intermediaries (*Your Agent Is Mine*: 9 of 428 measured routers injected code; see [[router-security]]).
 
 ---
 

@@ -11,18 +11,18 @@ The 2026 critical papers ([[oracle-gap]]) change the question. It is no longer "
 | # | Gap | One-line diagnosis | Evidence nodes |
 |---|---|---|---|
 | G1 | [[gap-evaluation-validity]] | Oracle inflated by noise and artifacts; ties within noise; no task-type baseline | [[routing-gap-noise]], [[unsolvability-ceiling]], [[routing-plateau]] |
-| G2 | [[gap-query-only-signal-ceiling]] | Query embeddings are saturated; nobody optimizes *what to observe* | [[unified-routing-cascading]], [[prefill-activation-router]], [[dart]] |
+| G2 | [[gap-query-only-signal-ceiling]] | Query embeddings are saturated; VOI routing exists only in a two-level form | [[pandora-router]], [[llms-encode-failures]], [[dart]] |
 | G3 | [[gap-nonstationary-pools]] | Models, prices and versions change weekly; probe design ad hoc | [[uniroute]], [[zerorouter]] |
 | G4 | [[gap-learning-from-logs]] | Deployment gives bandit, implicit, confounded feedback; academia uses full-information matrices | [[user-retrials]], [[gpt5-router]] |
-| G5 | [[gap-session-level-routing]] | Switching costs (cache, style, state) across turns ignored | [[personalizedrouter]] |
-| G6 | [[gap-agentic-credit-assignment]] | Step-level decisions, trajectory-level labels | [[agentrouter-agentic]], [[router-r1]] |
+| G5 | [[gap-session-level-routing]] | Sequential routers emerged in 2026, but on simulated users and naive switch costs | [[dialrouter]] |
+| G6 | [[gap-agentic-credit-assignment]] | Step-level decisions, trajectory-level labels; replay evaluation unsound | [[agentrouter-agentic]], [[replay-gap]] |
 | G7 | [[gap-unified-compute-allocation]] | Model, effort, samples, tools and retrieval routed separately | [[best-route]], [[reasoning-effort-routing]] |
 | G8 | [[gap-serving-coupling]] | Quality routers blind to queues, caches, energy | [[routerwise]] |
 | G9 | [[gap-adversarial-robustness]] | Router is an unprotected control plane; safety not an objective | [[rerouting-llm-routers]], [[dsc-robustness]] |
-| G10 | [[gap-guarantees-under-shift]] | Guarantees assume i.i.d.; operators need "never worse than baseline" | [[carrot]] |
-| G11 | [[gap-pool-design]] | Which models belong in the pool is unprincipled | [[llmrouterbench]], [[routereval]] |
+| G10 | [[gap-guarantees-under-shift]] | Risk control exists under exchangeability (RACER); nothing holds under shift | [[racer]] |
+| G11 | [[gap-pool-design]] | Per-query complementary sets solved (FlexRouter); deployment pool design is not | [[flexrouter]], [[llmrouterbench]] |
 | G12 | [[gap-coverage]] | English, text, short-context, generic domains only | [[multimodal-routing]] |
-| G13 | [[gap-transparency-and-control]] | Provider routers misaligned with users; no auditing | [[user-choice-stackelberg]], [[gpt5-router]] |
+| G13 | [[gap-transparency-and-control]] | Provider routers misaligned with users; black-box auditing unreliable, so attestation is needed | [[model-substitution-audit]], [[gpt5-router]] |
 
 ## How the gaps depend on each other
 
@@ -56,11 +56,14 @@ graph LR
 | ★★ | G9 Robust and safety-aware routing | Attacks are cheap; defenses immature | High |
 | ★★ | G3 Active cold-start profiling | Weekly model releases | High: IRT/CAT tools exist |
 | ★ | G8 Serving co-design | Needs a systems testbed | Medium-low |
-| ★ | G5 Session routing | Few datasets with switching | Medium |
+| ★ | G5 Session routing | Active since 2026; remaining value is in real switch economics and real users | Medium |
 | ★ | G10 Guarantees under shift | Theory-heavy, high value to operators | Medium |
 | ★ | G11 Pool design | Cheap to study offline on RouterEval-scale data | High |
 | ★ | G12 Coverage | Dataset-building effort | Medium |
 | ★ | G13 Auditing and control | Policy relevance; fingerprinting methods exist | Medium |
+
+## Stress test (iteration 2)
+Each gap was searched for 2025–26 prior art. Results: **G5 was overstated** (sequential multi-turn routers exist) and has been rewritten. **G2, G4, G7, G10, G11 and G13 narrowed**, with the specific remaining open parts recorded in each gap note. **G1, G3, G8, G9 and G12 stood**: no counter-evidence found, and multilingual *model* routing in particular has no benchmark. No public live-traffic A/B results for learned routers were found, which supports G4.
 
 ## Five theses for pushing the edge
 1. **Routing is an information-acquisition problem, not a classification problem.** The next gains come from deciding *what to look at* (activations, drafts, probes) under a cost, which is cascade routing with learned observation actions.

@@ -81,14 +81,17 @@ The **oracle router**, which picks the cheapest correct model for every query, i
 - **Routing collapse** ([[routing-collapse]]): decision-misaligned training over-selects the strongest model. EquiRouter's ranking loss fixes part of it.
 
 **Frontier expansions:**
-- *Richer signals*: routing on **prefill activations** ([[prefill-activation-router]]) and on **draft agreement** for thinking budgets ([[dart]]).
+- *Richer signals*: routing on **prefill activations** ([[prefill-activation-router]]), **pre-generation probes** ([[llms-encode-failures]], ICLR 2026), and **draft agreement** for thinking budgets ([[dart]]). **Pandora's Router** ([[pandora-router]], NeurIPS 2026) decides *when* paying for an expensive value estimate is worth it.
+- *Guarantees*: **RACER** ([[racer]], ICML 2026) gives set-valued routing with distribution-free misrouting-risk control.
+- *Sessions*: sequential multi-turn routers ([[dialrouter]], SeqRoute, MTRouter).
+- *Evaluation of agent routing*: **The Replay Gap** ([[replay-gap]]) shows log-replay evaluation of per-step model switching is unsound.
 - *Agents*: per-step routing (AgentRouter, [[agentrouter-agentic]]) and harness-native data flywheels ([[agentic-routing]]).
 - *Serving*: joint placement and routing under TTFT SLOs ([[routerwise]]), hardware-aware routing (HW-Router), batch-prompt-aware routing (RoBatch), energy (GreenServ). See [[serving-aware-routing]].
 - *Cold start*: ZeroRouter ([[zerorouter]]) and RouteProfile.
 - *Economics*: Stackelberg provider–user games ([[user-choice-stackelberg]]), learning from user retrials ([[user-retrials]]), truthful auctions.
-- *Security*: RerouteGuard ([[rerouteguard]]), R2A, malicious intermediaries in agent pipelines.
+- *Security*: RerouteGuard ([[rerouteguard]]), R2A, and malicious intermediaries: of 428 measured API routers, 9 injected code and 17 touched planted credentials. Software-only detection of model substitution is unreliable ([[model-substitution-audit]]).
 - *Infrastructure*: the LLMRouter library and xRouteBench ([[llmrouter-library]]) put 16+ routers behind one interface. Its conclusion is that no single router wins everywhere.
-- *Survey*: Moslem & Kelleher's routing-and-cascading survey (Feb 2026).
+- *Surveys*: Moslem & Kelleher's routing-and-cascading survey (Feb 2026), and a unified survey of routing, cascades and test-time scaling as adaptive computation (Jun 2026). The latter finds reported savings often incomparable because router, verifier and queue costs are counted inconsistently.
 
 ## 7. What we know with reasonable confidence
 1. **Routing pays in practice when the pool is cost-heterogeneous and traffic is easy-skewed.** Most savings come from sending easy queries to cheap models, which simple classifiers already capture.

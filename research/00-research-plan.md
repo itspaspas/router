@@ -42,4 +42,5 @@ Wiki notes quote numbers **only** from V sources, or from K sources where the nu
 
 ## Iteration log
 - **Iteration 1 (2026-10-22):** scope, catalog of 185 works, about 90 wiki nodes, literature review, gaps G1–G13, proposals P1–P9.
+- **Iteration 2:** 14 sources added (13 checked) and 16 existing entries upgraded to checked status (72 checked of 199); 8 new paper notes; every gap stress-tested against 2025–26 prior art (G5 rewritten; G2, G4, G7, G10, G11, G13 narrowed); P2, P4, P5, P6 and P9 re-scoped.
 - **Next iterations:** deepen the I-flagged entries (read abstracts), add per-paper notes for the 2026 wave, add a quantitative comparison table across benchmarks, and stress-test the gap list against counter-evidence.
