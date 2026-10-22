@@ -1,3 +1,4 @@
+import asyncio
 import dataclasses
 import json
 
@@ -91,52 +92,104 @@ async def test_body_not_mutated(respx_mock, cfg_tiers, client):
     assert body["model"] == "orig"
 
 
-class _FakeClient:
-    """Open_stream stand-in that records whether its generators were closed."""
+class _SpyStream:
+    """Async-iterator spy over scripted items. Counts aclose() calls made by the executor.
 
-    def __init__(self, scripts):
-        self.scripts = list(scripts)
-        self.closed = []
+    Unlike a plain async generator, it stays "open" until aclose() is called, so a test can
+    only pass if the executor itself closes it. A script item "hang" blocks forever.
+    """
+
+    def __init__(self, script):
+        self._script = list(script)
+        self.aclose_calls = 0
+
+    def __aiter__(self):
+        return self
+
+    async def __anext__(self):
+        if not self._script:
+            raise StopAsyncIteration
+        item = self._script.pop(0)
+        if item == "hang":
+            await asyncio.Event().wait()
+        if isinstance(item, Exception):
+            raise item
+        return item
+
+    async def aclose(self):
+        self.aclose_calls += 1
+
+
+class _FakeClient:
+    def __init__(self, *scripts):
+        self.spies = [_SpyStream(s) for s in scripts]
+        self.bodies = []
+        self._next = 0
 
     def open_stream(self, body):
-        script = self.scripts.pop(0)
-        idx = len(self.closed)
-        self.closed.append(False)
-
-        async def gen():
-            try:
-                for item in script:
-                    if isinstance(item, Exception):
-                        raise item
-                    yield item
-            finally:
-                self.closed[idx] = True
-
-        return gen()
+        self.bodies.append(body)
+        spy = self.spies[self._next]
+        self._next += 1
+        return spy
 
 
 async def test_early_consumer_stop_closes_upstream(cfg_tiers):
-    fake = _FakeClient([[b"a", b"b", b"c"]])
+    fake = _FakeClient([b"a", b"b", b"c"])
     r = await execute(AUTO, BODY, fake, cfg_tiers, stream=True)
-    it = r.stream.__aiter__()
-    assert await it.__anext__() == b"a"
+    assert await r.stream.__anext__() == b"a"
+    assert fake.spies[0].aclose_calls == 0
     await r.stream.aclose()
-    assert fake.closed == [True]
+    assert fake.spies[0].aclose_calls == 1
+
+
+async def test_unstarted_stream_aclose_closes_upstream(cfg_tiers):
+    fake = _FakeClient([b"a"])
+    r = await execute(AUTO, BODY, fake, cfg_tiers, stream=True)
+    await r.stream.aclose()
+    assert fake.spies[0].aclose_calls == 1
 
 
 async def test_mid_stream_error_propagates_without_fallback(cfg_tiers):
-    fake = _FakeClient([[b"a", UpstreamError("connection")], [b"zzz"]])
+    fake = _FakeClient([b"a", UpstreamError("connection")], [b"zzz"])
     r = await execute(AUTO, BODY, fake, cfg_tiers, stream=True)
     got = []
     with pytest.raises(UpstreamError):
         async for c in r.stream:
             got.append(c)
-    assert got == [b"a"] and r.attempts == ["auto"] and len(fake.scripts) == 1
-    assert fake.closed == [True]
+    assert got == [b"a"] and r.attempts == ["auto"] and len(fake.bodies) == 1
+    # the stream's own error path must close the upstream (consumer never calls aclose)
+    assert fake.spies[0].aclose_calls == 1
 
 
 async def test_failed_attempt_stream_is_closed(cfg_tiers):
-    fake = _FakeClient([[UpstreamError("upstream_5xx", 502)], [b"ok"]])
+    fake = _FakeClient([UpstreamError("upstream_5xx", 502)], [b"ok"])
     r = await execute(AUTO, BODY, fake, cfg_tiers, stream=True)
-    assert r.attempts == ["auto", "medium"] and fake.closed[0] is True
+    assert r.attempts == ["auto", "medium"]
+    assert fake.spies[0].aclose_calls == 1  # abandoned attempt closed by the executor
+    assert fake.spies[1].aclose_calls == 0  # winning stream still open
     assert [c async for c in r.stream] == [b"ok"]
+    assert fake.spies[1].aclose_calls == 1
+
+
+async def test_cancelled_first_chunk_closes_upstream(cfg_tiers):
+    fake = _FakeClient(["hang"])
+    task = asyncio.create_task(execute(AUTO, BODY, fake, cfg_tiers, stream=True))
+    await asyncio.sleep(0.01)
+    task.cancel()
+    with pytest.raises(asyncio.CancelledError):
+        await task
+    assert fake.spies[0].aclose_calls == 1
+
+
+async def test_stream_4xx_not_escalated(respx_mock, cfg_tiers, client):
+    respx_mock.post(URL).respond(400, json={"error": {"message": "bad"}})
+    with pytest.raises(UpstreamError) as e:
+        await execute(AUTO, {**BODY, "stream": True}, client, cfg_tiers, stream=True)
+    assert e.value.status == 400 and len(respx_mock.calls) == 1
+
+
+async def test_stream_all_attempts_fail_raises_last_error(respx_mock, cfg_tiers, client):
+    respx_mock.post(URL).mock(side_effect=[httpx.Response(500), httpx.Response(502), httpx.Response(503)])
+    with pytest.raises(UpstreamError) as e:
+        await execute(AUTO, {**BODY, "stream": True}, client, cfg_tiers, stream=True)
+    assert e.value.status == 503 and len(respx_mock.calls) == 3
