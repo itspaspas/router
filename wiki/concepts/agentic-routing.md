@@ -13,3 +13,5 @@ In agent loops (plan → tool call → observe → …), the unit of routing is 
 - Multi-agent: MasRouter ([[collaborative-routing]]).
 
 **Gaps** ([[gap-agentic-credit-assignment]]): credit assignment of a final outcome to step-level routing choices; switching cost (context re-prefill); safety, since a malicious router or intermediary can hijack agents (*Your Agent Is Mine*, CCS 2026; see [[router-security]]); and few standard agent-routing benchmarks.
+
+**Evaluation warning.** [[replay-gap]] (2026) shows that log-replay evaluation of per-step model switching on SWE-bench Verified mispredicts every success-relevant outcome. Agent-routing results that rely on spliced logs should be treated as unverified.

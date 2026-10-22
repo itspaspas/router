@@ -99,6 +99,7 @@ graph LR
   nonparametric-routers --> personalized-routing
   oracle-gap --> gap-evaluation-validity
   oracle-gap --> gap-query-only-signal-ceiling
+  personalized-routing --> gap-session-level-routing
   personalized-routing --> gap-transparency-and-control
   predictive-routers --> cold-start-and-model-representation
   predictive-routers --> nonparametric-routers
@@ -135,9 +136,10 @@ graph LR
   gap-query-only-signal-ceiling --> cascades
   gap-query-only-signal-ceiling --> gap-serving-coupling
   gap-serving-coupling --> token-level-routing
-  gap-session-level-routing --> router-evaluation
+  gap-session-level-routing --> gap-learning-from-logs
   gap-session-level-routing --> serving-aware-routing
   gap-transparency-and-control --> economics-and-incentives
+  gap-transparency-and-control --> router-security
   gap-unified-compute-allocation --> collaborative-routing
   gap-unified-compute-allocation --> predictive-routers
   gap-unified-compute-allocation --> reasoning-effort-routing

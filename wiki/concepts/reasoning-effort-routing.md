@@ -10,7 +10,8 @@ Since 2025, frontier models have exposed *effort knobs* (thinking on/off, thinki
 - **Model ↔ reasoning model**: CP-Router uses conformal sets to choose LLM vs. LRM; GPT-5's production router chooses between main and thinking variants ([[gpt5-router]]).
 - **Think or not (same model)**: Think When Needed (SIGIR 2026); probe-based "pre-decisional" reasoning gates; [[dart]], which is training-free and decides via no-think draft agreement.
 - **Budget-aware IRT**: RADAR treats (model, budget) pairs as respondents in an IRT model.
-- **Samples as a dimension**: [[best-route]] routes jointly over model and best-of-n.
+- **Samples as a dimension**: [[best-route]] routes jointly over model and best-of-n (up to 60% cost cut, <1% drop).
+- **Strategy as a dimension**: [[route-to-reason]] routes jointly over model and reasoning strategy (>60% token cut).
 - **Precision as a dimension**: DMR routes across quantization levels of one model.
 - **Step-level effort in agents**: per-step high/medium/low effort selection ([[agentic-routing]]).
 

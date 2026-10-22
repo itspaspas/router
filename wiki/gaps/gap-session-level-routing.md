@@ -1,12 +1,16 @@
 ---
 type: gap
 title: G5 Session- and conversation-level routing
-sources: [gmtrouter2025, openai2025gpt5, mahmood2026userchoice]
+sources: [zhang2026dialrouter, mtrouter2026, seqroute2026, gmtrouter2025, openai2025gpt5, mahmood2026userchoice]
 ---
-# G5: Routing is studied per query, but users live in sessions
+# G5: Session-level routing is emerging (2026) but rests on simulated sessions
 
-**Evidence.** Nearly all benchmarks are single-turn ([[router-evaluation]]). GMTRouter models multi-turn *preferences* but not switching dynamics. GPT-5's router switches models mid-conversation, and users noticed ([[gpt5-router]]).
+**Revised in iteration 2.** The first draft called this area "unstudied". That was wrong. In 2026 several papers model multi-turn routing as sequential decision-making: [[dialrouter]] (MCTS, then a distilled policy), SeqRoute (finite-horizon MDP, offline RL under a global budget), MTRouter (history–model joint embeddings, explicitly noting that switching breaks prompt caching) and SWRouter. GMTRouter models multi-turn *preferences*.
 
-**What is missing.** A formulation as an MDP with **switching costs**: losing the prompt/KV cache (re-prefill of a long context on a new model), style and persona discontinuity, and tool-state transfer. Also missing are the *option value* of starting cheap and escalating later in the session, and routing on *conversation trajectory* features (frustration, repeated corrections). Prompt-caching price discounts make "stickiness" economically significant and create an interesting interaction with [[serving-aware-routing]].
+**What is still missing.**
+1. **Real switch economics.** Papers model switch cost as re-billing the history at the input price. Real providers have cache write/read tiers, cache TTLs and per-provider KV reuse, so the true switch cost depends on timing and cache state ([[serving-aware-routing]]).
+2. **Real users.** Rewards come from LLM judges or simulated users. No public dataset logs *routed* sessions with outcomes. GPT-5's router is the only large-scale deployment, and its data is private ([[gpt5-router]], [[gap-learning-from-logs]]).
+3. **Continuity costs beyond money**: style, persona and memory inconsistency after a switch, which users notice (GPT-5 backlash).
+4. **Trajectory signals.** Frustration, repeated corrections and abandonment as routing features. These are linked to the user-choice game ([[user-choice-stackelberg]]).
 
-**Proposal.** P4 in [[06-research-proposals]].
+**Proposal.** P4 in [[06-research-proposals]] is re-scoped to these four points.

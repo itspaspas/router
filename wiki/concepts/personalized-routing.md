@@ -13,3 +13,5 @@ sources: [tran2025archrouter, dai2025personalized, gmtrouter2025, ong2024routell
 - **Implicit feedback**: GPT-5's router trains on model switches, preference rates and correctness ([[gpt5-router]]); user retrials as bandit feedback ([[user-retrials]]).
 
 **Gap.** User *agency*. The GPT-5 launch backlash showed that opaque routing erodes trust. Routing policies that are controllable, explainable (cf. ROUTESPLAIN) and contestable are almost unstudied ([[gap-transparency-and-control]]).
+
+**Multi-turn and sequential routing (2026).** [[dialrouter]] (MCTS plus a distilled policy), SeqRoute (MDP with offline RL under a budget), MTRouter (history–model embeddings; switching breaks prompt caching). See [[gap-session-level-routing]].

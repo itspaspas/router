@@ -12,3 +12,5 @@ sources: [sakota2023forc, optllm2024, omnirouter2025, metallm2024, wang2025mixll
 **Learning from logs.** Causal LLM Routing (NeurIPS 2025) learns from *observational* data (logged decisions) with an end-to-end regret objective. Bae et al. (2026) learn routing *and scheduling* from user retrials using contextual queueing bandits ([[user-retrials]]). Both point to the largely untapped resource of production logs ([[gap-learning-from-logs]]).
 
 **Mechanisms.** Truthful reverse auctions (AAMAS 2026) treat providers as strategic bidders ([[economics-and-incentives]]).
+
+**Verified details (iteration 2).** PILOT is a preference-prior LinUCB with an online multi-choice-knapsack budget policy. MixLLM reports 97.25% of GPT-4 quality at 24.18% cost under a time constraint. BaRP (2025) trains under pure bandit feedback. Causal LLM Routing uses surrogate regret losses (a classification upper bound and a softmax-weighted approximation) with causal adjustment for the logging policy.

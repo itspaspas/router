@@ -15,3 +15,5 @@ Instead of choosing *one* model, a router composes several.
 - **Finer granularity**: [[token-level-routing]], [[agentic-routing]].
 
 **Tension.** Composition raises the ceiling *above* the single-model oracle that most routing benchmarks use, so benchmarks built on "pick one" understate what is possible ([[router-evaluation]]).
+
+**Set-valued routing.** [[racer]] (ICML 2026) returns a calibrated *set* of models with misrouting-risk control, and [[flexrouter]] (COLM 2026) picks complementary sets via DPPs. Both sit between single-model routing and full ensembles.

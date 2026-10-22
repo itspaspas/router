@@ -53,7 +53,7 @@
    "title": "Research proposals P1\u2013P9",
    "type": "index",
    "path": "research/06-research-proposals.md",
-   "in_degree": 10,
+   "in_degree": 11,
    "out_degree": 28
   },
   {
@@ -61,8 +61,8 @@
    "title": "Agentic (step-level) routing",
    "type": "concept",
    "path": "wiki/concepts/agentic-routing.md",
-   "in_degree": 11,
-   "out_degree": 4
+   "in_degree": 12,
+   "out_degree": 5
   },
   {
    "id": "agentrouter-agentic",
@@ -109,7 +109,7 @@
    "title": "BEST-Route (ICML 2025)",
    "type": "paper",
    "path": "wiki/papers/best-route.md",
-   "in_degree": 6,
+   "in_degree": 7,
    "out_degree": 2
   },
   {
@@ -133,7 +133,7 @@
    "title": "Cascade routing (unifying routing and cascading)",
    "type": "concept",
    "path": "wiki/concepts/cascade-routing.md",
-   "in_degree": 10,
+   "in_degree": 11,
    "out_degree": 4
   },
   {
@@ -165,8 +165,8 @@
    "title": "Collaborative and multi-round routing",
    "type": "concept",
    "path": "wiki/concepts/collaborative-routing.md",
-   "in_degree": 9,
-   "out_degree": 4
+   "in_degree": 11,
+   "out_degree": 6
   },
   {
    "id": "dart",
@@ -193,6 +193,14 @@
    "out_degree": 16
   },
   {
+   "id": "dialrouter",
+   "title": "DialRouter \u2014 sequential multi-turn routing (2026)",
+   "type": "paper",
+   "path": "wiki/papers/dialrouter.md",
+   "in_degree": 2,
+   "out_degree": 2
+  },
+  {
    "id": "dsc-robustness",
    "title": "How Robust Are Router-LLMs? (DSC, EACL 2026)",
    "type": "paper",
@@ -205,7 +213,7 @@
    "title": "Economics, incentives and mechanism design",
    "type": "concept",
    "path": "wiki/concepts/economics-and-incentives.md",
-   "in_degree": 7,
+   "in_degree": 8,
    "out_degree": 5
   },
   {
@@ -215,6 +223,14 @@
    "path": "wiki/papers/embedllm.md",
    "in_degree": 5,
    "out_degree": 2
+  },
+  {
+   "id": "flexrouter",
+   "title": "FlexRouter \u2014 complementary model sets (COLM 2026)",
+   "type": "paper",
+   "path": "wiki/papers/flexrouter.md",
+   "in_degree": 2,
+   "out_degree": 3
   },
   {
    "id": "frugalgpt",
@@ -237,8 +253,8 @@
    "title": "G6 Agentic routing and credit assignment",
    "type": "gap",
    "path": "wiki/gaps/gap-agentic-credit-assignment.md",
-   "in_degree": 4,
-   "out_degree": 4
+   "in_degree": 5,
+   "out_degree": 5
   },
   {
    "id": "gap-coverage",
@@ -253,7 +269,7 @@
    "title": "G1 Evaluation validity",
    "type": "gap",
    "path": "wiki/gaps/gap-evaluation-validity.md",
-   "in_degree": 9,
+   "in_degree": 10,
    "out_degree": 8
   },
   {
@@ -261,16 +277,16 @@
    "title": "G10 Guarantees under distribution shift",
    "type": "gap",
    "path": "wiki/gaps/gap-guarantees-under-shift.md",
-   "in_degree": 5,
-   "out_degree": 4
+   "in_degree": 6,
+   "out_degree": 5
   },
   {
    "id": "gap-learning-from-logs",
    "title": "G4 Learning and evaluating from production logs",
    "type": "gap",
    "path": "wiki/gaps/gap-learning-from-logs.md",
-   "in_degree": 7,
-   "out_degree": 4
+   "in_degree": 9,
+   "out_degree": 5
   },
   {
    "id": "gap-nonstationary-pools",
@@ -285,16 +301,16 @@
    "title": "G11 Pool design and complementarity",
    "type": "gap",
    "path": "wiki/gaps/gap-pool-design.md",
-   "in_degree": 4,
-   "out_degree": 4
+   "in_degree": 5,
+   "out_degree": 5
   },
   {
    "id": "gap-query-only-signal-ceiling",
    "title": "G2 Query-only signal ceiling",
    "type": "gap",
    "path": "wiki/gaps/gap-query-only-signal-ceiling.md",
-   "in_degree": 10,
-   "out_degree": 9
+   "in_degree": 12,
+   "out_degree": 11
   },
   {
    "id": "gap-serving-coupling",
@@ -309,24 +325,24 @@
    "title": "G5 Session- and conversation-level routing",
    "type": "gap",
    "path": "wiki/gaps/gap-session-level-routing.md",
-   "in_degree": 2,
-   "out_degree": 4
+   "in_degree": 4,
+   "out_degree": 6
   },
   {
    "id": "gap-transparency-and-control",
    "title": "G13 Transparency, user control and auditing",
    "type": "gap",
    "path": "wiki/gaps/gap-transparency-and-control.md",
-   "in_degree": 12,
-   "out_degree": 6
+   "in_degree": 13,
+   "out_degree": 8
   },
   {
    "id": "gap-unified-compute-allocation",
    "title": "G7 Unified test-time compute allocation",
    "type": "gap",
    "path": "wiki/gaps/gap-unified-compute-allocation.md",
-   "in_degree": 4,
-   "out_degree": 6
+   "in_degree": 5,
+   "out_degree": 7
   },
   {
    "id": "gateways-and-semantic-router-libs",
@@ -413,8 +429,16 @@
    "title": "LLMRouterBench (ACL Findings 2026)",
    "type": "paper",
    "path": "wiki/papers/llmrouterbench.md",
-   "in_degree": 14,
+   "in_degree": 15,
    "out_degree": 3
+  },
+  {
+   "id": "llms-encode-failures",
+   "title": "LLMs Encode Their Failures (ICLR 2026)",
+   "type": "paper",
+   "path": "wiki/papers/llms-encode-failures.md",
+   "in_degree": 2,
+   "out_degree": 4
   },
   {
    "id": "martian",
@@ -425,11 +449,19 @@
    "out_degree": 3
   },
   {
+   "id": "model-substitution-audit",
+   "title": "Auditing model substitution in LLM APIs (NeurIPS 2025)",
+   "type": "paper",
+   "path": "wiki/papers/model-substitution-audit.md",
+   "in_degree": 2,
+   "out_degree": 3
+  },
+  {
    "id": "multimodal-routing",
    "title": "Multimodal and non-text routing",
    "type": "concept",
    "path": "wiki/concepts/multimodal-routing.md",
-   "in_degree": 5,
+   "in_degree": 6,
    "out_degree": 3
   },
   {
@@ -481,12 +513,20 @@
    "out_degree": 1
   },
   {
+   "id": "pandora-router",
+   "title": "Pandora's AI Model Routing Box (NeurIPS 2026)",
+   "type": "paper",
+   "path": "wiki/papers/pandora-router.md",
+   "in_degree": 2,
+   "out_degree": 4
+  },
+  {
    "id": "personalized-routing",
    "title": "Personalized and preference-aligned routing",
    "type": "concept",
    "path": "wiki/concepts/personalized-routing.md",
-   "in_degree": 9,
-   "out_degree": 6
+   "in_degree": 10,
+   "out_degree": 8
   },
   {
    "id": "personalizedrouter",
@@ -509,7 +549,7 @@
    "title": "Routing with prefill activations (NVIDIA, 2026)",
    "type": "paper",
    "path": "wiki/papers/prefill-activation-router.md",
-   "in_degree": 9,
+   "in_degree": 10,
    "out_degree": 4
   },
   {
@@ -517,8 +557,8 @@
    "title": "Quality estimation signals for routing",
    "type": "concept",
    "path": "wiki/concepts/quality-estimation.md",
-   "in_degree": 7,
-   "out_degree": 9
+   "in_degree": 9,
+   "out_degree": 11
   },
   {
    "id": "r2r",
@@ -529,11 +569,27 @@
    "out_degree": 1
   },
   {
+   "id": "racer",
+   "title": "RACER \u2014 risk-controlled set routing (ICML 2026)",
+   "type": "paper",
+   "path": "wiki/papers/racer.md",
+   "in_degree": 2,
+   "out_degree": 2
+  },
+  {
    "id": "reasoning-effort-routing",
    "title": "Reasoning-effort and test-time-compute routing",
    "type": "concept",
    "path": "wiki/concepts/reasoning-effort-routing.md",
-   "in_degree": 12,
+   "in_degree": 13,
+   "out_degree": 6
+  },
+  {
+   "id": "replay-gap",
+   "title": "The Replay Gap (2026)",
+   "type": "paper",
+   "path": "wiki/papers/replay-gap.md",
+   "in_degree": 3,
    "out_degree": 5
   },
   {
@@ -559,6 +615,14 @@
    "path": "wiki/papers/rerouting-llm-routers.md",
    "in_degree": 7,
    "out_degree": 2
+  },
+  {
+   "id": "route-to-reason",
+   "title": "Route to Reason (2025)",
+   "type": "paper",
+   "path": "wiki/papers/route-to-reason.md",
+   "in_degree": 2,
+   "out_degree": 3
   },
   {
    "id": "routellm",
@@ -589,8 +653,8 @@
    "title": "Router security and robustness",
    "type": "concept",
    "path": "wiki/concepts/router-security.md",
-   "in_degree": 9,
-   "out_degree": 5
+   "in_degree": 11,
+   "out_degree": 6
   },
   {
    "id": "routerarena",
@@ -717,7 +781,7 @@
    "title": "Routing, Cascades, and User Choice (ICLR 2026)",
    "type": "paper",
    "path": "wiki/papers/user-choice-stackelberg.md",
-   "in_degree": 7,
+   "in_degree": 8,
    "out_degree": 3
   },
   {
@@ -765,6 +829,10 @@
   {
    "source": "agentic-routing",
    "target": "gap-agentic-credit-assignment"
+  },
+  {
+   "source": "agentic-routing",
+   "target": "replay-gap"
   },
   {
    "source": "agentic-routing",
@@ -869,6 +937,14 @@
   {
    "source": "collaborative-routing",
    "target": "agentic-routing"
+  },
+  {
+   "source": "collaborative-routing",
+   "target": "flexrouter"
+  },
+  {
+   "source": "collaborative-routing",
+   "target": "racer"
   },
   {
    "source": "collaborative-routing",
@@ -1236,6 +1312,14 @@
   },
   {
    "source": "personalized-routing",
+   "target": "dialrouter"
+  },
+  {
+   "source": "personalized-routing",
+   "target": "gap-session-level-routing"
+  },
+  {
+   "source": "personalized-routing",
    "target": "gap-transparency-and-control"
   },
   {
@@ -1328,6 +1412,14 @@
   },
   {
    "source": "quality-estimation",
+   "target": "llms-encode-failures"
+  },
+  {
+   "source": "quality-estimation",
+   "target": "pandora-router"
+  },
+  {
+   "source": "quality-estimation",
    "target": "prefill-activation-router"
   },
   {
@@ -1357,6 +1449,10 @@
   {
    "source": "reasoning-effort-routing",
    "target": "gpt5-router"
+  },
+  {
+   "source": "reasoning-effort-routing",
+   "target": "route-to-reason"
   },
   {
    "source": "representation-matching-routers",
@@ -1444,6 +1540,10 @@
   },
   {
    "source": "router-security",
+   "target": "model-substitution-audit"
+  },
+  {
+   "source": "router-security",
    "target": "rerouteguard"
   },
   {
@@ -1524,6 +1624,10 @@
   },
   {
    "source": "gap-agentic-credit-assignment",
+   "target": "replay-gap"
+  },
+  {
+   "source": "gap-agentic-credit-assignment",
    "target": "router-r1"
   },
   {
@@ -1588,6 +1692,10 @@
   },
   {
    "source": "gap-guarantees-under-shift",
+   "target": "racer"
+  },
+  {
+   "source": "gap-guarantees-under-shift",
    "target": "unified-routing-cascading"
   },
   {
@@ -1605,6 +1713,10 @@
   {
    "source": "gap-learning-from-logs",
    "target": "gpt5-router"
+  },
+  {
+   "source": "gap-learning-from-logs",
+   "target": "replay-gap"
   },
   {
    "source": "gap-learning-from-logs",
@@ -1637,6 +1749,10 @@
   {
    "source": "gap-nonstationary-pools",
    "target": "zerorouter"
+  },
+  {
+   "source": "gap-pool-design",
+   "target": "flexrouter"
   },
   {
    "source": "gap-pool-design",
@@ -1680,6 +1796,14 @@
   },
   {
    "source": "gap-query-only-signal-ceiling",
+   "target": "llms-encode-failures"
+  },
+  {
+   "source": "gap-query-only-signal-ceiling",
+   "target": "pandora-router"
+  },
+  {
+   "source": "gap-query-only-signal-ceiling",
    "target": "prefill-activation-router"
   },
   {
@@ -1708,15 +1832,23 @@
   },
   {
    "source": "gap-session-level-routing",
+   "target": "dialrouter"
+  },
+  {
+   "source": "gap-session-level-routing",
+   "target": "gap-learning-from-logs"
+  },
+  {
+   "source": "gap-session-level-routing",
    "target": "gpt5-router"
   },
   {
    "source": "gap-session-level-routing",
-   "target": "router-evaluation"
+   "target": "serving-aware-routing"
   },
   {
    "source": "gap-session-level-routing",
-   "target": "serving-aware-routing"
+   "target": "user-choice-stackelberg"
   },
   {
    "source": "gap-transparency-and-control",
@@ -1736,7 +1868,15 @@
   },
   {
    "source": "gap-transparency-and-control",
+   "target": "model-substitution-audit"
+  },
+  {
+   "source": "gap-transparency-and-control",
    "target": "not-diamond"
+  },
+  {
+   "source": "gap-transparency-and-control",
+   "target": "router-security"
   },
   {
    "source": "gap-transparency-and-control",
@@ -1761,6 +1901,10 @@
   {
    "source": "gap-unified-compute-allocation",
    "target": "reasoning-effort-routing"
+  },
+  {
+   "source": "gap-unified-compute-allocation",
+   "target": "route-to-reason"
   },
   {
    "source": "gap-unified-compute-allocation",
@@ -2211,6 +2355,14 @@
    "target": "reasoning-effort-routing"
   },
   {
+   "source": "dialrouter",
+   "target": "gap-session-level-routing"
+  },
+  {
+   "source": "dialrouter",
+   "target": "personalized-routing"
+  },
+  {
    "source": "dsc-robustness",
    "target": "gap-adversarial-robustness"
   },
@@ -2229,6 +2381,18 @@
   {
    "source": "embedllm",
    "target": "routing-collapse"
+  },
+  {
+   "source": "flexrouter",
+   "target": "collaborative-routing"
+  },
+  {
+   "source": "flexrouter",
+   "target": "gap-pool-design"
+  },
+  {
+   "source": "flexrouter",
+   "target": "llmrouterbench"
   },
   {
    "source": "frugalgpt",
@@ -2315,8 +2479,52 @@
    "target": "router-evaluation"
   },
   {
+   "source": "llms-encode-failures",
+   "target": "gap-query-only-signal-ceiling"
+  },
+  {
+   "source": "llms-encode-failures",
+   "target": "multimodal-routing"
+  },
+  {
+   "source": "llms-encode-failures",
+   "target": "prefill-activation-router"
+  },
+  {
+   "source": "llms-encode-failures",
+   "target": "quality-estimation"
+  },
+  {
+   "source": "model-substitution-audit",
+   "target": "06-research-proposals"
+  },
+  {
+   "source": "model-substitution-audit",
+   "target": "gap-transparency-and-control"
+  },
+  {
+   "source": "model-substitution-audit",
+   "target": "router-security"
+  },
+  {
    "source": "p2l",
    "target": "predictive-routers"
+  },
+  {
+   "source": "pandora-router",
+   "target": "cascade-routing"
+  },
+  {
+   "source": "pandora-router",
+   "target": "economics-and-incentives"
+  },
+  {
+   "source": "pandora-router",
+   "target": "gap-query-only-signal-ceiling"
+  },
+  {
+   "source": "pandora-router",
+   "target": "quality-estimation"
   },
   {
    "source": "personalizedrouter",
@@ -2347,6 +2555,34 @@
    "target": "token-level-routing"
   },
   {
+   "source": "racer",
+   "target": "collaborative-routing"
+  },
+  {
+   "source": "racer",
+   "target": "gap-guarantees-under-shift"
+  },
+  {
+   "source": "replay-gap",
+   "target": "agentic-routing"
+  },
+  {
+   "source": "replay-gap",
+   "target": "gap-agentic-credit-assignment"
+  },
+  {
+   "source": "replay-gap",
+   "target": "gap-evaluation-validity"
+  },
+  {
+   "source": "replay-gap",
+   "target": "gap-learning-from-logs"
+  },
+  {
+   "source": "replay-gap",
+   "target": "router-evaluation"
+  },
+  {
    "source": "rerouteguard",
    "target": "gap-adversarial-robustness"
   },
@@ -2361,6 +2597,18 @@
   {
    "source": "rerouting-llm-routers",
    "target": "router-security"
+  },
+  {
+   "source": "route-to-reason",
+   "target": "best-route"
+  },
+  {
+   "source": "route-to-reason",
+   "target": "gap-unified-compute-allocation"
+  },
+  {
+   "source": "route-to-reason",
+   "target": "reasoning-effort-routing"
   },
   {
    "source": "routellm",

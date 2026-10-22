@@ -32,6 +32,7 @@ CATEGORY_ORDER = [
     ("collaborative", "Multi-round, token-level, agentic and fusion routing"),
     ("personalization", "Personalized and preference-aligned routing"),
     ("multimodal", "Multimodal routing"),
+    ("coverage", "Multilingual and other coverage"),
     ("systems", "Serving systems, edge and energy"),
     ("benchmark", "Benchmarks, evaluation platforms and libraries"),
     ("theory", "Theory and critical analyses"),
