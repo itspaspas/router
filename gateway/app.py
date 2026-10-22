@@ -19,7 +19,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, StreamingResponse
 
 from gateway.budget import BudgetGuard
-from gateway.config import RouterConfig, Settings
+from gateway.config import RouterConfig, Settings, load_config, load_settings
 from gateway.decision_log import DecisionLogger, DecisionRecord, hash_user
 from gateway.executor import ExecResult, execute
 from gateway.hooshyar import HooshyarClient, UpstreamError
@@ -315,3 +315,10 @@ def create_app(
         return {"ok": True}
 
     return app
+
+
+def create_app_from_env() -> FastAPI:
+    """Factory for `uvicorn --factory gateway.app:create_app_from_env`. Reads settings from the
+    environment at call time (never at import), so importing this module needs no env vars."""
+    settings = load_settings()
+    return create_app(settings, load_config(settings.config_path))
