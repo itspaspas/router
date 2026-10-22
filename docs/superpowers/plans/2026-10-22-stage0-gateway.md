@@ -8,7 +8,7 @@
 
 **Tech Stack:** Python ≥ 3.11, FastAPI ≥ 0.110, httpx ≥ 0.27, PyYAML ≥ 6, pytest ≥ 8, pytest-asyncio ≥ 0.23, respx ≥ 0.21 (mocks httpx, which stands in for the spec's "mock OpenAI-compatible server").
 
-**Spec:** `docs/superpowers/specs/2026-10-22-persian-router-design.md` (§2 architecture, §3 flow, §5 logging/privacy/failures, §6.1 testing, §6.3 Stage 0, §7 discovery). Stage 0 deliberately omits the session manager, observation service and policies R1–R3. Those belong to the Stage 2 and 3 plans.
+**Spec:** `docs/superpowers/specs/2026-10-22-persian-router-design.md` (§2 architecture, §3 flow, §5 logging/privacy/failures, §6.1 testing, §6.3 Stage 0, §7 discovery). Stage 0 deliberately omits the session manager, the observation service, policies R1–R3 and a thumbs-feedback endpoint. Those belong to the Stage 2 and 3 plans. Stage 0 logs `last_user_hash` so that regenerate and rephrase signals (spec §5) can be derived offline later.
 
 ## Global Constraints
 
@@ -20,6 +20,15 @@
 - Router failure must never fail a request that Hooshyar `auto` could serve.
 - Prices are unverified until confirmed: `config/prices.yaml` carries `verified: false`, and every logged cost carries `cost_verified`.
 - Upstream timeout default `120` s (matches Hooshyar's sample).
+
+## Shared test fixtures (`tests/conftest.py`)
+Each fixture is added by the first task that uses it. Constants: `URL = UP = "https://h.test/v1/chat/completions"`, `MODELS = "https://h.test/v1/models"`, `BODY = {"messages": [{"role": "user", "content": "hi"}]}`, `BODY_FA` (same with `"سلام"`), `MSGS = BODY["messages"]`, `AUTH = {"Authorization": "Bearer k1"}`.
+- `client` (Task 4): `HooshyarClient("https://h.test/v1", "T", 5)`
+- `cfg_tiers` (Task 5): the example config with tiers `small="s1", medium="m1", frontier="f1"`. `cfg_no_medium` is the same with `medium=""`.
+- `cfg_with_budget` (Task 4): default cap `5.0`, `per_app={"chat": 1.0}`. `cfg_capped` (Task 8): `cfg_tiers` with `per_app={"chat": 0.0}`.
+- `make_record(**overrides)` (Task 6): a valid `DecisionRecord` with neutral values.
+- Response helpers (Task 7, 8): `ok_json(req)` returns 200 `{"model": "m1", "choices": [{"message": {"content": "ok"}}]}`; `ok_text(s)` returns a handler giving 200 with content `s`; `slow_then_error(seconds)` returns an async handler that sleeps and then raises `httpx.ConnectError`; `route_by_model(mapping, default)` returns a respx side-effect that dispatches on the JSON body's `model`.
+- App clients (Task 8): `app_client` is built with `Settings(base_url="https://h.test/v1", token="T", app_keys={"k1": "chat"}, log_path=tmp_path/"d.jsonl", log_text=False, log_salt="s", config_path=...)`, `cfg_tiers` with shadow disabled, and `httpx.AsyncClient(transport=ASGITransport(app), base_url="http://gw")` with the app's lifespan started. `app_client_shadow` has shadow enabled, `sample_rate=1.0`. `app_client_capped` uses `cfg_capped`. `app_client_broken_policy` uses a policy whose `decide` raises `RuntimeError`. `log_lines()` waits for the logger queue to drain and returns the parsed JSONL records.
 
 ## Review Focus
 
@@ -116,7 +125,7 @@ def test_detect_language(text, expected):
 
 - [ ] **Step 4: Run** `pytest tests/test_language.py -v`. Expected: PASS.
 
-- [ ] **Step 5: Commit** `git commit -am "feat(gateway): Persian/English/mixed language detection"` (after `git add` of the new files)
+- [ ] **Step 5: Commit** `git add gateway/language.py tests/test_language.py && git commit -m "feat(gateway): Persian/English/mixed language detection"`
 
 ---
 
@@ -170,7 +179,7 @@ def test_b0_honours_explicit_model(m):
     - `async def list_models(self) -> dict` (`GET /models`)
   - `def compute_cost(model: str | None, usage: dict | None, prices: Prices) -> float | None`: USD, or None if the model or usage is missing.
   - `class BudgetGuard: def __init__(self, cfg: RouterConfig, clock: Callable[[], datetime] = utcnow)`
-    - `def over_cap(self, app_id: str) -> bool`
+    - `def over_cap(self, app_id: str) -> bool` (true when today's spend ≥ the cap, so a cap of `0.0` is over from the start)
     - `def record(self, app_id: str, cost: float | None) -> None` (ignores None; resets at UTC midnight)
 
 - [ ] **Step 1: Write the failing tests** (respx mocks `https://h.test/v1`)
@@ -281,7 +290,7 @@ async def test_stream_fallback_only_before_first_byte(respx_mock, cfg_tiers):
 **Interfaces:**
 - Consumes: `Decision` (Task 3)
 - Produces:
-  - `@dataclass class DecisionRecord`, with fields: `request_id: str, ts: str, app_id: str, user_hash: str | None, conversation_id: str | None, language: str, n_messages: int, prompt_chars: int, policy: str, target: str, probs: dict, reasons: list, attempts: list, served_by: str | None, response_model: str | None, prompt_tokens: int | None, completion_tokens: int | None, cost: float | None, cost_verified: bool, latency_ms: int, status: int, error_kind: str | None, stream: bool, shadow_auto_judge: dict | None = None, text: dict | None = None`
+  - `@dataclass class DecisionRecord`, with fields: `request_id: str, ts: str, app_id: str, user_hash: str | None, conversation_id: str | None, language: str, n_messages: int, prompt_chars: int, policy: str, target: str, probs: dict, reasons: list, attempts: list, served_by: str | None, response_model: str | None, prompt_tokens: int | None, completion_tokens: int | None, cost: float | None, cost_verified: bool, latency_ms: int, status: int, error_kind: str | None, stream: bool, last_user_hash: str | None = None, shadow_auto_judge: dict | None = None, text: dict | None = None` (`last_user_hash` = `hash_user(last user message, salt)`, used to detect regenerations offline)
   - `def hash_user(user: str | None, salt: str) -> str | None` (sha256 hex of `salt + user`)
   - `class DecisionLogger: def __init__(self, path: Path, log_text: bool)`; `def emit(self, rec: DecisionRecord) -> None` (non-blocking enqueue); `async def run(self) -> None` (background writer, one JSON object per line, `ensure_ascii=False`); `async def close(self) -> None` (drains the queue)
   - `error_kind` is a fixed vocabulary only: `"timeout" | "connection" | "upstream_4xx" | "upstream_5xx" | "auth" | "internal"`. It is never an exception message.
@@ -399,7 +408,7 @@ async def test_slow_failing_shadow_does_not_delay(app_client_shadow, respx_mock)
     r = await app_client_shadow.post("/v1/chat/completions", json=BODY, headers=AUTH)
     assert r.status_code == 200 and time.monotonic() - t0 < 1.0
 
-async def test_budget_cap_downgrades_auto_only(app_client_capped, respx_mock):   # cap 0.0 for app "chat"
+async def test_budget_cap_downgrades_auto_only(app_client_capped, respx_mock):   # cfg_capped: cap 0.0 for app "chat"
     respx_mock.post(UP).respond(200, json={"model": "s1", "choices": []})
     await app_client_capped.post("/v1/chat/completions", json=BODY, headers=AUTH)
     assert json.loads(respx_mock.calls[-1].request.content)["model"] == "s1"            # auto -> small
@@ -413,7 +422,7 @@ async def test_policy_exception_falls_back_to_auto(app_client_broken_policy, res
 ```
 
 - [ ] **Step 2: Run** `pytest tests/test_app.py -v`. Expected: FAIL.
-- [ ] **Step 3: Implement `create_app`.** It uses a lifespan that starts and stops `DecisionLogger.run`. Upstream errors that exhaust the chain return the upstream status (or 502 for timeout or connection failures) with an OpenAI-style error body. `cfg_with_budget` (cap 0.0) makes `over_cap` true from the first request.
+- [ ] **Step 3: Implement `create_app`.** It uses a lifespan that starts and stops `DecisionLogger.run`. Upstream errors that exhaust the chain return the upstream status (or 502 for timeout or connection failures) with an OpenAI-style error body. `cfg_capped` (cap 0.0) makes `over_cap` true from the first request.
 - [ ] **Step 4: Run** `pytest -v` (full suite). Expected: all PASS.
 - [ ] **Step 5: Commit** `git commit -m "feat(gateway): FastAPI app with auth, fallback, budget, shadow, logging"`
 
@@ -448,8 +457,12 @@ async def test_smoke_reports_errors_without_raising(respx_mock, cfg_tiers):
     rows = await smoke(client, cfg_tiers)
     assert rows[0] == ("auto", "upstream_5xx") and len(rows) == 5
 
-def test_scripts_never_print_token(capsys, monkeypatch):   # run the smoke main() against respx with token "SECRET-T"
-    ...
+def test_scripts_never_print_token(capsys, monkeypatch, respx_mock):
+    for k, v in {"HOOSHYAR_TOKEN": "SECRET-T", "HOOSHYAR_BASE_URL": "https://h.test/v1",
+                 "ROUTER_APP_KEYS": "{}", "ROUTER_LOG_SALT": "s"}.items():
+        monkeypatch.setenv(k, v)
+    respx_mock.post(UP).respond(200, json={"choices": [{"message": {"content": "x"}}]})
+    smoke_main()                                   # scripts/smoke_hooshyar.py main()
     assert "SECRET-T" not in capsys.readouterr().out
 ```
 
