@@ -127,18 +127,19 @@ The policy must beat B0 on utility at matched or lower cost, with a bootstrap 95
 **6.3 Stages**
 | Stage | Content | Deliverable |
 |---|---|---|
-| 0 | Gateway skeleton passing through to `auto`; logging; shadow `auto-judge`; tests; smoke script | production-safe infrastructure |
+| 0 | Discovery script (models, logprobs, `auto-judge` format; see §7); gateway skeleton passing through to `auto`; logging; shadow `auto-judge`; tests; smoke script | production-safe infrastructure + answers to §7 |
 | 1 | Benchmark v0 (public + synthetic, k-sample labels, artifact audit); B0, B1, R2 results | first answers to RQ1 and RQ2 |
 | 2 | R1 in shadow → gate → live | production savings |
 | 3 | R3 VOI router + comparisons; paper draft | the paper's main result |
 | later | Learning from logs (P3); multi-turn and agent routing | — |
 
-## 7. Open items (to resolve during planning, not blockers)
-1. Whether Hooshyar returns `logprobs`. R3 treats them as optional.
-2. The Hooshyar model list, per-token prices, and rate limits (including for `auto-judge`).
-3. How `auto-judge` reports its choice (output format), and whether calling it is cheap.
-4. Licences and availability of the candidate Persian public datasets.
-5. Which multilingual encoder to use for R1/R2 (chosen on benchmark v0).
+## 7. Open items, resolved by discovery tasks rather than by asking
+The repository owner does not know these answers, so the plan resolves them empirically. Nothing in the design depends on any particular answer.
+1. **`logprobs` support.** The Stage 0 discovery script requests `logprobs=true` from each tier and records whether they come back. If not, R3 drops the entropy observation and keeps drafts and agreement.
+2. **Model list, prices, rate limits.** The discovery script calls `GET /models` and records the response. Prices and limits are filled into `config/` from Hooshyar's documentation or administrators. Until then, a placeholder price table marked *unverified* is used and every cost figure is labelled as such.
+3. **`auto-judge` output format and cost.** The discovery script calls it on a fixed probe set and records the raw output, latency and token usage. The B0 adapter parses that recorded format.
+4. **Persian dataset licences.** A planning task checks each candidate's licence and availability. Unusable sets are replaced by more synthetic data.
+5. **Multilingual encoder for R1/R2.** Chosen empirically on benchmark v0.
 
 ## 8. Out of scope (for this spec)
 - Using internal conversation data (revisit after organizational approval).
