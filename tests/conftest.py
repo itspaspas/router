@@ -31,3 +31,17 @@ def cfg_with_budget():
         default_daily_budget=5.0,
         per_app_budget={"chat": 1.0},
     )
+
+
+def _cfg_with_tiers(**tiers):
+    return dataclasses.replace(load_config(_ROUTER_YAML), tiers=tiers)
+
+
+@pytest.fixture
+def cfg_tiers():
+    return _cfg_with_tiers(small="s1", medium="m1", frontier="f1")
+
+
+@pytest.fixture
+def cfg_no_medium():
+    return _cfg_with_tiers(small="s1", medium="", frontier="f1")
