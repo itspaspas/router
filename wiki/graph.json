@@ -45,7 +45,7 @@
    "title": "Gaps and research agenda",
    "type": "index",
    "path": "research/05-gaps-and-agenda.md",
-   "in_degree": 6,
+   "in_degree": 7,
    "out_degree": 38
   },
   {
@@ -53,8 +53,16 @@
    "title": "Research proposals P1\u2013P9",
    "type": "index",
    "path": "research/06-research-proposals.md",
-   "in_degree": 11,
+   "in_degree": 12,
    "out_degree": 33
+  },
+  {
+   "id": "07-benchmark-comparison",
+   "title": "Benchmark and results comparison",
+   "type": "index",
+   "path": "research/07-benchmark-comparison.md",
+   "in_degree": 1,
+   "out_degree": 24
   },
   {
    "id": "agentic-routing",
@@ -69,7 +77,7 @@
    "title": "AgentRouter \u2014 per-step agent routing (ICML 2026 WS)",
    "type": "paper",
    "path": "wiki/papers/agentrouter-agentic.md",
-   "in_degree": 8,
+   "in_degree": 9,
    "out_degree": 3
   },
   {
@@ -109,7 +117,7 @@
    "title": "BEST-Route (ICML 2025)",
    "type": "paper",
    "path": "wiki/papers/best-route.md",
-   "in_degree": 7,
+   "in_degree": 8,
    "out_degree": 2
   },
   {
@@ -125,7 +133,7 @@
    "title": "CARROT (ICLR WS 2025)",
    "type": "paper",
    "path": "wiki/papers/carrot.md",
-   "in_degree": 4,
+   "in_degree": 5,
    "out_degree": 4
   },
   {
@@ -173,7 +181,7 @@
    "title": "DART (2026)",
    "type": "paper",
    "path": "wiki/papers/dart.md",
-   "in_degree": 8,
+   "in_degree": 9,
    "out_degree": 3
   },
   {
@@ -205,7 +213,7 @@
    "title": "How Robust Are Router-LLMs? (DSC, EACL 2026)",
    "type": "paper",
    "path": "wiki/papers/dsc-robustness.md",
-   "in_degree": 9,
+   "in_degree": 10,
    "out_degree": 3
   },
   {
@@ -269,7 +277,7 @@
    "title": "G1 Evaluation validity",
    "type": "gap",
    "path": "wiki/gaps/gap-evaluation-validity.md",
-   "in_degree": 10,
+   "in_degree": 11,
    "out_degree": 8
   },
   {
@@ -381,7 +389,7 @@
    "title": "HyDRA in GitHub Copilot auto-mode (2026)",
    "type": "system",
    "path": "wiki/systems/hydra-copilot-auto.md",
-   "in_degree": 3,
+   "in_degree": 4,
    "out_degree": 5
   },
   {
@@ -390,7 +398,7 @@
    "type": "index",
    "path": "wiki/index.md",
    "in_degree": 0,
-   "out_degree": 101
+   "out_degree": 102
   },
   {
    "id": "industry-landscape",
@@ -413,7 +421,7 @@
    "title": "kNN beats complex routers (2025)",
    "type": "paper",
    "path": "wiki/papers/knn-router.md",
-   "in_degree": 10,
+   "in_degree": 11,
    "out_degree": 3
   },
   {
@@ -429,7 +437,7 @@
    "title": "LLMRouter library + xRouteBench (UIUC, 2026)",
    "type": "system",
    "path": "wiki/systems/llmrouter-library.md",
-   "in_degree": 8,
+   "in_degree": 9,
    "out_degree": 5
   },
   {
@@ -437,7 +445,7 @@
    "title": "LLMRouterBench (ACL Findings 2026)",
    "type": "paper",
    "path": "wiki/papers/llmrouterbench.md",
-   "in_degree": 15,
+   "in_degree": 16,
    "out_degree": 3
   },
   {
@@ -445,7 +453,7 @@
    "title": "LLMs Encode Their Failures (ICLR 2026)",
    "type": "paper",
    "path": "wiki/papers/llms-encode-failures.md",
-   "in_degree": 7,
+   "in_degree": 8,
    "out_degree": 4
   },
   {
@@ -597,7 +605,7 @@
    "title": "The Replay Gap (2026)",
    "type": "paper",
    "path": "wiki/papers/replay-gap.md",
-   "in_degree": 7,
+   "in_degree": 8,
    "out_degree": 5
   },
   {
@@ -629,7 +637,7 @@
    "title": "Route to Reason (2025)",
    "type": "paper",
    "path": "wiki/papers/route-to-reason.md",
-   "in_degree": 4,
+   "in_degree": 5,
    "out_degree": 3
   },
   {
@@ -637,7 +645,7 @@
    "title": "RouteLLM (paper + framework)",
    "type": "paper",
    "path": "wiki/papers/routellm.md",
-   "in_degree": 11,
+   "in_degree": 12,
    "out_degree": 4
   },
   {
@@ -669,7 +677,7 @@
    "title": "RouterArena (ICLR 2026)",
    "type": "paper",
    "path": "wiki/papers/routerarena.md",
-   "in_degree": 13,
+   "in_degree": 14,
    "out_degree": 2
   },
   {
@@ -677,7 +685,7 @@
    "title": "RouterBench (2024)",
    "type": "paper",
    "path": "wiki/papers/routerbench.md",
-   "in_degree": 5,
+   "in_degree": 6,
    "out_degree": 2
   },
   {
@@ -693,7 +701,7 @@
    "title": "RouterEval (EMNLP Findings 2025)",
    "type": "paper",
    "path": "wiki/papers/routereval.md",
-   "in_degree": 6,
+   "in_degree": 7,
    "out_degree": 1
   },
   {
@@ -709,7 +717,7 @@
    "title": "When Routing Collapses / EquiRouter (2026)",
    "type": "paper",
    "path": "wiki/papers/routing-collapse.md",
-   "in_degree": 10,
+   "in_degree": 11,
    "out_degree": 1
   },
   {
@@ -717,7 +725,7 @@
    "title": "How Much of the Routing Gap Is Real? (2026)",
    "type": "paper",
    "path": "wiki/papers/routing-gap-noise.md",
-   "in_degree": 11,
+   "in_degree": 12,
    "out_degree": 3
   },
   {
@@ -725,7 +733,7 @@
    "title": "The Routing Plateau (2026)",
    "type": "paper",
    "path": "wiki/papers/routing-plateau.md",
-   "in_degree": 16,
+   "in_degree": 17,
    "out_degree": 3
   },
   {
@@ -749,7 +757,7 @@
    "title": "Most of the LLM Routing Gap Is Task Type (2026)",
    "type": "paper",
    "path": "wiki/papers/task-type-gap.md",
-   "in_degree": 8,
+   "in_degree": 9,
    "out_degree": 3
   },
   {
@@ -781,7 +789,7 @@
    "title": "Unsolvability Ceiling is an evaluation artifact (2026)",
    "type": "paper",
    "path": "wiki/papers/unsolvability-ceiling.md",
-   "in_degree": 8,
+   "in_degree": 9,
    "out_degree": 3
   },
   {
@@ -1961,6 +1969,10 @@
   {
    "source": "index",
    "target": "06-research-proposals"
+  },
+  {
+   "source": "index",
+   "target": "07-benchmark-comparison"
   },
   {
    "source": "index",
@@ -3893,6 +3905,102 @@
   {
    "source": "06-research-proposals",
    "target": "zerorouter"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "05-gaps-and-agenda"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "06-research-proposals"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "agentrouter-agentic"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "best-route"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "carrot"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "dart"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "dsc-robustness"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "gap-evaluation-validity"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "hydra-copilot-auto"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "knn-router"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "llmrouter-library"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "llmrouterbench"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "llms-encode-failures"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "replay-gap"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "route-to-reason"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "routellm"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "routerarena"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "routerbench"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "routereval"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "routing-collapse"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "routing-gap-noise"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "task-type-gap"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "unsolvability-ceiling"
   }
  ]
 }

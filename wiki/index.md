@@ -7,7 +7,7 @@ title: Wiki index
 **Start here:** [[llm-routing]] → [[01-literature-review]] → [[05-gaps-and-agenda]] → [[06-research-proposals]]
 
 ## Research documents
-[[00-research-plan]] · [[01-literature-review]] · [[02-timeline]] · [[03-taxonomy]] · [[04-projects-landscape]] · [[05-gaps-and-agenda]] · [[06-research-proposals]]
+[[00-research-plan]] · [[01-literature-review]] · [[02-timeline]] · [[03-taxonomy]] · [[04-projects-landscape]] · [[05-gaps-and-agenda]] · [[06-research-proposals]] · [[07-benchmark-comparison]]
 
 ## Concepts
 [[llm-routing]] · [[routing-vs-moe]] · [[design-space]] · [[predictive-routers]] · [[representation-matching-routers]] · [[nonparametric-routers]] · [[cascades]] · [[cascade-routing]] · [[budgeted-online-routing]] · [[decision-aware-training]] · [[quality-estimation]] · [[cold-start-and-model-representation]] · [[reasoning-effort-routing]] · [[collaborative-routing]] · [[token-level-routing]] · [[agentic-routing]] · [[personalized-routing]] · [[serving-aware-routing]] · [[multimodal-routing]] · [[router-evaluation]] · [[oracle-gap]] · [[router-security]] · [[economics-and-incentives]] · [[industry-landscape]]
