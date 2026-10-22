@@ -1,7 +1,8 @@
 """Discovery and smoke probes against Hooshyar (run by the repository owner with their token).
 
 discover() answers the spec section 7 open items: which models exist, whether logprobs are returned,
-and what auto-judge outputs. smoke() checks that every target answers at all. Neither raises on an
+and what auto-judge outputs; it also checks whether streamed responses carry usage when asked
+(stream_options.include_usage, R13). smoke() checks that every target answers at all. Neither raises on an
 upstream failure: errors are recorded as UpstreamError.kind. Neither ever prints the token or the
 Authorization header (the client keeps them private and nothing here reads them).
 """
@@ -16,6 +17,7 @@ from pathlib import Path
 
 from gateway.config import RouterConfig, load_config, load_settings
 from gateway.hooshyar import HooshyarClient, UpstreamError
+from gateway.records import SSEScanner
 
 PROBE_PROMPTS: list[str] = [
     "Write a short poem about rain.",
@@ -51,6 +53,26 @@ async def _probe_logprobs(client: HooshyarClient, model: str) -> bool | None:
         return resp["choices"][0].get("logprobs") is not None
     except Exception:
         return None
+
+
+async def _probe_stream_usage(client: HooshyarClient) -> bool | None:
+    """True if a streamed `auto` reply asked for usage carries a non-null usage, False if the stream
+    completes without one, None on any error."""
+    body = {
+        "model": "auto",
+        "stream": True,
+        "stream_options": {"include_usage": True},
+        "max_tokens": 5,
+        "messages": _user(PROBE_PROMPTS[0]),
+    }
+    scanner = SSEScanner(keep_text=False)
+    try:
+        async for chunk in client.open_stream(body):
+            scanner.feed(chunk)
+        scanner.flush()
+    except Exception:
+        return None
+    return scanner.usage is not None
 
 
 async def _judge(client: HooshyarClient, idx: int, prompt: str) -> dict:
@@ -91,6 +113,7 @@ async def discover(client: HooshyarClient, cfg: RouterConfig) -> dict:
         "models": models,
         "logprobs": logprobs,
         "auto_judge": auto_judge,
+        "stream_include_usage": await _probe_stream_usage(client),
         "ts": datetime.now(timezone.utc).isoformat(),
     }
 
@@ -172,6 +195,7 @@ def discover_main() -> None:
     print()
     lp = {True: "yes", False: "no", None: "error"}
     print(_table([(k, lp[v]) for k, v in report["logprobs"].items()], ("target", "logprobs")))
+    print(f"\nstream usage (stream_options.include_usage on auto): {lp[report['stream_include_usage']]}")
     print()
     judge = [(str(j["prompt_idx"]), f"{j['latency_ms']}ms  {j['raw']!r}") for j in report["auto_judge"]]
     print(_table(judge, ("prompt", "auto-judge output")))

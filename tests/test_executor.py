@@ -5,7 +5,7 @@ import json
 import httpx
 import pytest
 
-from gateway.executor import execute
+from gateway.executor import TierNotConfigured, execute
 from gateway.hooshyar import UpstreamError
 from policies.base import Decision
 from tests.conftest import BODY, URL
@@ -79,13 +79,21 @@ async def test_concrete_model_verbatim_no_fallback(respx_mock, cfg_tiers, client
     assert json.loads(respx_mock.calls[0].request.content)["model"] == "some-model"
 
 
-async def test_no_attempt_possible_raises_connection_error(respx_mock, cfg_no_medium, client):
+async def test_no_configured_entry_raises_tier_not_configured(respx_mock, cfg_no_medium, client):
     cfg = dataclasses.replace(cfg_no_medium, tiers={"small": "", "medium": "", "frontier": ""})
-    with pytest.raises(UpstreamError) as e:
+    with pytest.raises(TierNotConfigured) as e:
         await execute(Decision("small", "p", {}), BODY, client, cfg, stream=False)
-    assert e.value.kind == "connection" and e.value.status is None
-    assert len(respx_mock.calls) == 0
+    assert not isinstance(e.value, UpstreamError)
+    assert e.value.tier == "small" and len(respx_mock.calls) == 0
     assert e.value.attempts == ["small:unconfigured", "medium:unconfigured", "frontier:unconfigured"]
+
+
+async def test_tier_not_configured_when_streaming(respx_mock, cfg_tiers, client):
+    cfg = dataclasses.replace(cfg_tiers, tiers={"small": "s1", "medium": "", "frontier": ""})
+    with pytest.raises(TierNotConfigured) as e:
+        await execute(Decision("medium", "p", {}), BODY, client, cfg, stream=True)
+    assert e.value.tier == "medium" and e.value.attempts == ["medium:unconfigured", "frontier:unconfigured"]
+    assert len(respx_mock.calls) == 0
 
 
 async def test_body_not_mutated(respx_mock, cfg_tiers, client):

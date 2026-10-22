@@ -88,3 +88,54 @@ def test_cost_known_and_unknown():
     assert compute_cost("unpriced", {"prompt_tokens": 10, "completion_tokens": 10}, p) is None
     assert compute_cost("m1", None, p) is None
     assert compute_cost(None, {"prompt_tokens": 1, "completion_tokens": 1}, p) is None
+
+
+@pytest.mark.parametrize("usage", [{}, {"total_tokens": 8}, {"prompt_tokens": None, "completion_tokens": None}])
+def test_cost_is_none_without_token_counts(usage):
+    p = Prices(verified=False, models={"m1": (1.0, 2.0)})
+    assert compute_cost("m1", usage, p) is None
+
+
+def test_cost_with_one_count_present():
+    p = Prices(verified=False, models={"m1": (1.0, 2.0)})
+    assert compute_cost("m1", {"prompt_tokens": 1_000_000}, p) == pytest.approx(1.0)
+
+
+ERR = {"message": "SECRET context too long", "code": "context_length_exceeded"}
+
+
+async def _raise_upstream(stream: bool) -> UpstreamError:
+    c = HooshyarClient("https://h.test/v1", "T", 5)
+    with pytest.raises(UpstreamError) as e:
+        if stream:
+            async for _ in c.open_stream({"stream": True}):
+                pass
+        else:
+            await c.chat({})
+    return e.value
+
+
+@pytest.mark.parametrize("stream", [False, True])
+async def test_4xx_captures_client_error_without_leaking_it(respx_mock, stream):
+    respx_mock.post("https://h.test/v1/chat/completions").respond(
+        429, json={"error": ERR}, headers={"Retry-After": "7"})
+    e = await _raise_upstream(stream)
+    assert e.client_error == ERR and e.retry_after == "7" and e.kind == "upstream_4xx"
+    assert "SECRET" not in str(e) and "SECRET" not in repr(e)
+
+
+@pytest.mark.parametrize("stream", [False, True])
+@pytest.mark.parametrize("kwargs", [{"content": b"<html>no</html>"}, {"json": {"error": "flat string"}},
+                                    {"json": ["error"]}, {"json": {"detail": "x"}}])
+async def test_4xx_without_error_object_has_no_client_error(respx_mock, stream, kwargs):
+    respx_mock.post("https://h.test/v1/chat/completions").respond(400, **kwargs)
+    e = await _raise_upstream(stream)
+    assert e.client_error is None and e.retry_after is None
+
+
+@pytest.mark.parametrize("stream", [False, True])
+async def test_5xx_never_captures_client_error(respx_mock, stream):
+    respx_mock.post("https://h.test/v1/chat/completions").respond(
+        503, json={"error": ERR}, headers={"Retry-After": "7"})
+    e = await _raise_upstream(stream)
+    assert e.client_error is None and e.retry_after is None and e.kind == "upstream_5xx"

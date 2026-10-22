@@ -32,3 +32,10 @@ def test_example_config_loads_with_unconfigured_tiers():
     assert cfg.fallback["frontier"] == []
     assert cfg.timeout_s == 120
     assert cfg.prices.verified is False
+
+
+def test_settings_repr_hides_secrets():
+    env = {"HOOSHYAR_TOKEN": "TOK-SECRET", "ROUTER_APP_KEYS": '{"KEY-SECRET": "chat"}',
+           "ROUTER_LOG_SALT": "SALT-SECRET"}
+    text = repr(load_settings(env))
+    assert "TOK-SECRET" not in text and "KEY-SECRET" not in text and "SALT-SECRET" not in text

@@ -11,6 +11,18 @@ from policies.base import Decision
 TIERS = ("small", "medium", "frontier")
 
 
+class TierNotConfigured(Exception):
+    """No entry of the chain (the tier and its fallbacks) has a configured model: nothing was sent.
+
+    Not an UpstreamError: it is a configuration/client problem, never retried or re-served.
+    """
+
+    def __init__(self, tier: str, attempts: list[str]):
+        self.tier = tier
+        self.attempts = attempts
+        super().__init__(f"model tier {tier!r} is not configured")
+
+
 @dataclass
 class ExecResult:
     served_by: str  # upstream model id actually sent ("auto" or a Hooshyar id)
@@ -93,7 +105,7 @@ async def execute(
                 e.attempts = attempts
                 raise
             last_error = e
-    if last_error is None:
-        last_error = UpstreamError("connection")
+    if last_error is None:  # every chain entry was unconfigured: no request was possible
+        raise TierNotConfigured(decision.target, attempts)
     last_error.attempts = attempts  # for the decision log: what was tried before giving up
     raise last_error

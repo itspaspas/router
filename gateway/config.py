@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -18,12 +18,12 @@ DEFAULT_TIMEOUT_S = 120.0
 @dataclass(frozen=True)
 class Settings:
     base_url: str
-    token: str
+    token: str = field(repr=False)
     config_path: Path
-    app_keys: dict[str, str]  # app key -> app id
+    app_keys: dict[str, str] = field(repr=False)  # app key -> app id
     log_path: Path
     log_text: bool
-    log_salt: str
+    log_salt: str = field(repr=False)
 
 
 def _require(env: Mapping[str, str], name: str) -> str:

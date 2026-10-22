@@ -64,6 +64,7 @@ async def test_discover_errors_are_recorded_not_raised(respx_mock, cfg_tiers, cl
     assert set(rep["logprobs"].values()) == {None}
     assert len(rep["auto_judge"]) == 5
     assert rep["auto_judge"][0]["raw"] is None and rep["auto_judge"][0]["usage"] is None
+    assert rep["stream_include_usage"] is None
 
 
 async def test_discover_skips_unconfigured_tiers(respx_mock, cfg_no_medium, client):
@@ -71,6 +72,48 @@ async def test_discover_skips_unconfigured_tiers(respx_mock, cfg_no_medium, clie
     respx_mock.post(UP).mock(side_effect=_no_logprobs)
     rep = await discover(client, cfg_no_medium)
     assert set(rep["logprobs"]) == {"auto", "small", "frontier"}
+
+
+def _sse(*events: bytes) -> bytes:
+    return b"".join(b"data: " + e + b"\n\n" for e in events) + b"data: [DONE]\n\n"
+
+
+@pytest.mark.parametrize("events,expected", [
+    ((b'{"choices":[{"delta":{"content":"x"}}],"usage":null}',
+      b'{"choices":[],"usage":{"prompt_tokens":3,"completion_tokens":1}}'), True),
+    ((b'{"choices":[{"delta":{"content":"x"}}],"usage":null}',), False),
+    ((), False),
+])
+async def test_discover_probes_stream_include_usage(respx_mock, cfg_tiers, client, events, expected):
+    respx_mock.get(MODELS).respond(200, json={"data": []})
+    seen = []
+
+    def handler(req):
+        body = json.loads(req.content)
+        if body.get("stream"):
+            seen.append(body)
+            return httpx.Response(200, content=_sse(*events), headers={"content-type": "text/event-stream"})
+        return _no_logprobs(req)
+
+    respx_mock.post(UP).mock(side_effect=handler)
+    rep = await discover(client, cfg_tiers)
+    assert rep["stream_include_usage"] is expected
+    assert len(seen) == 1
+    assert seen[0]["model"] == "auto" and seen[0]["stream"] is True and seen[0]["max_tokens"] == 5
+    assert seen[0]["stream_options"] == {"include_usage": True}
+
+
+async def test_discover_stream_probe_error_is_none(respx_mock, cfg_tiers, client):
+    respx_mock.get(MODELS).respond(200, json={"data": []})
+
+    def handler(req):
+        if json.loads(req.content).get("stream"):
+            raise httpx.ReadTimeout("t")
+        return _no_logprobs(req)
+
+    respx_mock.post(UP).mock(side_effect=handler)
+    rep = await discover(client, cfg_tiers)
+    assert rep["stream_include_usage"] is None and rep["logprobs"]["auto"] is False
 
 
 async def test_smoke_reports_errors_without_raising(respx_mock, cfg_tiers, client):
@@ -125,6 +168,8 @@ def test_discover_main_writes_report_without_token(capsys, monkeypatch, respx_mo
     assert "SECRET-T" not in text and "Bearer" not in text
     assert "سلام" in text  # ensure_ascii=False
     assert json.loads(text)["logprobs"]["small"] is False
+    assert json.loads(text)["stream_include_usage"] is False
+    assert "stream usage" in out.out
 
 
 def test_import_app_needs_no_env():

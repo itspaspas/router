@@ -15,13 +15,14 @@ import random
 from typing import Awaitable, Callable
 
 import anyio
+import httpx
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, StreamingResponse
 
 from gateway.budget import BudgetGuard
 from gateway.config import RouterConfig, Settings, load_config, load_settings
 from gateway.decision_log import DecisionLogger, DecisionRecord, hash_user
-from gateway.executor import ExecResult, execute
+from gateway.executor import TIERS, ExecResult, TierNotConfigured, execute
 from gateway.hooshyar import HooshyarClient, UpstreamError
 from gateway.records import RequestTrace, SSEScanner, request_features, response_fields
 from gateway.shadow import shadow_auto_judge
@@ -31,7 +32,11 @@ from policies.base import Decision, RouteRequest, RoutingPolicy
 log = logging.getLogger(__name__)
 
 SHUTDOWN_GRACE_S = 2.0
-MODEL_IDS = ("auto", "small", "medium", "frontier")
+# The shadow auto-judge has its own small connection pool, so it can never starve user traffic,
+# and at most this many shadow calls run at once; when all slots are busy the shadow is skipped.
+SHADOW_MAX_INFLIGHT = 8
+SHADOW_LIMITS = httpx.Limits(max_connections=8, max_keepalive_connections=4)
+SHADOW_TIMEOUT = httpx.Timeout(30.0, pool=1.0)
 
 
 def _error(message: str, kind: str) -> dict:
@@ -73,20 +78,25 @@ def _closer(trace: RequestTrace, status: int, error_kind: str | None):
 
 
 def _error_response(trace: RequestTrace, status: int, message: str, kind: str,
-                    error_kind: str | None, headers: dict | None = None) -> _JSON:
-    resp = _JSON(_error(message, kind), status_code=status, headers=headers)
+                    error_kind: str | None, headers: dict | None = None,
+                    error: dict | None = None) -> _JSON:
+    """`error` replaces the generic error object (an upstream 4xx error object, R14)."""
+    body = {"error": error} if error is not None else _error(message, kind)
+    resp = _JSON(body, status_code=status, headers=headers)
     resp.on_close = _closer(trace, status, error_kind)
     return resp
 
 
 class _Gateway:
     def __init__(self, settings: Settings, cfg: RouterConfig, policy: RoutingPolicy,
-                 client: HooshyarClient | None):
+                 client: HooshyarClient | None, shadow_client: HooshyarClient | None = None):
         self.settings = settings
         self.cfg = cfg
         self.policy = policy
         self.client = client
         self.owns_client = client is None
+        self.shadow_client = shadow_client  # never the user-traffic client (separate pool)
+        self.shadow_sem = asyncio.Semaphore(SHADOW_MAX_INFLIGHT)
         self.budget = BudgetGuard(cfg)
         self.logger = DecisionLogger(settings.log_path, settings.log_text)
         self.tasks: set[asyncio.Task] = set()
@@ -139,13 +149,23 @@ class _Gateway:
             return None
         return self.settings.app_keys.get(key.strip())
 
-    def _start_shadow(self, trace: RequestTrace, body: dict) -> None:
+    async def _start_shadow(self, trace: RequestTrace, body: dict) -> None:
         try:
             messages = body.get("messages")
-            if (self.cfg.shadow_enabled and isinstance(messages, list)
+            if not (self.cfg.shadow_enabled and isinstance(messages, list)
                     and random.random() < self.cfg.shadow_sample_rate):
-                trace.shadow_task = self.spawn(
-                    shadow_auto_judge(self.client, messages, self.known_models))
+                return
+            if self.shadow_sem.locked():  # saturated: skip (record keeps None), never queue
+                return
+            await self.shadow_sem.acquire()  # cannot block: a free slot exists
+            try:
+                task = self.spawn(shadow_auto_judge(self.shadow_client, messages, self.known_models))
+            except BaseException:
+                self.shadow_sem.release()
+                raise
+            # released however the task ends, even if it is cancelled before it starts
+            task.add_done_callback(lambda _: self.shadow_sem.release())
+            trace.shadow_task = task
         except Exception as e:
             log.error("shadow start failed: %s", type(e).__name__)
 
@@ -178,6 +198,12 @@ class _Gateway:
         except UpstreamError:
             raise
         except Exception as e:  # router failure: serve via Hooshyar auto
+            # R15: a tier the client named itself is the client's error (400); a tier the router
+            # chose is a router failure like any other.
+            model = body.get("model")
+            if (isinstance(e, TierNotConfigured) and isinstance(model, str)
+                    and model.strip() == e.tier):
+                raise
             log.error("router failure, serving via auto: %s", type(e).__name__)
             reasons = trace.decision.reasons if trace.decision else ()
             trace.decision = Decision("auto", AutoPassthrough.name, {"auto": 1.0},
@@ -208,14 +234,23 @@ class _Gateway:
         except Exception as e:  # keep neutral features and serve anyway
             log.error("feature extraction failed: %s", type(e).__name__)
         trace.stream = body.get("stream") is True
-        self._start_shadow(trace, body)
+        await self._start_shadow(trace, body)
         try:
             result = await self._execute(body, trace)
+        except TierNotConfigured as e:
+            trace.attempts = list(e.attempts)
+            return _error_response(trace, 400, f"model tier '{e.tier}' is not configured",
+                                   "invalid_request_error", None,
+                                   {"X-Router-Policy": _header(trace.decision.policy)})
         except UpstreamError as e:
             trace.attempts = list(e.attempts)
             status = e.status if isinstance(e.status, int) and 400 <= e.status <= 599 else 502
+            err_headers = {"X-Router-Policy": _header(trace.decision.policy)}
+            if e.retry_after:
+                err_headers["Retry-After"] = _header(e.retry_after)
+            # R14: a 4xx error object goes back to the caller verbatim; the log keeps the kind only.
             return _error_response(trace, status, "upstream request failed", e.kind, e.kind,
-                                   {"X-Router-Policy": _header(trace.decision.policy)})
+                                   err_headers, e.client_error)
         try:
             trace.attempts, trace.served_by = result.attempts, result.served_by
             out_headers = {"X-Router-Policy": _header(trace.decision.policy),
@@ -272,13 +307,19 @@ def create_app(
     cfg: RouterConfig,
     policy: RoutingPolicy | None = None,
     client: HooshyarClient | None = None,
+    shadow_client: HooshyarClient | None = None,
 ) -> FastAPI:
-    gw = _Gateway(settings, cfg, policy or AutoPassthrough(), client)
+    gw = _Gateway(settings, cfg, policy or AutoPassthrough(), client, shadow_client)
 
     @contextlib.asynccontextmanager
     async def lifespan(app: FastAPI):
         if gw.client is None:
             gw.client = HooshyarClient(settings.base_url, settings.token, cfg.timeout_s)
+        shadow_http = None
+        if gw.shadow_client is None:
+            shadow_http = httpx.AsyncClient(limits=SHADOW_LIMITS, timeout=SHADOW_TIMEOUT)
+            gw.shadow_client = HooshyarClient(settings.base_url, settings.token, cfg.timeout_s,
+                                              http=shadow_http)
         writer = asyncio.create_task(gw.logger.run())
         try:
             yield
@@ -289,9 +330,14 @@ def create_app(
                 writer.cancel()
                 with contextlib.suppress(asyncio.CancelledError):
                     await writer
-                if gw.owns_client:
-                    await gw.client.aclose()
-                    gw.client = None
+                try:
+                    if gw.owns_client:
+                        await gw.client.aclose()
+                        gw.client = None
+                finally:
+                    if shadow_http is not None:  # created here, so closed here
+                        await shadow_http.aclose()
+                        gw.shadow_client = None
 
     app = FastAPI(title="Persian router gateway", lifespan=lifespan)
     app.state.gateway = gw
@@ -307,7 +353,8 @@ def create_app(
 
     @app.get("/v1/models")
     async def list_models():
-        data = [{"id": m, "object": "model", "created": 0, "owned_by": "router"} for m in MODEL_IDS]
+        ids = ["auto", *(t for t in TIERS if cfg.model_for(t))]  # R15: configured tiers only
+        data = [{"id": m, "object": "model", "created": 0, "owned_by": "router"} for m in ids]
         return {"object": "list", "data": data}
 
     @app.get("/healthz")

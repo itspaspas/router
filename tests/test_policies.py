@@ -46,3 +46,15 @@ def test_b0_strips_surrounding_whitespace_from_explicit_model():
     d = AutoPassthrough().decide(raw_req("  small \n"))
     assert d.target == "small" and d.probs == {"small": 1.0}
     assert d.reasons == ("explicit model requested",)
+
+
+@pytest.mark.parametrize("m", ["x" * 129, "bad model", "m1\n<script>", "مدل", "a;b", "a\x00b"])
+def test_b0_suspicious_model_string_falls_back_to_auto(m):
+    d = AutoPassthrough().decide(raw_req(m))
+    assert d.target == "auto" and d.reasons == ("invalid model value: using hooshyar auto",)
+
+
+@pytest.mark.parametrize("m", ["x" * 128, "org/model-1.5:latest", "name@v2", "A_b"])
+def test_b0_accepts_well_formed_model_ids(m):
+    d = AutoPassthrough().decide(raw_req(m))
+    assert d.target == m and d.reasons == ("explicit model requested",)

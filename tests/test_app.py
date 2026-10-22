@@ -11,6 +11,7 @@ from gateway.config import Prices
 from gateway.decision_log import hash_user
 from gateway.hooshyar import UpstreamError
 from policies.auto_passthrough import AutoPassthrough
+from policies.base import Decision
 from tests.conftest import (
     AUTH,
     BODY,
@@ -217,10 +218,34 @@ async def test_exhausted_transport_errors_are_502(app_client, respx_mock, log_li
     assert rec["status"] == 502 and rec["error_kind"] == kind
 
 
-async def test_upstream_4xx_body_is_not_forwarded(app_client, respx_mock):
-    respx_mock.post(UP).respond(400, json={"error": {"message": "secret detail"}})
+@pytest.mark.parametrize("stream", [False, True])
+async def test_upstream_4xx_error_object_reaches_client_not_log(app_client, respx_mock, log_lines, tmp_path,
+                                                                 caplog, capsys, stream):
+    err = {"message": "context too long", "code": "context_length_exceeded"}
+    respx_mock.post(UP).respond(400, json={"error": err})
+    r = await app_client.post("/v1/chat/completions", json={**BODY, "stream": stream}, headers=AUTH)
+    assert r.status_code == 400 and r.json() == {"error": err}
+    assert r.headers["x-router-policy"] == "b0_auto" and len(respx_mock.calls) == 1
+    (rec,) = await log_lines()
+    assert rec["status"] == 400 and rec["error_kind"] == "upstream_4xx"
+    assert "context too long" not in (tmp_path / "d.jsonl").read_text(encoding="utf-8")
+    out = capsys.readouterr()
+    assert "context too long" not in caplog.text + out.out + out.err
+
+
+async def test_upstream_429_forwards_retry_after(app_client, respx_mock):
+    respx_mock.post(UP).respond(429, json={"error": {"message": "slow down", "type": "rate_limit"}},
+                                headers={"Retry-After": "12"})
     r = await app_client.post("/v1/chat/completions", json=BODY, headers=AUTH)
-    assert r.status_code == 400 and "secret" not in r.text and r.json()["error"]["type"] == "upstream_4xx"
+    assert r.status_code == 429 and r.headers["retry-after"] == "12"
+    assert r.json() == {"error": {"message": "slow down", "type": "rate_limit"}}
+
+
+async def test_upstream_non_json_4xx_gets_generic_body(app_client, respx_mock):
+    respx_mock.post(UP).respond(400, text="secret upstream detail")
+    r = await app_client.post("/v1/chat/completions", json=BODY, headers=AUTH)
+    assert r.status_code == 400 and "secret" not in r.text and "retry-after" not in r.headers
+    assert r.json() == {"error": {"message": "upstream request failed", "type": "upstream_4xx"}}
 
 
 # --- decision 2: router failures degrade to auto ------------------------------------------------
@@ -447,6 +472,84 @@ async def test_shadow_sample_rate_zero_skips_shadow(app_factory, cfg_tiers, resp
     assert (await log_lines())[0]["shadow_auto_judge"] is None
 
 
+async def test_shadow_saturated_is_skipped_not_queued(app_client_shadow, respx_mock, log_lines):
+    from gateway.app import SHADOW_MAX_INFLIGHT
+
+    gw = app_client_shadow._transport.app.state.gateway
+    for _ in range(SHADOW_MAX_INFLIGHT):
+        await gw.shadow_sem.acquire()   # all shadow slots busy
+    respx_mock.post(UP).mock(side_effect=route_by_model({"auto-judge": ok_text("m1")}, default=ok_json))
+    r = await app_client_shadow.post("/v1/chat/completions", json=BODY, headers=AUTH)
+    assert r.status_code == 200 and sent_models(respx_mock) == ["auto"]
+    for _ in range(SHADOW_MAX_INFLIGHT):
+        gw.shadow_sem.release()
+    (rec,) = await log_lines()
+    assert rec["status"] == 200 and rec["shadow_auto_judge"] is None
+
+
+async def test_shadow_slot_released_after_call(app_client_shadow, respx_mock, log_lines):
+    from gateway.app import SHADOW_MAX_INFLIGHT
+
+    gw = app_client_shadow._transport.app.state.gateway
+    respx_mock.post(UP).mock(side_effect=route_by_model({"auto-judge": ok_text("m1")}, default=ok_json))
+    await app_client_shadow.post("/v1/chat/completions", json=BODY, headers=AUTH)
+    (rec,) = await log_lines()
+    assert rec["shadow_auto_judge"]["ok"] is True
+    assert gw.shadow_sem._value == SHADOW_MAX_INFLIGHT
+
+
+async def test_shadow_uses_its_own_client(app_client_shadow, respx_mock, log_lines, monkeypatch):
+    from gateway import app as app_module
+
+    gw = app_client_shadow._transport.app.state.gateway
+    used = []
+    real = app_module.shadow_auto_judge
+
+    async def spy(client, *a, **k):
+        used.append(client)
+        return await real(client, *a, **k)
+
+    monkeypatch.setattr(app_module, "shadow_auto_judge", spy)
+    respx_mock.post(UP).mock(side_effect=route_by_model({"auto-judge": ok_text("m1")}, default=ok_json))
+    await app_client_shadow.post("/v1/chat/completions", json=BODY, headers=AUTH)
+    await log_lines()
+    assert used == [gw.shadow_client] and gw.shadow_client is not gw.client
+    assert gw.shadow_client._http is not gw.client._http
+    assert gw.shadow_client._http.timeout.pool == 1.0
+
+
+async def test_injected_shadow_client_is_used_and_not_closed(tmp_path, cfg_tiers, respx_mock):
+    class FakeJudge:
+        def __init__(self):
+            self.bodies, self.closed = [], False
+
+        async def chat(self, body):
+            self.bodies.append(body)
+            return {"choices": [{"message": {"content": "m1"}}]}
+
+        async def aclose(self):
+            self.closed = True
+
+    fake = FakeJudge()
+    app = create_app(app_settings(tmp_path), dataclasses.replace(cfg_tiers, shadow_enabled=True, shadow_sample_rate=1.0),
+                     shadow_client=fake)
+    respx_mock.post(UP).mock(side_effect=ok_json)
+    async with serve_app(app) as c:
+        assert (await c.post("/v1/chat/completions", json=BODY, headers=AUTH)).status_code == 200
+    assert sent_models(respx_mock) == ["auto"] and [b["model"] for b in fake.bodies] == ["auto-judge"]
+    assert not fake.closed
+    (rec,) = [json.loads(line) for line in (tmp_path / "d.jsonl").read_text().splitlines()]
+    assert rec["shadow_auto_judge"]["parsed_model"] == "m1"
+
+
+async def test_owned_shadow_client_closed_on_shutdown(tmp_path, cfg_tiers):
+    app = create_app(app_settings(tmp_path), cfg_tiers)
+    async with serve_app(app):
+        http = app.state.gateway.shadow_client._http
+        assert not http.is_closed
+    assert http.is_closed and app.state.gateway.shadow_client is None
+
+
 # --- record features (decision 6) --------------------------------------------------------------
 
 
@@ -483,3 +586,44 @@ async def test_models_and_healthz(app_client):
     assert [m["id"] for m in r.json()["data"]] == ["auto", "small", "medium", "frontier"]
     assert all(m["object"] == "model" for m in r.json()["data"])
     assert (await app_client.get("/healthz")).json() == {"ok": True}
+
+
+async def test_models_lists_only_configured_tiers(app_factory, cfg_no_medium):
+    c = await app_factory(dataclasses.replace(cfg_no_medium, shadow_enabled=False))
+    assert [m["id"] for m in (await c.get("/v1/models")).json()["data"]] == ["auto", "small", "frontier"]
+    bare = await app_factory(dataclasses.replace(cfg_no_medium, shadow_enabled=False,
+                                                 tiers={"small": "", "medium": "", "frontier": ""}))
+    assert [m["id"] for m in (await bare.get("/v1/models")).json()["data"]] == ["auto"]
+
+
+# --- unconfigured tiers (R15) ------------------------------------------------------------------
+
+
+EMPTY_TIERS = {"small": "", "medium": "", "frontier": ""}
+
+
+@pytest.mark.parametrize("stream", [False, True])
+async def test_explicit_unconfigured_tier_is_400(app_factory, cfg_tiers, respx_mock, log_lines, stream):
+    c = await app_factory(dataclasses.replace(cfg_tiers, shadow_enabled=False, tiers=EMPTY_TIERS))
+    r = await c.post("/v1/chat/completions", json={**BODY, "model": "small", "stream": stream}, headers=AUTH)
+    assert r.status_code == 400 and len(respx_mock.calls) == 0
+    assert r.json() == {"error": {"message": "model tier 'small' is not configured",
+                                  "type": "invalid_request_error"}}
+    (rec,) = await log_lines()
+    assert rec["status"] == 400 and rec["error_kind"] is None and rec["target"] == "small"
+    assert rec["attempts"] == ["small:unconfigured", "medium:unconfigured", "frontier:unconfigured"]
+
+
+async def test_policy_chosen_unconfigured_tier_serves_via_auto(app_factory, cfg_tiers, respx_mock, log_lines):
+    class PickMedium:
+        name = "pick_medium"
+
+        def decide(self, req):
+            return Decision("medium", self.name, {"medium": 1.0})
+
+    c = await app_factory(dataclasses.replace(cfg_tiers, shadow_enabled=False, tiers=EMPTY_TIERS), PickMedium())
+    respx_mock.post(UP).respond(200, json={"model": "m1", "choices": []})
+    r = await c.post("/v1/chat/completions", json=BODY, headers=AUTH)
+    assert r.status_code == 200 and sent_models(respx_mock) == ["auto"]
+    (rec,) = await log_lines()
+    assert rec["target"] == "auto" and "internal_error" in rec["reasons"]

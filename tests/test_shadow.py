@@ -19,7 +19,7 @@ async def test_parses_known_model(client, respx_mock):
 async def test_never_raises_on_error_or_timeout(client, respx_mock):
     respx_mock.post(URL).mock(side_effect=httpx.ConnectError("x"))
     r = await shadow_auto_judge(client, MSGS, set())
-    assert r == {"raw": None, "parsed_model": None, "latency_ms": r["latency_ms"], "ok": False}
+    assert r == {"raw": None, "parsed_model": None, "latency_ms": r["latency_ms"], "ok": False, "usage": None}
 
 
 async def test_body_is_non_streaming_auto_judge_with_messages(client, respx_mock):
@@ -88,7 +88,7 @@ async def test_non_json_response_is_not_ok(client, respx_mock):
 async def test_upstream_status_error_is_not_ok(client, respx_mock):
     respx_mock.post(URL).respond(503, json={"error": {"message": "down"}})
     r = await shadow_auto_judge(client, MSGS, {"gpt-4o"})
-    assert r == {"raw": None, "parsed_model": None, "latency_ms": r["latency_ms"], "ok": False}
+    assert r == {"raw": None, "parsed_model": None, "latency_ms": r["latency_ms"], "ok": False, "usage": None}
 
 
 async def test_timeout_returns_not_ok_promptly(client, respx_mock):
@@ -107,3 +107,17 @@ async def test_cancellation_propagates(client, respx_mock):
     task.cancel()
     with pytest.raises(asyncio.CancelledError):
         await task
+
+
+async def test_usage_is_included(client, respx_mock):
+    usage = {"prompt_tokens": 9, "completion_tokens": 2, "total_tokens": 11}
+    respx_mock.post(URL).respond(200, json={"choices": [{"message": {"content": "m1"}}], "usage": usage})
+    r = await shadow_auto_judge(client, MSGS, {"m1"})
+    assert r["ok"] is True and r["usage"] == usage
+
+
+@pytest.mark.parametrize("usage", [None, "x", 5])
+async def test_usage_none_when_missing_or_not_a_dict(client, respx_mock, usage):
+    respx_mock.post(URL).respond(200, json={"choices": [{"message": {"content": "m1"}}], "usage": usage})
+    r = await shadow_auto_judge(client, MSGS, {"m1"})
+    assert r["ok"] is True and r["usage"] is None
