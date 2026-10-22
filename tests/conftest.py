@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from gateway.config import load_config
+from gateway.decision_log import DecisionRecord
 from gateway.hooshyar import HooshyarClient
 
 URL = UP = "https://h.test/v1/chat/completions"
@@ -45,3 +46,34 @@ def cfg_tiers():
 @pytest.fixture
 def cfg_no_medium():
     return _cfg_with_tiers(small="s1", medium="", frontier="f1")
+
+
+def make_record(**overrides) -> DecisionRecord:
+    """A valid DecisionRecord with neutral values; override any field by keyword."""
+    fields = dict(
+        request_id="r1",
+        ts="2026-10-22T00:00:00+00:00",
+        app_id="chat",
+        user_hash=None,
+        conversation_id=None,
+        language="fa",
+        n_messages=1,
+        prompt_chars=10,
+        policy="auto_passthrough",
+        target="auto",
+        probs={},
+        reasons=[],
+        attempts=[],
+        served_by="auto",
+        response_model="m1",
+        prompt_tokens=None,
+        completion_tokens=None,
+        cost=None,
+        cost_verified=False,
+        latency_ms=5,
+        status=200,
+        error_kind=None,
+        stream=False,
+    )
+    fields.update(overrides)
+    return DecisionRecord(**fields)
