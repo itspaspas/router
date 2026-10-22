@@ -33,6 +33,7 @@ async def test_4xx_is_not_retried(respx_mock, cfg_tiers, client):
     with pytest.raises(UpstreamError) as e:
         await execute(AUTO, BODY, client, cfg_tiers, stream=False)
     assert e.value.status == 400 and len(respx_mock.calls) == 1
+    assert e.value.attempts == ["auto"]
 
 
 async def test_unconfigured_tier_skipped(respx_mock, cfg_no_medium, client):
@@ -60,6 +61,7 @@ async def test_all_attempts_fail_raises_last_error(respx_mock, cfg_tiers, client
     with pytest.raises(UpstreamError) as e:
         await execute(AUTO, BODY, client, cfg_tiers, stream=False)
     assert e.value.status == 503 and len(respx_mock.calls) == 3
+    assert e.value.attempts == ["auto", "medium", "frontier"]
 
 
 async def test_tier_target_resolves_and_falls_back(respx_mock, cfg_tiers, client):
@@ -83,6 +85,7 @@ async def test_no_attempt_possible_raises_connection_error(respx_mock, cfg_no_me
         await execute(Decision("small", "p", {}), BODY, client, cfg, stream=False)
     assert e.value.kind == "connection" and e.value.status is None
     assert len(respx_mock.calls) == 0
+    assert e.value.attempts == ["small:unconfigured", "medium:unconfigured", "frontier:unconfigured"]
 
 
 async def test_body_not_mutated(respx_mock, cfg_tiers, client):

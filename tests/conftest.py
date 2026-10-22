@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import asyncio
+import contextlib
 import dataclasses
 import inspect
 import json
@@ -10,7 +11,7 @@ from pathlib import Path
 import httpx
 import pytest
 
-from gateway.config import load_config
+from gateway.config import Settings, load_config
 from gateway.decision_log import DecisionRecord
 from gateway.hooshyar import HooshyarClient
 
@@ -124,3 +125,98 @@ def route_by_model(mapping: dict, default):
         return out
 
     return handler
+
+
+# App clients (Task 8). Each runs the app's lifespan and talks to it in-process over ASGITransport.
+
+
+def app_settings(tmp_path: Path, **overrides) -> Settings:
+    fields = dict(
+        base_url="https://h.test/v1",
+        token="T",
+        config_path=Path("unused.yaml"),
+        app_keys={"k1": "chat"},
+        log_path=tmp_path / "d.jsonl",
+        log_text=False,
+        log_salt="s",
+    )
+    fields.update(overrides)
+    return Settings(**fields)
+
+
+@contextlib.asynccontextmanager
+async def serve_app(app):
+    """Run `app`'s lifespan and yield an httpx client bound to it."""
+    async with app.router.lifespan_context(app):
+        transport = httpx.ASGITransport(app=app)
+        async with httpx.AsyncClient(transport=transport, base_url="http://gw") as c:
+            yield c
+
+
+@pytest.fixture
+async def app_factory(tmp_path):
+    """`await app_factory(cfg, policy=None, client=None, **settings_overrides)` -> started client.
+
+    Every app built is kept in `app_factory.apps` (used by `log_lines`) and shut down at teardown.
+    """
+    from gateway.app import create_app
+
+    apps = []
+    async with contextlib.AsyncExitStack() as stack:
+
+        async def make(cfg, policy=None, client=None, **settings_overrides):
+            app = create_app(app_settings(tmp_path, **settings_overrides), cfg, policy, client)
+            apps.append(app)
+            return await stack.enter_async_context(serve_app(app))
+
+        make.apps = apps
+        yield make
+
+
+@pytest.fixture
+def cfg_capped(cfg_tiers):
+    return dataclasses.replace(cfg_tiers, per_app_budget={"chat": 0.0})
+
+
+class _BrokenPolicy:
+    name = "broken"
+
+    def decide(self, req):
+        raise RuntimeError("policy exploded")
+
+
+@pytest.fixture
+async def app_client(app_factory, cfg_tiers):
+    return await app_factory(dataclasses.replace(cfg_tiers, shadow_enabled=False))
+
+
+@pytest.fixture
+async def app_client_shadow(app_factory, cfg_tiers):
+    return await app_factory(
+        dataclasses.replace(cfg_tiers, shadow_enabled=True, shadow_sample_rate=1.0)
+    )
+
+
+@pytest.fixture
+async def app_client_capped(app_factory, cfg_capped):
+    return await app_factory(dataclasses.replace(cfg_capped, shadow_enabled=False))
+
+
+@pytest.fixture
+async def app_client_broken_policy(app_factory, cfg_tiers):
+    return await app_factory(dataclasses.replace(cfg_tiers, shadow_enabled=False), _BrokenPolicy())
+
+
+@pytest.fixture
+def log_lines(app_factory, tmp_path):
+    """`await log_lines()`: wait for background work and the log queue to drain; parsed records."""
+
+    async def read() -> list[dict]:
+        for app in app_factory.apps:
+            await app.state.gateway.drain()
+        path = tmp_path / "d.jsonl"
+        if not path.exists():
+            return []
+        return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+
+    return read

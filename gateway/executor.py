@@ -90,8 +90,10 @@ async def execute(
             return ExecResult(model, attempts, await client.chat(req), None)
         except UpstreamError as e:
             if not e.retryable:
+                e.attempts = attempts
                 raise
             last_error = e
-    if last_error is not None:
-        raise last_error
-    raise UpstreamError("connection")
+    if last_error is None:
+        last_error = UpstreamError("connection")
+    last_error.attempts = attempts  # for the decision log: what was tried before giving up
+    raise last_error
