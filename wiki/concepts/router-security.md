@@ -15,3 +15,4 @@ The router is a *control plane*. Whoever manipulates it controls cost, quality a
 - **Model substitution** ([[model-substitution-audit]], NeurIPS 2025): software-only detection of a cheaper model behind an endpoint is unreliable, so the paper argues for TEE attestation.
 
 **Gaps** ([[gap-adversarial-robustness]]): certified or worst-case-bounded routers; safety as a first-class routing objective (a safety floor per route); cost-DoS budgets per tenant; auditing whether a third-party router actually sends you to the model it claims ([[gap-transparency-and-control]]).
+- **R2A update (verified, iteration 8)**: the attack is black-box, using a surrogate ensemble plus adversarial suffixes, and works on commercial routers.

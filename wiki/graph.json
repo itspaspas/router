@@ -141,7 +141,7 @@
    "title": "Cascades, deferral and self-assessment",
    "type": "concept",
    "path": "wiki/concepts/cascades.md",
-   "in_degree": 12,
+   "in_degree": 13,
    "out_degree": 9
   },
   {
@@ -246,7 +246,7 @@
    "type": "gap",
    "path": "wiki/gaps/gap-adversarial-robustness.md",
    "in_degree": 6,
-   "out_degree": 5
+   "out_degree": 6
   },
   {
    "id": "gap-agentic-credit-assignment",
@@ -254,7 +254,7 @@
    "type": "gap",
    "path": "wiki/gaps/gap-agentic-credit-assignment.md",
    "in_degree": 5,
-   "out_degree": 5
+   "out_degree": 6
   },
   {
    "id": "gap-coverage",
@@ -341,7 +341,7 @@
    "title": "G7 Unified test-time compute allocation",
    "type": "gap",
    "path": "wiki/gaps/gap-unified-compute-allocation.md",
-   "in_degree": 5,
+   "in_degree": 6,
    "out_degree": 7
   },
   {
@@ -1608,6 +1608,10 @@
   },
   {
    "source": "gap-adversarial-robustness",
+   "target": "cascades"
+  },
+  {
+   "source": "gap-adversarial-robustness",
    "target": "dsc-robustness"
   },
   {
@@ -1633,6 +1637,10 @@
   {
    "source": "gap-agentic-credit-assignment",
    "target": "agentrouter-agentic"
+  },
+  {
+   "source": "gap-agentic-credit-assignment",
+   "target": "gap-unified-compute-allocation"
   },
   {
    "source": "gap-agentic-credit-assignment",

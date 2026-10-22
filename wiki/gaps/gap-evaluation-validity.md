@@ -1,7 +1,7 @@
 ---
 type: gap
 title: G1 Evaluation validity
-sources: [dars2026, chen2026gapreal, garg2026unsolvability, lu2026plateau, li2026llmrouterbench, lee2026tasktype, li2025knn]
+sources: [routejudge2026, yuan2025whoroutes, routerxbench2026, dars2026, chen2026gapreal, garg2026unsolvability, lu2026plateau, li2026llmrouterbench, lee2026tasktype, li2025knn]
 ---
 # G1: We cannot yet measure router progress reliably
 
@@ -19,3 +19,5 @@ sources: [dars2026, chen2026gapreal, garg2026unsolvability, lu2026plateau, li202
 
 ## Prior art (iteration 7)
 DARS (2026) builds router supervision from *repeated observations*, crossing meaning-preserving query rewrites with repeated stochastic decoding to get distributional capability estimates. Together with [[routing-gap-noise]], this means multi-sample labels are already proposed. P1's remaining novelty is the **full protocol** (artifact audit, task-type oracle, real prices, confidence intervals, living pool) and its adoption as a benchmark standard, not multi-sampling itself.
+
+**Evaluation platforms (iteration 8).** RouteJudge (2026) evaluates routers *online by user preference* over routing decisions, with the ORBIT toolbox for submissions. "Who Routes the Router?" (NeurIPS 2025 WS) critiques imbalanced pools and oversimplified metrics. RouterXBench argues for fair and comprehensive router evaluation. The community clearly sees the problem. A *noise-aware, artifact-audited* protocol is still missing.

@@ -1,6 +1,6 @@
 # Source catalog
 
-203 works. Generated from `sources/catalog.csv` by `scripts/build_graph.py`; edit the CSV, not this file.
+204 works. Generated from `sources/catalog.csv` by `scripts/build_graph.py`; edit the CSV, not this file.
 
 Verification column: **V** = verified this session (abstract-level web check); **K** = well-known prior knowledge, not re-checked this session; **I** = indexed from the curated Awesome-Routing-LLMs list only.
 
@@ -123,7 +123,7 @@ Verification column: **V** = verified this session (abstract-level web check); *
 | oats2026 | OATS | 2026 | arXiv | [arXiv:2603.13426](https://arxiv.org/abs/2603.13426) | I | Search by ID found nothing (iteration 7) |
 | seqroute2026 | SeqRoute | 2026 | arXiv | [arXiv:2605.25424](https://arxiv.org/abs/2605.25424) | V | Multi-turn routing as finite-horizon MDP, offline RL under global budget |
 
-## Cascades, deferral and self-assessment (17)
+## Cascades, deferral and self-assessment (16)
 
 | id | Title | Year | Venue | Link | V | Note |
 |---|---|---|---|---|---|---|
@@ -139,13 +139,12 @@ Verification column: **V** = verified this session (abstract-level web check); *
 | chen2025confident | Confident or Seek Stronger: Exploring Uncertainty-Based On-Device LLM Routing | 2025 | NeurIPS 2025 WS | [arXiv:2502.04428](https://arxiv.org/abs/2502.04428) | I | On-device to cloud escalation with uncertainty |
 | diSRouter2025 | DiSRouter: Distributed Self-Routing for LLM Selections | 2025 | ICLR 2026 | [arXiv:2510.19208](https://arxiv.org/abs/2510.19208) | V | No central router: each LLM self-assesses (two-stage self-awareness training) and answers or passes on; generalizes OOD and to pool changes |
 | sater2025 | SATER: Self-Aware and Token-Efficient Approach to Routing and Cascading | 2025 | EMNLP | [arXiv:2510.05164](https://arxiv.org/abs/2510.05164) | V | Fudan; shortest-response preference optimization + confidence-aware rejection; works for pre-routing and cascades; >50% cost and >80% cascade-latency reduction |
-| acar2026 | ACAR (adaptive cascade routing) | 2026 | arXiv | [arXiv:2602.21231](https://arxiv.org/abs/2602.21231) | I |  |
+| acar2026 | ACAR: Adaptive Complexity Routing | 2026 | arXiv | [arXiv:2602.21231](https://arxiv.org/abs/2602.21231) | V | Self-consistency variance over 3 probe samples decides 1/2/3-model execution; 55.6% vs 54.4% two-model baseline while skipping full ensembling on ~54% of 1,510 tasks; training-free with decision traces |
 | r2vagent2026 | R2V Agent | 2026 | arXiv | [arXiv:2605.16604](https://arxiv.org/abs/2605.16604) | I |  |
 | raser2026 | RASER | 2026 | arXiv | [arXiv:2606.02488](https://arxiv.org/abs/2606.02488) | I |  |
 | ror2026 | Resample or Reroute (RoR) | 2026 | arXiv | [arXiv:2607.08665](https://arxiv.org/abs/2607.08665) | I | When to resample same model vs reroute to another |
-| xrouter2026acl | X-Router | 2026 | ACL Findings | aclanthology:2026.findings-acl.994 | I |  |
 
-## Reasoning-effort and test-time-compute routing (8)
+## Reasoning-effort and test-time-compute routing (9)
 
 | id | Title | Year | Venue | Link | V | Note |
 |---|---|---|---|---|---|---|
@@ -157,6 +156,7 @@ Verification column: **V** = verified this session (abstract-level web check); *
 | odar2026 | ODAR: Principled Adaptive Routing for LLM Reasoning via Active Inference | 2026 | arXiv | [arXiv:2602.23681](https://arxiv.org/abs/2602.23681) | V | Amortized active-inference difficulty estimator routes fast vs slow agent; free-energy answer fusion with varentropy; 82% compute cut on open stack (authors) |
 | r2router2026 | R2-Router: A New Paradigm for LLM Routing with Reasoning | 2026 | ICML | [arXiv:2602.02823](https://arxiv.org/abs/2602.02823) | V | Routes jointly over (LLM, output-length budget) enforced via length-constrained instructions; R2-Bench; ~4-5x lower cost than prior routers (authors); plug-in to existing routers |
 | thinkwhenneeded2026 | Think When Needed: Model-Aware Reasoning Routing | 2026 | arXiv (SIGIR 2026) | [arXiv:2601.18146](https://arxiv.org/abs/2601.18146) | V | Per-instance decide whether an LLM should reason |
+| xrouter2026acl | X-Router: Decoupling Knowledge and Reasoning for Cost-Effective LLM Inference | 2026 | ACL Findings | aclanthology:2026.findings-acl.994 | V | Dual-axis routing: retrieval necessity and reasoning necessity decided separately under a user cost-quality trade-off |
 
 ## Multi-round, token-level, agentic and fusion routing (27)
 
@@ -178,8 +178,8 @@ Verification column: **V** = verified this session (abstract-level web check); *
 | agentrouter2026icml | AgentRouter: Heterogeneous Model Routing for Cost-Optimal Multi-Step Agentic Workflows | 2026 | ICML WS (AdaptFM) | [link](https://icml.cc/virtual/2026/68040) | V | 12M classifier per step; reported 72% cost cut <3% task drop vs frontier-only |
 | agenticrouting2026 | Agentic Routing: The Harness-Native Data Flywheel | 2026 | arXiv | [arXiv:2607.11399](https://arxiv.org/abs/2607.11399) | V | Step-level routing from harness state; routing logs become training data |
 | atlas2026 | Atlas | 2026 | arXiv | [arXiv:2601.03872](https://arxiv.org/abs/2601.03872) | I |  |
-| budgetagentic2026 | Budget-Aware Agentic Routing via Boundary-Guided Training | 2026 | arXiv | [arXiv:2602.21227](https://arxiv.org/abs/2602.21227) | I |  |
-| budgetmem2026 | BudgetMem | 2026 | ICML | [arXiv:2602.06025](https://arxiv.org/abs/2602.06025) | I |  |
+| budgetagentic2026 | Budget-Aware Agentic Routing via Boundary-Guided Training | 2026 | arXiv | [arXiv:2602.21227](https://arxiv.org/abs/2602.21227) | V | Cambridge/Microsoft; per-step cheap vs expensive model under strict per-task budget; boundary policies (always-small/always-large) build difficulty taxonomy; BoPO avoids degenerate always-cheap policy |
+| budgetmem2026 | BudgetMem: Learning Query-Aware Budget-Tier Routing for Runtime Agent Memory | 2026 | ICML | [arXiv:2602.06025](https://arxiv.org/abs/2602.06025) | V | RL router picks Low/Mid/High budget tiers per memory module; LoCoMo, LongMemEval, HotpotQA |
 | ncots2026 | NCoTs: Neural Chain-of-Thought Search | 2026 | arXiv | [arXiv:2601.11340](https://arxiv.org/abs/2601.11340) | I |  |
 | policystep2026 | Policy-Guided Stepwise Model Routing for Cost-Effective Reasoning | 2026 | arXiv | [arXiv:2605.06116](https://arxiv.org/abs/2605.06116) | I |  |
 | relayllm2026 | RelayLLM: Efficient Reasoning via Collaborative Decoding | 2026 | arXiv | [arXiv:2601.05167](https://arxiv.org/abs/2601.05167) | V | Small model is the controller and emits a command token to call the large model for a few tokens; GRPO; large model writes ~1.07% of tokens; 42.5 -> 49.5% avg on 6 math benchmarks |
@@ -244,15 +244,15 @@ Verification column: **V** = verified this session (abstract-level web check); *
 | medrec2025 | Multi-LLM Collaboration for Medication Recommendation | 2025 | arXiv | [arXiv:2512.05066](https://arxiv.org/abs/2512.05066) | I |  |
 | lu2025routerarena | RouterArena: An Open Platform for Comprehensive Comparison of LLM Routers | 2025 | ICLR 2026 | [arXiv:2510.00202](https://arxiv.org/abs/2510.00202) | V | Live leaderboard incl. commercial routers (Azure GPT-5 router) at routeworks.github.io |
 | huang2025routereval | RouterEval: A Comprehensive Benchmark for Routing LLMs to Explore Model-level Scaling Up | 2025 | EMNLP Findings | [arXiv:2503.10657](https://arxiv.org/abs/2503.10657) | V | 200M+ records 8500+ LLMs 12 evals; model-level scaling-up with candidate count |
-| yuan2025whoroutes | Who Routes the Router? Rethinking the Evaluation of LLM Routing Systems | 2025 | NeurIPS WS | openreview:EEPostHMtF | I |  |
+| yuan2025whoroutes | Who Routes the Router? Rethinking the Evaluation of LLM Routing Systems | 2025 | NeurIPS WS | openreview:EEPostHMtF | V | Critiques limited task diversity, imbalanced pools, oversimplified metrics; proposes balanced pool + multi-faceted deployment metrics |
 | agentselect2026 | AgentSelect: Benchmark for Narrative Query-to-Agent Recommendation | 2026 | ICML 2026 | [arXiv:2603.03761](https://arxiv.org/abs/2603.03761) | V | 111K queries, 108K deployable agent configs (backbone + toolkit), 251K interactions; CF/GNN fragile on long tail; content-aware matching needed |
 | amongus2026 | AmongUs (agent deception benchmark used for routing) | 2026 | ICML | [arXiv:2602.05176](https://arxiv.org/abs/2602.05176) | I |  |
 | llmrouterlib2026 | LLMRouter: Unified Infrastructure for Developing Evaluating and Deploying LLM Routers (+ xRouteBench) | 2026 | arXiv | [arXiv:2608.06867](https://arxiv.org/abs/2608.06867) | V | 16+ routers in one library; 5 scenarios incl. long-context memory vision time-series personalization; +14.6% rel. over best fixed model; no single winner |
 | li2026llmrouterbench | LLMRouterBench: A Massive Benchmark and Unified Framework for LLM Routing | 2026 | ACL Findings | [arXiv:2601.07206](https://arxiv.org/abs/2601.07206) | V | 400K instances 21 datasets 33 models 10 baselines; many routers incl. commercial fail to beat simple baseline; model-recall failures |
-| routejudge2026 | RouteJudge & ORBIT | 2026 | arXiv | [arXiv:2606.18774](https://arxiv.org/abs/2606.18774) | I | LLM-judge based router evaluation |
-| routerxbench2026 | RouterXBench | 2026 | arXiv | [arXiv:2602.11877](https://arxiv.org/abs/2602.11877) | I | Code at github.com/zhuchichi56/RouterXBench; scope not verified |
+| routejudge2026 | RouteJudge: An Open Platform for Reproducible and Preference-Aware LLM Routing (+ ORBIT toolbox) | 2026 | arXiv | [arXiv:2606.18774](https://arxiv.org/abs/2606.18774) | V | Lai, Hu, Ye; online pairwise preference evaluation of routing decisions; ORBIT toolbox for implementing and submitting routers; routejudge.cn |
 | gonuguntla2026replay | The Replay Gap: Static Evaluation of Model Switching in LLM Agents Scores the Wrong World | 2026 | arXiv | [arXiv:2608.08239](https://arxiv.org/abs/2608.08239) | V | Live forked re-execution on SWE-bench Verified: swaps change 61-94% of later actions; log-stitching replay mispredicts every success-relevant outcome; thoroughness tax |
-| twinrouterbench2026 | TwinRouterBench | 2026 | CAIS WS | [arXiv:2605.18859](https://arxiv.org/abs/2605.18859) | I |  |
+| routerxbench2026 | Towards Fair and Comprehensive Evaluation of Routers (RouterXBench) | 2026 | arXiv | [arXiv:2602.11877](https://arxiv.org/abs/2602.11877) | V | Code at github.com/zhuchichi56/RouterXBench; scope not verified |
+| twinrouterbench2026 | TwinRouterBench: Fast Static and Live Dynamic Evaluation for Realistic Agentic LLM Routing | 2026 | NeurIPS 2026 | [arXiv:2605.18859](https://arxiv.org/abs/2605.18859) | V | Static: 970 execution-verified router-visible prefixes over SWE-bench/BFCL/mtRAG/QMSum/PinchBench, judge-free scoring; Dynamic: live per-call routing on SWE-bench Verified measured by resolution and real API spend |
 
 ## Theory and critical analyses (15)
 
@@ -274,15 +274,16 @@ Verification column: **V** = verified this session (abstract-level web check); *
 | garg2026unsolvability | Unsolvability Ceiling in Multi-LLM Routing: An Empirical Study of Evaluation Artifacts | 2026 | arXiv | [arXiv:2605.07395](https://arxiv.org/abs/2605.07395) | V | Truncation/judge/format artifacts inflate 'unsolvable'; routers collapse to majority class |
 | lai2026equirouter | When Routing Collapses: On the Degenerate Convergence of LLM Routers (EquiRouter) | 2026 | arXiv (NeurIPS 2026 as 'When LLM Routers Overpay') | [arXiv:2602.03478](https://arxiv.org/abs/2602.03478) | V | Routers over-select strongest model as budget grows; fix by learning rankings; ~17% cost cut at GPT-4 level on RouterBench |
 
-## Security and robustness (6)
+## Security and robustness (7)
 
 | id | Title | Year | Venue | Link | V | Note |
 |---|---|---|---|---|---|---|
 | cai2025substitution | Are You Getting What You Pay For? Auditing Model Substitution in LLM APIs | 2025 | NeurIPS | [arXiv:2504.04715](https://arxiv.org/abs/2504.04715) | V | Software-only detection (output stats, benchmarks, logprobs) unreliable vs quantization/random substitution; argues for TEE attestation |
 | kassem2025robust | How Robust Are Router-LLMs? Analysis of the Fragility of LLM Routing Capabilities (DSC) | 2025 | EACL 2026 | [arXiv:2504.07113](https://arxiv.org/abs/2504.07113) | V | Category-driven routing; jailbreaks routed to weak models; privacy/safety checks |
 | shafran2025rerouting | Rerouting LLM Routers | 2025 | COLM | [arXiv:2501.01818](https://arxiv.org/abs/2501.01818) | V | Query-independent confounder gadgets force strong-model routing; 'LLM control plane integrity' |
-| r2a2026 | R2A: Route to Rome Attack | 2026 | ACL | [arXiv:2604.15022](https://arxiv.org/abs/2604.15022) | I |  |
 | rerouteguard2026 | RerouteGuard: Understanding and Mitigating Adversarial Risks for LLM Routing | 2026 | arXiv | [arXiv:2601.21380](https://arxiv.org/abs/2601.21380) | V | Real routing systems vulnerable (cost escalation); embedding-based detector >99% |
+| r2a2026 | Route to Rome Attack: Directing LLM Routers to Expensive Models via Adversarial Suffix Optimization (R2A) | 2026 | ACL | [arXiv:2604.15022](https://arxiv.org/abs/2604.15022) | V | Black-box: hybrid ensemble surrogate router + adversarial suffix optimization; raises expensive-model routing rate on open-source and commercial routers; threatens tiered-subscription economics |
+| cascadefail2026 | When Efficiency Backfires: Cascading LLMs Trigger Cascade Failure under Adversarial Attack | 2026 | arXiv | [arXiv:2605.17288](https://arxiv.org/abs/2605.17288) | I | Title-level only: adversarial attacks on cascades |
 | youragent2026 | Your Agent Is Mine: Measuring Malicious Intermediary Attacks on the LLM Supply Chain | 2026 | ACM CCS | [arXiv:2604.08407](https://arxiv.org/abs/2604.08407) | V | Measured 28 paid + 400 free API routers: 9 injected malicious code, 17 touched planted credentials; defenses: fail-closed gating, anomaly screening, transparency logs |
 
 ## Industry disclosures (2)

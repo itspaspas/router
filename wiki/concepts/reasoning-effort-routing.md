@@ -1,7 +1,7 @@
 ---
 type: concept
 title: Reasoning-effort and test-time-compute routing
-sources: [su2025cprouter, radar2025, thinkwhenneeded2026, dart2026, ding2025bestroute, routereason2025, difficulty2025, openai2025gpt5, dmr2026]
+sources: [xrouter2026acl, acar2026, su2025cprouter, radar2025, thinkwhenneeded2026, dart2026, ding2025bestroute, routereason2025, difficulty2025, openai2025gpt5, dmr2026]
 ---
 # Reasoning-effort routing
 
@@ -17,3 +17,5 @@ Since 2025, frontier models have exposed *effort knobs* (thinking on/off, thinki
 - **Step-level effort in agents**: per-step high/medium/low effort selection ([[agentic-routing]]).
 
 **Gap.** No unified "compute router" jointly allocates model, effort, samples, retrieval and tools under one budget with a shared quality estimator ([[gap-unified-compute-allocation]]).
+
+**More knobs (iteration 8).** X-Router (ACL Findings 2026) routes *retrieval necessity* and *reasoning necessity* as separate axes. ACAR uses self-consistency variance over three probe samples to pick 1-, 2- or 3-model execution, training-free.
