@@ -53,7 +53,7 @@
    "title": "Research proposals P1\u2013P9",
    "type": "index",
    "path": "research/06-research-proposals.md",
-   "in_degree": 12,
+   "in_degree": 13,
    "out_degree": 33
   },
   {
@@ -270,14 +270,14 @@
    "type": "gap",
    "path": "wiki/gaps/gap-coverage.md",
    "in_degree": 5,
-   "out_degree": 4
+   "out_degree": 7
   },
   {
    "id": "gap-evaluation-validity",
    "title": "G1 Evaluation validity",
    "type": "gap",
    "path": "wiki/gaps/gap-evaluation-validity.md",
-   "in_degree": 11,
+   "in_degree": 12,
    "out_degree": 8
   },
   {
@@ -389,7 +389,7 @@
    "title": "HyDRA in GitHub Copilot auto-mode (2026)",
    "type": "system",
    "path": "wiki/systems/hydra-copilot-auto.md",
-   "in_degree": 6,
+   "in_degree": 7,
    "out_degree": 5
   },
   {
@@ -1664,7 +1664,19 @@
   },
   {
    "source": "gap-coverage",
+   "target": "06-research-proposals"
+  },
+  {
+   "source": "gap-coverage",
    "target": "bedrock-intelligent-prompt-routing"
+  },
+  {
+   "source": "gap-coverage",
+   "target": "gap-evaluation-validity"
+  },
+  {
+   "source": "gap-coverage",
+   "target": "hydra-copilot-auto"
   },
   {
    "source": "gap-coverage",

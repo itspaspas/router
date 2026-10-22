@@ -59,7 +59,7 @@ graph LR
 | ★ | G5 Session routing | Active since 2026; remaining value is in real switch economics and real users | Medium |
 | ★ | G10 Guarantees under shift | Theory-heavy, high value to operators | Medium |
 | ★ | G11 Pool design | Cheap to study offline on RouterEval-scale data | High |
-| ★ | G12 Coverage | Dataset-building effort | Medium |
+| ★★ | G12 Coverage | Persian and mixed Persian–English routing is a confirmed open slot; fits real deployment traffic | Medium: needs Persian evaluation data |
 | ★ | G13 Auditing and control | Policy relevance; fingerprinting methods exist | Medium |
 
 ## Stress test (iteration 2)
