@@ -1,9 +1,13 @@
 """Shared constants and fixtures. Tests import constants via `from tests.conftest import URL`."""
 from __future__ import annotations
 
+import asyncio
 import dataclasses
+import inspect
+import json
 from pathlib import Path
 
+import httpx
 import pytest
 
 from gateway.config import load_config
@@ -77,3 +81,46 @@ def make_record(**overrides) -> DecisionRecord:
     )
     fields.update(overrides)
     return DecisionRecord(**fields)
+
+
+# Response helpers for respx routes. Handlers take the httpx.Request and return an httpx.Response
+# (sync or async). Use as `respx_mock.post(URL).mock(side_effect=ok_json)`.
+
+def ok_json(req: httpx.Request) -> httpx.Response:
+    """200 with a fixed chat completion whose content is "ok"."""
+    return httpx.Response(200, json={"model": "m1", "choices": [{"message": {"content": "ok"}}]})
+
+
+def ok_text(s: str):
+    """Handler factory: 200 with a chat completion whose content is `s`."""
+
+    def handler(req: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json={"model": "m1", "choices": [{"message": {"content": s}}]})
+
+    return handler
+
+
+def slow_then_error(seconds: float):
+    """Handler factory: sleeps `seconds`, then raises httpx.ConnectError."""
+
+    async def handler(req: httpx.Request) -> httpx.Response:
+        await asyncio.sleep(seconds)
+        raise httpx.ConnectError("slow upstream")
+
+    return handler
+
+
+def route_by_model(mapping: dict, default):
+    """Handler factory: dispatches on the JSON body's `model`; `mapping` maps model id -> handler.
+
+    Unknown models (or a body without `model`) use `default`. Handlers may be sync or async.
+    """
+
+    async def handler(req: httpx.Request) -> httpx.Response:
+        model = json.loads(req.content).get("model")
+        out = mapping.get(model, default)(req)
+        if inspect.isawaitable(out):
+            out = await out
+        return out
+
+    return handler
