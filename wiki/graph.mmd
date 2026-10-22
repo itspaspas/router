@@ -1,0 +1,149 @@
+graph LR
+  agentic-routing["Agentic (step-level) routing"]
+  budgeted-online-routing["Budgeted, constrained and online (bandit) routing"]
+  cascade-routing["Cascade routing (unifying routing and cascading)"]
+  cascades["Cascades, deferral and self-assessment"]
+  cold-start-and-model-representation["Cold start, unseen models and model representation"]
+  collaborative-routing["Collaborative and multi-round routing"]
+  decision-aware-training["Decision-aware router training (and routing collapse)"]
+  design-space["Design space of LLM routers"]
+  economics-and-incentives["Economics, incentives and mechanism design"]
+  gap-adversarial-robustness{{"G9 Adversarial robustness and safety-aware routing"}}
+  gap-agentic-credit-assignment{{"G6 Agentic routing and credit assignment"}}
+  gap-coverage{{"G12 Coverage — languages, modalities, long context, domains"}}
+  gap-evaluation-validity{{"G1 Evaluation validity"}}
+  gap-guarantees-under-shift{{"G10 Guarantees under distribution shift"}}
+  gap-learning-from-logs{{"G4 Learning and evaluating from production logs"}}
+  gap-nonstationary-pools{{"G3 Non-stationary model pools"}}
+  gap-pool-design{{"G11 Pool design and complementarity"}}
+  gap-query-only-signal-ceiling{{"G2 Query-only signal ceiling"}}
+  gap-serving-coupling{{"G8 Coupling routing with serving systems"}}
+  gap-session-level-routing{{"G5 Session- and conversation-level routing"}}
+  gap-transparency-and-control{{"G13 Transparency, user control and auditing"}}
+  gap-unified-compute-allocation{{"G7 Unified test-time compute allocation"}}
+  industry-landscape["Industry and open-source landscape"]
+  llm-routing["LLM routing (hub)"]
+  multimodal-routing["Multimodal and non-text routing"]
+  nonparametric-routers["Non-parametric and memory-based routers (kNN, graph)"]
+  oracle-gap["The oracle gap and the 2026 critical turn"]
+  personalized-routing["Personalized and preference-aligned routing"]
+  predictive-routers["Predictive (score-based) routers"]
+  quality-estimation["Quality estimation signals for routing"]
+  reasoning-effort-routing["Reasoning-effort and test-time-compute routing"]
+  representation-matching-routers["Representation-matching routers"]
+  router-evaluation["Router evaluation and benchmarks"]
+  router-security["Router security and robustness"]
+  routing-vs-moe["Routing vs Mixture-of-Experts"]
+  serving-aware-routing["Serving-aware routing (latency, load, energy, edge)"]
+  token-level-routing["Token- and segment-level routing"]
+  agentic-routing --> collaborative-routing
+  agentic-routing --> gap-agentic-credit-assignment
+  agentic-routing --> router-security
+  budgeted-online-routing --> decision-aware-training
+  budgeted-online-routing --> economics-and-incentives
+  budgeted-online-routing --> gap-learning-from-logs
+  cascade-routing --> gap-query-only-signal-ceiling
+  cascades --> cascade-routing
+  cascades --> economics-and-incentives
+  cascades --> gap-guarantees-under-shift
+  cascades --> serving-aware-routing
+  cold-start-and-model-representation --> gap-nonstationary-pools
+  collaborative-routing --> agentic-routing
+  collaborative-routing --> router-evaluation
+  collaborative-routing --> token-level-routing
+  decision-aware-training --> gap-guarantees-under-shift
+  decision-aware-training --> gap-nonstationary-pools
+  design-space --> agentic-routing
+  design-space --> budgeted-online-routing
+  design-space --> cascade-routing
+  design-space --> cascades
+  design-space --> cold-start-and-model-representation
+  design-space --> collaborative-routing
+  design-space --> industry-landscape
+  design-space --> nonparametric-routers
+  design-space --> personalized-routing
+  design-space --> predictive-routers
+  design-space --> quality-estimation
+  design-space --> reasoning-effort-routing
+  design-space --> representation-matching-routers
+  design-space --> serving-aware-routing
+  design-space --> token-level-routing
+  economics-and-incentives --> gap-transparency-and-control
+  economics-and-incentives --> industry-landscape
+  llm-routing --> agentic-routing
+  llm-routing --> budgeted-online-routing
+  llm-routing --> cascade-routing
+  llm-routing --> cascades
+  llm-routing --> cold-start-and-model-representation
+  llm-routing --> collaborative-routing
+  llm-routing --> decision-aware-training
+  llm-routing --> design-space
+  llm-routing --> economics-and-incentives
+  llm-routing --> industry-landscape
+  llm-routing --> multimodal-routing
+  llm-routing --> nonparametric-routers
+  llm-routing --> oracle-gap
+  llm-routing --> personalized-routing
+  llm-routing --> predictive-routers
+  llm-routing --> quality-estimation
+  llm-routing --> reasoning-effort-routing
+  llm-routing --> representation-matching-routers
+  llm-routing --> router-evaluation
+  llm-routing --> router-security
+  llm-routing --> routing-vs-moe
+  llm-routing --> serving-aware-routing
+  llm-routing --> token-level-routing
+  multimodal-routing --> gap-coverage
+  nonparametric-routers --> cold-start-and-model-representation
+  nonparametric-routers --> gap-query-only-signal-ceiling
+  nonparametric-routers --> personalized-routing
+  oracle-gap --> gap-evaluation-validity
+  oracle-gap --> gap-query-only-signal-ceiling
+  personalized-routing --> gap-session-level-routing
+  personalized-routing --> gap-transparency-and-control
+  predictive-routers --> cold-start-and-model-representation
+  predictive-routers --> nonparametric-routers
+  predictive-routers --> quality-estimation
+  quality-estimation --> cascade-routing
+  quality-estimation --> cascades
+  quality-estimation --> gap-query-only-signal-ceiling
+  reasoning-effort-routing --> agentic-routing
+  reasoning-effort-routing --> gap-unified-compute-allocation
+  representation-matching-routers --> cold-start-and-model-representation
+  router-evaluation --> gap-evaluation-validity
+  router-evaluation --> multimodal-routing
+  router-evaluation --> oracle-gap
+  router-evaluation --> serving-aware-routing
+  router-security --> gap-adversarial-robustness
+  router-security --> gap-transparency-and-control
+  routing-vs-moe --> decision-aware-training
+  routing-vs-moe --> llm-routing
+  routing-vs-moe --> serving-aware-routing
+  routing-vs-moe --> token-level-routing
+  serving-aware-routing --> cascades
+  serving-aware-routing --> gap-serving-coupling
+  token-level-routing --> cascades
+  token-level-routing --> gap-serving-coupling
+  gap-adversarial-robustness --> cascades
+  gap-adversarial-robustness --> gap-transparency-and-control
+  gap-agentic-credit-assignment --> agentic-routing
+  gap-agentic-credit-assignment --> gap-unified-compute-allocation
+  gap-agentic-credit-assignment --> router-security
+  gap-coverage --> gap-evaluation-validity
+  gap-coverage --> multimodal-routing
+  gap-coverage --> router-evaluation
+  gap-learning-from-logs --> agentic-routing
+  gap-nonstationary-pools --> decision-aware-training
+  gap-pool-design --> routing-vs-moe
+  gap-query-only-signal-ceiling --> cascade-routing
+  gap-query-only-signal-ceiling --> cascades
+  gap-query-only-signal-ceiling --> gap-serving-coupling
+  gap-serving-coupling --> token-level-routing
+  gap-session-level-routing --> gap-learning-from-logs
+  gap-session-level-routing --> serving-aware-routing
+  gap-transparency-and-control --> economics-and-incentives
+  gap-transparency-and-control --> router-security
+  gap-unified-compute-allocation --> collaborative-routing
+  gap-unified-compute-allocation --> predictive-routers
+  gap-unified-compute-allocation --> reasoning-effort-routing
+  gap-unified-compute-allocation --> token-level-routing

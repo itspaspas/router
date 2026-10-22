@@ -1,0 +1,8 @@
+.claude/*.local.md
+logs/
+discovery/
+.env
+tokens.json
+*.egg-info/
+__pycache__/
+.pytest_cache/

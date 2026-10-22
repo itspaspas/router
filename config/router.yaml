@@ -1,0 +1,23 @@
+# Tier -> Hooshyar model id. Empty string = unconfigured.
+tiers:
+  small: ""
+  medium: ""
+  frontier: ""
+
+# Tiers to try, in order, when a request to a tier (or "auto") fails.
+fallback:
+  auto: [medium, frontier]
+  small: [medium, frontier]
+  medium: [frontier]
+  frontier: []
+
+budget:
+  default_daily_usd: 5.0
+  per_app: {}
+
+shadow:
+  enabled: true
+  sample_rate: 1.0
+
+timeout_s: 120
+prices_file: config/prices.yaml

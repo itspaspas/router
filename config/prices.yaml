@@ -1,0 +1,4 @@
+# Prices are unverified until confirmed; models: model id -> [input, output] USD per 1M tokens.
+verified: false
+currency: USD
+models: {}

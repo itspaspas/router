@@ -1,0 +1,4026 @@
+{
+ "nodes": [
+  {
+   "id": "00-research-plan",
+   "title": "Research plan",
+   "type": "index",
+   "path": "research/00-research-plan.md",
+   "in_degree": 1,
+   "out_degree": 11
+  },
+  {
+   "id": "01-literature-review",
+   "title": "Literature review \u2014 LLM routers 2023\u20132026",
+   "type": "index",
+   "path": "research/01-literature-review.md",
+   "in_degree": 2,
+   "out_degree": 72
+  },
+  {
+   "id": "02-timeline",
+   "title": "Timeline of LLM routing",
+   "type": "index",
+   "path": "research/02-timeline.md",
+   "in_degree": 3,
+   "out_degree": 32
+  },
+  {
+   "id": "03-taxonomy",
+   "title": "Taxonomy of LLM routers",
+   "type": "index",
+   "path": "research/03-taxonomy.md",
+   "in_degree": 3,
+   "out_degree": 13
+  },
+  {
+   "id": "04-projects-landscape",
+   "title": "Projects and systems landscape",
+   "type": "index",
+   "path": "research/04-projects-landscape.md",
+   "in_degree": 4,
+   "out_degree": 23
+  },
+  {
+   "id": "05-gaps-and-agenda",
+   "title": "Gaps and research agenda",
+   "type": "index",
+   "path": "research/05-gaps-and-agenda.md",
+   "in_degree": 7,
+   "out_degree": 38
+  },
+  {
+   "id": "06-research-proposals",
+   "title": "Research proposals P1\u2013P9",
+   "type": "index",
+   "path": "research/06-research-proposals.md",
+   "in_degree": 13,
+   "out_degree": 33
+  },
+  {
+   "id": "07-benchmark-comparison",
+   "title": "Benchmark and results comparison",
+   "type": "index",
+   "path": "research/07-benchmark-comparison.md",
+   "in_degree": 1,
+   "out_degree": 24
+  },
+  {
+   "id": "agentic-routing",
+   "title": "Agentic (step-level) routing",
+   "type": "concept",
+   "path": "wiki/concepts/agentic-routing.md",
+   "in_degree": 12,
+   "out_degree": 5
+  },
+  {
+   "id": "agentrouter-agentic",
+   "title": "AgentRouter \u2014 per-step agent routing (ICML 2026 WS)",
+   "type": "paper",
+   "path": "wiki/papers/agentrouter-agentic.md",
+   "in_degree": 9,
+   "out_degree": 3
+  },
+  {
+   "id": "arch-router",
+   "title": "Arch-Router (2025) + archgw",
+   "type": "paper",
+   "path": "wiki/papers/arch-router.md",
+   "in_degree": 11,
+   "out_degree": 3
+  },
+  {
+   "id": "automix",
+   "title": "AutoMix (NeurIPS 2024)",
+   "type": "paper",
+   "path": "wiki/papers/automix.md",
+   "in_degree": 4,
+   "out_degree": 1
+  },
+  {
+   "id": "azure-model-router",
+   "title": "Azure AI Foundry Model Router",
+   "type": "system",
+   "path": "wiki/systems/azure-model-router.md",
+   "in_degree": 6,
+   "out_degree": 3
+  },
+  {
+   "id": "bedrock-intelligent-prompt-routing",
+   "title": "Amazon Bedrock Intelligent Prompt Routing",
+   "type": "system",
+   "path": "wiki/systems/bedrock-intelligent-prompt-routing.md",
+   "in_degree": 5,
+   "out_degree": 2
+  },
+  {
+   "id": "best-route",
+   "title": "BEST-Route (ICML 2025)",
+   "type": "paper",
+   "path": "wiki/papers/best-route.md",
+   "in_degree": 8,
+   "out_degree": 2
+  },
+  {
+   "id": "budgeted-online-routing",
+   "title": "Budgeted, constrained and online (bandit) routing",
+   "type": "concept",
+   "path": "wiki/concepts/budgeted-online-routing.md",
+   "in_degree": 8,
+   "out_degree": 4
+  },
+  {
+   "id": "carrot",
+   "title": "CARROT (ICLR WS 2025)",
+   "type": "paper",
+   "path": "wiki/papers/carrot.md",
+   "in_degree": 5,
+   "out_degree": 4
+  },
+  {
+   "id": "cascade-routing",
+   "title": "Cascade routing (unifying routing and cascading)",
+   "type": "concept",
+   "path": "wiki/concepts/cascade-routing.md",
+   "in_degree": 11,
+   "out_degree": 4
+  },
+  {
+   "id": "cascades",
+   "title": "Cascades, deferral and self-assessment",
+   "type": "concept",
+   "path": "wiki/concepts/cascades.md",
+   "in_degree": 13,
+   "out_degree": 9
+  },
+  {
+   "id": "citer",
+   "title": "CITER (2025)",
+   "type": "paper",
+   "path": "wiki/papers/citer.md",
+   "in_degree": 3,
+   "out_degree": 2
+  },
+  {
+   "id": "cold-start-and-model-representation",
+   "title": "Cold start, unseen models and model representation",
+   "type": "concept",
+   "path": "wiki/concepts/cold-start-and-model-representation.md",
+   "in_degree": 11,
+   "out_degree": 7
+  },
+  {
+   "id": "collaborative-routing",
+   "title": "Collaborative and multi-round routing",
+   "type": "concept",
+   "path": "wiki/concepts/collaborative-routing.md",
+   "in_degree": 11,
+   "out_degree": 6
+  },
+  {
+   "id": "dart",
+   "title": "DART (2026)",
+   "type": "paper",
+   "path": "wiki/papers/dart.md",
+   "in_degree": 9,
+   "out_degree": 3
+  },
+  {
+   "id": "decision-aware-training",
+   "title": "Decision-aware router training (and routing collapse)",
+   "type": "concept",
+   "path": "wiki/concepts/decision-aware-training.md",
+   "in_degree": 7,
+   "out_degree": 6
+  },
+  {
+   "id": "design-space",
+   "title": "Design space of LLM routers",
+   "type": "concept",
+   "path": "wiki/concepts/design-space.md",
+   "in_degree": 4,
+   "out_degree": 16
+  },
+  {
+   "id": "dialrouter",
+   "title": "DialRouter \u2014 sequential multi-turn routing (2026)",
+   "type": "paper",
+   "path": "wiki/papers/dialrouter.md",
+   "in_degree": 7,
+   "out_degree": 2
+  },
+  {
+   "id": "dsc-robustness",
+   "title": "How Robust Are Router-LLMs? (DSC, EACL 2026)",
+   "type": "paper",
+   "path": "wiki/papers/dsc-robustness.md",
+   "in_degree": 10,
+   "out_degree": 3
+  },
+  {
+   "id": "economics-and-incentives",
+   "title": "Economics, incentives and mechanism design",
+   "type": "concept",
+   "path": "wiki/concepts/economics-and-incentives.md",
+   "in_degree": 8,
+   "out_degree": 5
+  },
+  {
+   "id": "embedllm",
+   "title": "EmbedLLM (ICLR 2025)",
+   "type": "paper",
+   "path": "wiki/papers/embedllm.md",
+   "in_degree": 5,
+   "out_degree": 2
+  },
+  {
+   "id": "flexrouter",
+   "title": "FlexRouter \u2014 complementary model sets (COLM 2026)",
+   "type": "paper",
+   "path": "wiki/papers/flexrouter.md",
+   "in_degree": 4,
+   "out_degree": 3
+  },
+  {
+   "id": "frugalgpt",
+   "title": "FrugalGPT (2023)",
+   "type": "paper",
+   "path": "wiki/papers/frugalgpt.md",
+   "in_degree": 5,
+   "out_degree": 4
+  },
+  {
+   "id": "gap-adversarial-robustness",
+   "title": "G9 Adversarial robustness and safety-aware routing",
+   "type": "gap",
+   "path": "wiki/gaps/gap-adversarial-robustness.md",
+   "in_degree": 6,
+   "out_degree": 6
+  },
+  {
+   "id": "gap-agentic-credit-assignment",
+   "title": "G6 Agentic routing and credit assignment",
+   "type": "gap",
+   "path": "wiki/gaps/gap-agentic-credit-assignment.md",
+   "in_degree": 5,
+   "out_degree": 6
+  },
+  {
+   "id": "gap-coverage",
+   "title": "G12 Coverage \u2014 languages, modalities, long context, domains",
+   "type": "gap",
+   "path": "wiki/gaps/gap-coverage.md",
+   "in_degree": 5,
+   "out_degree": 7
+  },
+  {
+   "id": "gap-evaluation-validity",
+   "title": "G1 Evaluation validity",
+   "type": "gap",
+   "path": "wiki/gaps/gap-evaluation-validity.md",
+   "in_degree": 12,
+   "out_degree": 8
+  },
+  {
+   "id": "gap-guarantees-under-shift",
+   "title": "G10 Guarantees under distribution shift",
+   "type": "gap",
+   "path": "wiki/gaps/gap-guarantees-under-shift.md",
+   "in_degree": 6,
+   "out_degree": 5
+  },
+  {
+   "id": "gap-learning-from-logs",
+   "title": "G4 Learning and evaluating from production logs",
+   "type": "gap",
+   "path": "wiki/gaps/gap-learning-from-logs.md",
+   "in_degree": 10,
+   "out_degree": 6
+  },
+  {
+   "id": "gap-nonstationary-pools",
+   "title": "G3 Non-stationary model pools",
+   "type": "gap",
+   "path": "wiki/gaps/gap-nonstationary-pools.md",
+   "in_degree": 6,
+   "out_degree": 7
+  },
+  {
+   "id": "gap-pool-design",
+   "title": "G11 Pool design and complementarity",
+   "type": "gap",
+   "path": "wiki/gaps/gap-pool-design.md",
+   "in_degree": 5,
+   "out_degree": 5
+  },
+  {
+   "id": "gap-query-only-signal-ceiling",
+   "title": "G2 Query-only signal ceiling",
+   "type": "gap",
+   "path": "wiki/gaps/gap-query-only-signal-ceiling.md",
+   "in_degree": 12,
+   "out_degree": 11
+  },
+  {
+   "id": "gap-serving-coupling",
+   "title": "G8 Coupling routing with serving systems",
+   "type": "gap",
+   "path": "wiki/gaps/gap-serving-coupling.md",
+   "in_degree": 7,
+   "out_degree": 3
+  },
+  {
+   "id": "gap-session-level-routing",
+   "title": "G5 Session- and conversation-level routing",
+   "type": "gap",
+   "path": "wiki/gaps/gap-session-level-routing.md",
+   "in_degree": 4,
+   "out_degree": 6
+  },
+  {
+   "id": "gap-transparency-and-control",
+   "title": "G13 Transparency, user control and auditing",
+   "type": "gap",
+   "path": "wiki/gaps/gap-transparency-and-control.md",
+   "in_degree": 13,
+   "out_degree": 8
+  },
+  {
+   "id": "gap-unified-compute-allocation",
+   "title": "G7 Unified test-time compute allocation",
+   "type": "gap",
+   "path": "wiki/gaps/gap-unified-compute-allocation.md",
+   "in_degree": 6,
+   "out_degree": 7
+  },
+  {
+   "id": "gateways-and-semantic-router-libs",
+   "title": "AI gateways and semantic-router libraries",
+   "type": "system",
+   "path": "wiki/systems/gateways-and-semantic-router-libs.md",
+   "in_degree": 6,
+   "out_degree": 6
+  },
+  {
+   "id": "gpt5-router",
+   "title": "GPT-5 real-time router (OpenAI, 2025)",
+   "type": "system",
+   "path": "wiki/systems/gpt5-router.md",
+   "in_degree": 13,
+   "out_degree": 5
+  },
+  {
+   "id": "graphrouter",
+   "title": "GraphRouter (ICLR 2025)",
+   "type": "paper",
+   "path": "wiki/papers/graphrouter.md",
+   "in_degree": 7,
+   "out_degree": 5
+  },
+  {
+   "id": "hybrid-llm",
+   "title": "Hybrid LLM (ICLR 2024)",
+   "type": "paper",
+   "path": "wiki/papers/hybrid-llm.md",
+   "in_degree": 4,
+   "out_degree": 2
+  },
+  {
+   "id": "hydra-copilot-auto",
+   "title": "HyDRA in GitHub Copilot auto-mode (2026)",
+   "type": "system",
+   "path": "wiki/systems/hydra-copilot-auto.md",
+   "in_degree": 7,
+   "out_degree": 5
+  },
+  {
+   "id": "index",
+   "title": "Wiki index",
+   "type": "index",
+   "path": "wiki/index.md",
+   "in_degree": 0,
+   "out_degree": 102
+  },
+  {
+   "id": "industry-landscape",
+   "title": "Industry and open-source landscape",
+   "type": "concept",
+   "path": "wiki/concepts/industry-landscape.md",
+   "in_degree": 17,
+   "out_degree": 16
+  },
+  {
+   "id": "irt-router",
+   "title": "IRT-Router (ACL 2025)",
+   "type": "paper",
+   "path": "wiki/papers/irt-router.md",
+   "in_degree": 5,
+   "out_degree": 4
+  },
+  {
+   "id": "knn-router",
+   "title": "kNN beats complex routers (2025)",
+   "type": "paper",
+   "path": "wiki/papers/knn-router.md",
+   "in_degree": 11,
+   "out_degree": 3
+  },
+  {
+   "id": "llm-routing",
+   "title": "LLM routing (hub)",
+   "type": "concept",
+   "path": "wiki/concepts/llm-routing.md",
+   "in_degree": 4,
+   "out_degree": 26
+  },
+  {
+   "id": "llmrouter-library",
+   "title": "LLMRouter library + xRouteBench (UIUC, 2026)",
+   "type": "system",
+   "path": "wiki/systems/llmrouter-library.md",
+   "in_degree": 9,
+   "out_degree": 5
+  },
+  {
+   "id": "llmrouterbench",
+   "title": "LLMRouterBench (ACL Findings 2026)",
+   "type": "paper",
+   "path": "wiki/papers/llmrouterbench.md",
+   "in_degree": 16,
+   "out_degree": 3
+  },
+  {
+   "id": "llms-encode-failures",
+   "title": "LLMs Encode Their Failures (ICLR 2026)",
+   "type": "paper",
+   "path": "wiki/papers/llms-encode-failures.md",
+   "in_degree": 8,
+   "out_degree": 4
+  },
+  {
+   "id": "martian",
+   "title": "Martian",
+   "type": "system",
+   "path": "wiki/systems/martian.md",
+   "in_degree": 3,
+   "out_degree": 3
+  },
+  {
+   "id": "model-substitution-audit",
+   "title": "Auditing model substitution in LLM APIs (NeurIPS 2025)",
+   "type": "paper",
+   "path": "wiki/papers/model-substitution-audit.md",
+   "in_degree": 6,
+   "out_degree": 3
+  },
+  {
+   "id": "multimodal-routing",
+   "title": "Multimodal and non-text routing",
+   "type": "concept",
+   "path": "wiki/concepts/multimodal-routing.md",
+   "in_degree": 6,
+   "out_degree": 3
+  },
+  {
+   "id": "nonparametric-routers",
+   "title": "Non-parametric and memory-based routers (kNN, graph)",
+   "type": "concept",
+   "path": "wiki/concepts/nonparametric-routers.md",
+   "in_degree": 7,
+   "out_degree": 7
+  },
+  {
+   "id": "not-diamond",
+   "title": "Not Diamond",
+   "type": "system",
+   "path": "wiki/systems/not-diamond.md",
+   "in_degree": 5,
+   "out_degree": 3
+  },
+  {
+   "id": "nvidia-llm-router",
+   "title": "NVIDIA LLM Router blueprint \u2192 NeMo Switchyard",
+   "type": "system",
+   "path": "wiki/systems/nvidia-llm-router.md",
+   "in_degree": 4,
+   "out_degree": 4
+  },
+  {
+   "id": "openrouter",
+   "title": "OpenRouter (gateway + Auto router)",
+   "type": "system",
+   "path": "wiki/systems/openrouter.md",
+   "in_degree": 4,
+   "out_degree": 5
+  },
+  {
+   "id": "oracle-gap",
+   "title": "The oracle gap and the 2026 critical turn",
+   "type": "concept",
+   "path": "wiki/concepts/oracle-gap.md",
+   "in_degree": 12,
+   "out_degree": 9
+  },
+  {
+   "id": "p2l",
+   "title": "Prompt-to-Leaderboard (ICML 2025)",
+   "type": "paper",
+   "path": "wiki/papers/p2l.md",
+   "in_degree": 3,
+   "out_degree": 1
+  },
+  {
+   "id": "pandora-router",
+   "title": "Pandora's AI Model Routing Box (NeurIPS 2026)",
+   "type": "paper",
+   "path": "wiki/papers/pandora-router.md",
+   "in_degree": 7,
+   "out_degree": 4
+  },
+  {
+   "id": "personalized-routing",
+   "title": "Personalized and preference-aligned routing",
+   "type": "concept",
+   "path": "wiki/concepts/personalized-routing.md",
+   "in_degree": 10,
+   "out_degree": 8
+  },
+  {
+   "id": "personalizedrouter",
+   "title": "PersonalizedRouter (TMLR 2025)",
+   "type": "paper",
+   "path": "wiki/papers/personalizedrouter.md",
+   "in_degree": 7,
+   "out_degree": 2
+  },
+  {
+   "id": "predictive-routers",
+   "title": "Predictive (score-based) routers",
+   "type": "concept",
+   "path": "wiki/concepts/predictive-routers.md",
+   "in_degree": 12,
+   "out_degree": 12
+  },
+  {
+   "id": "prefill-activation-router",
+   "title": "Routing with prefill activations (NVIDIA, 2026)",
+   "type": "paper",
+   "path": "wiki/papers/prefill-activation-router.md",
+   "in_degree": 9,
+   "out_degree": 4
+  },
+  {
+   "id": "quality-estimation",
+   "title": "Quality estimation signals for routing",
+   "type": "concept",
+   "path": "wiki/concepts/quality-estimation.md",
+   "in_degree": 9,
+   "out_degree": 11
+  },
+  {
+   "id": "r2r",
+   "title": "R2R (NeurIPS 2025)",
+   "type": "paper",
+   "path": "wiki/papers/r2r.md",
+   "in_degree": 3,
+   "out_degree": 1
+  },
+  {
+   "id": "racer",
+   "title": "RACER \u2014 risk-controlled set routing (ICML 2026)",
+   "type": "paper",
+   "path": "wiki/papers/racer.md",
+   "in_degree": 5,
+   "out_degree": 2
+  },
+  {
+   "id": "reasoning-effort-routing",
+   "title": "Reasoning-effort and test-time-compute routing",
+   "type": "concept",
+   "path": "wiki/concepts/reasoning-effort-routing.md",
+   "in_degree": 13,
+   "out_degree": 6
+  },
+  {
+   "id": "replay-gap",
+   "title": "The Replay Gap (2026)",
+   "type": "paper",
+   "path": "wiki/papers/replay-gap.md",
+   "in_degree": 8,
+   "out_degree": 5
+  },
+  {
+   "id": "representation-matching-routers",
+   "title": "Representation-matching routers",
+   "type": "concept",
+   "path": "wiki/concepts/representation-matching-routers.md",
+   "in_degree": 8,
+   "out_degree": 8
+  },
+  {
+   "id": "rerouteguard",
+   "title": "RerouteGuard (2026)",
+   "type": "paper",
+   "path": "wiki/papers/rerouteguard.md",
+   "in_degree": 6,
+   "out_degree": 2
+  },
+  {
+   "id": "rerouting-llm-routers",
+   "title": "Rerouting LLM Routers (COLM 2025)",
+   "type": "paper",
+   "path": "wiki/papers/rerouting-llm-routers.md",
+   "in_degree": 7,
+   "out_degree": 2
+  },
+  {
+   "id": "route-to-reason",
+   "title": "Route to Reason (2025)",
+   "type": "paper",
+   "path": "wiki/papers/route-to-reason.md",
+   "in_degree": 5,
+   "out_degree": 3
+  },
+  {
+   "id": "routellm",
+   "title": "RouteLLM (paper + framework)",
+   "type": "paper",
+   "path": "wiki/papers/routellm.md",
+   "in_degree": 12,
+   "out_degree": 4
+  },
+  {
+   "id": "router-evaluation",
+   "title": "Router evaluation and benchmarks",
+   "type": "concept",
+   "path": "wiki/concepts/router-evaluation.md",
+   "in_degree": 14,
+   "out_degree": 10
+  },
+  {
+   "id": "router-r1",
+   "title": "Router-R1 (NeurIPS 2025)",
+   "type": "paper",
+   "path": "wiki/papers/router-r1.md",
+   "in_degree": 10,
+   "out_degree": 3
+  },
+  {
+   "id": "router-security",
+   "title": "Router security and robustness",
+   "type": "concept",
+   "path": "wiki/concepts/router-security.md",
+   "in_degree": 11,
+   "out_degree": 6
+  },
+  {
+   "id": "routerarena",
+   "title": "RouterArena (ICLR 2026)",
+   "type": "paper",
+   "path": "wiki/papers/routerarena.md",
+   "in_degree": 14,
+   "out_degree": 2
+  },
+  {
+   "id": "routerbench",
+   "title": "RouterBench (2024)",
+   "type": "paper",
+   "path": "wiki/papers/routerbench.md",
+   "in_degree": 6,
+   "out_degree": 2
+  },
+  {
+   "id": "routerdc",
+   "title": "RouterDC (NeurIPS 2024)",
+   "type": "paper",
+   "path": "wiki/papers/routerdc.md",
+   "in_degree": 3,
+   "out_degree": 2
+  },
+  {
+   "id": "routereval",
+   "title": "RouterEval (EMNLP Findings 2025)",
+   "type": "paper",
+   "path": "wiki/papers/routereval.md",
+   "in_degree": 7,
+   "out_degree": 1
+  },
+  {
+   "id": "routerwise",
+   "title": "RouterWise (2026)",
+   "type": "paper",
+   "path": "wiki/papers/routerwise.md",
+   "in_degree": 8,
+   "out_degree": 2
+  },
+  {
+   "id": "routing-collapse",
+   "title": "When Routing Collapses / EquiRouter (2026)",
+   "type": "paper",
+   "path": "wiki/papers/routing-collapse.md",
+   "in_degree": 11,
+   "out_degree": 1
+  },
+  {
+   "id": "routing-gap-noise",
+   "title": "How Much of the Routing Gap Is Real? (2026)",
+   "type": "paper",
+   "path": "wiki/papers/routing-gap-noise.md",
+   "in_degree": 12,
+   "out_degree": 3
+  },
+  {
+   "id": "routing-plateau",
+   "title": "The Routing Plateau (2026)",
+   "type": "paper",
+   "path": "wiki/papers/routing-plateau.md",
+   "in_degree": 17,
+   "out_degree": 3
+  },
+  {
+   "id": "routing-vs-moe",
+   "title": "Routing vs Mixture-of-Experts",
+   "type": "concept",
+   "path": "wiki/concepts/routing-vs-moe.md",
+   "in_degree": 6,
+   "out_degree": 4
+  },
+  {
+   "id": "serving-aware-routing",
+   "title": "Serving-aware routing (latency, load, energy, edge)",
+   "type": "concept",
+   "path": "wiki/concepts/serving-aware-routing.md",
+   "in_degree": 14,
+   "out_degree": 3
+  },
+  {
+   "id": "task-type-gap",
+   "title": "Most of the LLM Routing Gap Is Task Type (2026)",
+   "type": "paper",
+   "path": "wiki/papers/task-type-gap.md",
+   "in_degree": 9,
+   "out_degree": 3
+  },
+  {
+   "id": "token-level-routing",
+   "title": "Token- and segment-level routing",
+   "type": "concept",
+   "path": "wiki/concepts/token-level-routing.md",
+   "in_degree": 12,
+   "out_degree": 4
+  },
+  {
+   "id": "unified-routing-cascading",
+   "title": "Unified routing and cascading (ICML 2025)",
+   "type": "paper",
+   "path": "wiki/papers/unified-routing-cascading.md",
+   "in_degree": 8,
+   "out_degree": 3
+  },
+  {
+   "id": "uniroute",
+   "title": "UniRoute \u2014 Universal Model Routing (2025)",
+   "type": "paper",
+   "path": "wiki/papers/uniroute.md",
+   "in_degree": 8,
+   "out_degree": 2
+  },
+  {
+   "id": "unsolvability-ceiling",
+   "title": "Unsolvability Ceiling is an evaluation artifact (2026)",
+   "type": "paper",
+   "path": "wiki/papers/unsolvability-ceiling.md",
+   "in_degree": 9,
+   "out_degree": 3
+  },
+  {
+   "id": "user-choice-stackelberg",
+   "title": "Routing, Cascades, and User Choice (ICLR 2026)",
+   "type": "paper",
+   "path": "wiki/papers/user-choice-stackelberg.md",
+   "in_degree": 7,
+   "out_degree": 3
+  },
+  {
+   "id": "user-retrials",
+   "title": "Learning to Route and Schedule from User Retrials (2026)",
+   "type": "paper",
+   "path": "wiki/papers/user-retrials.md",
+   "in_degree": 9,
+   "out_degree": 2
+  },
+  {
+   "id": "vllm-semantic-router",
+   "title": "vLLM Semantic Router",
+   "type": "system",
+   "path": "wiki/systems/vllm-semantic-router.md",
+   "in_degree": 7,
+   "out_degree": 4
+  },
+  {
+   "id": "zerorouter",
+   "title": "ZeroRouter (2026)",
+   "type": "paper",
+   "path": "wiki/papers/zerorouter.md",
+   "in_degree": 6,
+   "out_degree": 2
+  },
+  {
+   "id": "zooter",
+   "title": "Zooter (NAACL 2024)",
+   "type": "paper",
+   "path": "wiki/papers/zooter.md",
+   "in_degree": 4,
+   "out_degree": 1
+  }
+ ],
+ "edges": [
+  {
+   "source": "agentic-routing",
+   "target": "agentrouter-agentic"
+  },
+  {
+   "source": "agentic-routing",
+   "target": "collaborative-routing"
+  },
+  {
+   "source": "agentic-routing",
+   "target": "gap-agentic-credit-assignment"
+  },
+  {
+   "source": "agentic-routing",
+   "target": "replay-gap"
+  },
+  {
+   "source": "agentic-routing",
+   "target": "router-security"
+  },
+  {
+   "source": "budgeted-online-routing",
+   "target": "decision-aware-training"
+  },
+  {
+   "source": "budgeted-online-routing",
+   "target": "economics-and-incentives"
+  },
+  {
+   "source": "budgeted-online-routing",
+   "target": "gap-learning-from-logs"
+  },
+  {
+   "source": "budgeted-online-routing",
+   "target": "user-retrials"
+  },
+  {
+   "source": "cascade-routing",
+   "target": "06-research-proposals"
+  },
+  {
+   "source": "cascade-routing",
+   "target": "gap-query-only-signal-ceiling"
+  },
+  {
+   "source": "cascade-routing",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "cascade-routing",
+   "target": "unified-routing-cascading"
+  },
+  {
+   "source": "cascades",
+   "target": "automix"
+  },
+  {
+   "source": "cascades",
+   "target": "cascade-routing"
+  },
+  {
+   "source": "cascades",
+   "target": "economics-and-incentives"
+  },
+  {
+   "source": "cascades",
+   "target": "frugalgpt"
+  },
+  {
+   "source": "cascades",
+   "target": "gap-guarantees-under-shift"
+  },
+  {
+   "source": "cascades",
+   "target": "routerwise"
+  },
+  {
+   "source": "cascades",
+   "target": "serving-aware-routing"
+  },
+  {
+   "source": "cascades",
+   "target": "unified-routing-cascading"
+  },
+  {
+   "source": "cascades",
+   "target": "user-choice-stackelberg"
+  },
+  {
+   "source": "cold-start-and-model-representation",
+   "target": "arch-router"
+  },
+  {
+   "source": "cold-start-and-model-representation",
+   "target": "embedllm"
+  },
+  {
+   "source": "cold-start-and-model-representation",
+   "target": "gap-nonstationary-pools"
+  },
+  {
+   "source": "cold-start-and-model-representation",
+   "target": "graphrouter"
+  },
+  {
+   "source": "cold-start-and-model-representation",
+   "target": "router-r1"
+  },
+  {
+   "source": "cold-start-and-model-representation",
+   "target": "uniroute"
+  },
+  {
+   "source": "cold-start-and-model-representation",
+   "target": "zerorouter"
+  },
+  {
+   "source": "collaborative-routing",
+   "target": "agentic-routing"
+  },
+  {
+   "source": "collaborative-routing",
+   "target": "flexrouter"
+  },
+  {
+   "source": "collaborative-routing",
+   "target": "racer"
+  },
+  {
+   "source": "collaborative-routing",
+   "target": "router-evaluation"
+  },
+  {
+   "source": "collaborative-routing",
+   "target": "router-r1"
+  },
+  {
+   "source": "collaborative-routing",
+   "target": "token-level-routing"
+  },
+  {
+   "source": "decision-aware-training",
+   "target": "gap-guarantees-under-shift"
+  },
+  {
+   "source": "decision-aware-training",
+   "target": "gap-nonstationary-pools"
+  },
+  {
+   "source": "decision-aware-training",
+   "target": "routellm"
+  },
+  {
+   "source": "decision-aware-training",
+   "target": "routing-collapse"
+  },
+  {
+   "source": "decision-aware-training",
+   "target": "routing-gap-noise"
+  },
+  {
+   "source": "decision-aware-training",
+   "target": "unsolvability-ceiling"
+  },
+  {
+   "source": "design-space",
+   "target": "05-gaps-and-agenda"
+  },
+  {
+   "source": "design-space",
+   "target": "agentic-routing"
+  },
+  {
+   "source": "design-space",
+   "target": "budgeted-online-routing"
+  },
+  {
+   "source": "design-space",
+   "target": "cascade-routing"
+  },
+  {
+   "source": "design-space",
+   "target": "cascades"
+  },
+  {
+   "source": "design-space",
+   "target": "cold-start-and-model-representation"
+  },
+  {
+   "source": "design-space",
+   "target": "collaborative-routing"
+  },
+  {
+   "source": "design-space",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "design-space",
+   "target": "nonparametric-routers"
+  },
+  {
+   "source": "design-space",
+   "target": "personalized-routing"
+  },
+  {
+   "source": "design-space",
+   "target": "predictive-routers"
+  },
+  {
+   "source": "design-space",
+   "target": "quality-estimation"
+  },
+  {
+   "source": "design-space",
+   "target": "reasoning-effort-routing"
+  },
+  {
+   "source": "design-space",
+   "target": "representation-matching-routers"
+  },
+  {
+   "source": "design-space",
+   "target": "serving-aware-routing"
+  },
+  {
+   "source": "design-space",
+   "target": "token-level-routing"
+  },
+  {
+   "source": "economics-and-incentives",
+   "target": "gap-transparency-and-control"
+  },
+  {
+   "source": "economics-and-incentives",
+   "target": "gpt5-router"
+  },
+  {
+   "source": "economics-and-incentives",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "economics-and-incentives",
+   "target": "user-choice-stackelberg"
+  },
+  {
+   "source": "economics-and-incentives",
+   "target": "user-retrials"
+  },
+  {
+   "source": "industry-landscape",
+   "target": "04-projects-landscape"
+  },
+  {
+   "source": "industry-landscape",
+   "target": "arch-router"
+  },
+  {
+   "source": "industry-landscape",
+   "target": "azure-model-router"
+  },
+  {
+   "source": "industry-landscape",
+   "target": "bedrock-intelligent-prompt-routing"
+  },
+  {
+   "source": "industry-landscape",
+   "target": "gateways-and-semantic-router-libs"
+  },
+  {
+   "source": "industry-landscape",
+   "target": "gpt5-router"
+  },
+  {
+   "source": "industry-landscape",
+   "target": "hydra-copilot-auto"
+  },
+  {
+   "source": "industry-landscape",
+   "target": "llmrouter-library"
+  },
+  {
+   "source": "industry-landscape",
+   "target": "llmrouterbench"
+  },
+  {
+   "source": "industry-landscape",
+   "target": "martian"
+  },
+  {
+   "source": "industry-landscape",
+   "target": "not-diamond"
+  },
+  {
+   "source": "industry-landscape",
+   "target": "nvidia-llm-router"
+  },
+  {
+   "source": "industry-landscape",
+   "target": "openrouter"
+  },
+  {
+   "source": "industry-landscape",
+   "target": "routellm"
+  },
+  {
+   "source": "industry-landscape",
+   "target": "routerarena"
+  },
+  {
+   "source": "industry-landscape",
+   "target": "vllm-semantic-router"
+  },
+  {
+   "source": "llm-routing",
+   "target": "05-gaps-and-agenda"
+  },
+  {
+   "source": "llm-routing",
+   "target": "agentic-routing"
+  },
+  {
+   "source": "llm-routing",
+   "target": "budgeted-online-routing"
+  },
+  {
+   "source": "llm-routing",
+   "target": "cascade-routing"
+  },
+  {
+   "source": "llm-routing",
+   "target": "cascades"
+  },
+  {
+   "source": "llm-routing",
+   "target": "cold-start-and-model-representation"
+  },
+  {
+   "source": "llm-routing",
+   "target": "collaborative-routing"
+  },
+  {
+   "source": "llm-routing",
+   "target": "decision-aware-training"
+  },
+  {
+   "source": "llm-routing",
+   "target": "design-space"
+  },
+  {
+   "source": "llm-routing",
+   "target": "economics-and-incentives"
+  },
+  {
+   "source": "llm-routing",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "llm-routing",
+   "target": "llmrouterbench"
+  },
+  {
+   "source": "llm-routing",
+   "target": "multimodal-routing"
+  },
+  {
+   "source": "llm-routing",
+   "target": "nonparametric-routers"
+  },
+  {
+   "source": "llm-routing",
+   "target": "oracle-gap"
+  },
+  {
+   "source": "llm-routing",
+   "target": "personalized-routing"
+  },
+  {
+   "source": "llm-routing",
+   "target": "predictive-routers"
+  },
+  {
+   "source": "llm-routing",
+   "target": "quality-estimation"
+  },
+  {
+   "source": "llm-routing",
+   "target": "reasoning-effort-routing"
+  },
+  {
+   "source": "llm-routing",
+   "target": "representation-matching-routers"
+  },
+  {
+   "source": "llm-routing",
+   "target": "router-evaluation"
+  },
+  {
+   "source": "llm-routing",
+   "target": "router-security"
+  },
+  {
+   "source": "llm-routing",
+   "target": "routereval"
+  },
+  {
+   "source": "llm-routing",
+   "target": "routing-vs-moe"
+  },
+  {
+   "source": "llm-routing",
+   "target": "serving-aware-routing"
+  },
+  {
+   "source": "llm-routing",
+   "target": "token-level-routing"
+  },
+  {
+   "source": "multimodal-routing",
+   "target": "gap-coverage"
+  },
+  {
+   "source": "multimodal-routing",
+   "target": "knn-router"
+  },
+  {
+   "source": "multimodal-routing",
+   "target": "llmrouter-library"
+  },
+  {
+   "source": "nonparametric-routers",
+   "target": "cold-start-and-model-representation"
+  },
+  {
+   "source": "nonparametric-routers",
+   "target": "gap-query-only-signal-ceiling"
+  },
+  {
+   "source": "nonparametric-routers",
+   "target": "graphrouter"
+  },
+  {
+   "source": "nonparametric-routers",
+   "target": "knn-router"
+  },
+  {
+   "source": "nonparametric-routers",
+   "target": "personalized-routing"
+  },
+  {
+   "source": "nonparametric-routers",
+   "target": "routing-gap-noise"
+  },
+  {
+   "source": "nonparametric-routers",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "oracle-gap",
+   "target": "gap-evaluation-validity"
+  },
+  {
+   "source": "oracle-gap",
+   "target": "gap-query-only-signal-ceiling"
+  },
+  {
+   "source": "oracle-gap",
+   "target": "knn-router"
+  },
+  {
+   "source": "oracle-gap",
+   "target": "llmrouterbench"
+  },
+  {
+   "source": "oracle-gap",
+   "target": "routing-collapse"
+  },
+  {
+   "source": "oracle-gap",
+   "target": "routing-gap-noise"
+  },
+  {
+   "source": "oracle-gap",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "oracle-gap",
+   "target": "task-type-gap"
+  },
+  {
+   "source": "oracle-gap",
+   "target": "unsolvability-ceiling"
+  },
+  {
+   "source": "personalized-routing",
+   "target": "arch-router"
+  },
+  {
+   "source": "personalized-routing",
+   "target": "dialrouter"
+  },
+  {
+   "source": "personalized-routing",
+   "target": "gap-session-level-routing"
+  },
+  {
+   "source": "personalized-routing",
+   "target": "gap-transparency-and-control"
+  },
+  {
+   "source": "personalized-routing",
+   "target": "gpt5-router"
+  },
+  {
+   "source": "personalized-routing",
+   "target": "personalizedrouter"
+  },
+  {
+   "source": "personalized-routing",
+   "target": "routellm"
+  },
+  {
+   "source": "personalized-routing",
+   "target": "user-retrials"
+  },
+  {
+   "source": "predictive-routers",
+   "target": "carrot"
+  },
+  {
+   "source": "predictive-routers",
+   "target": "cold-start-and-model-representation"
+  },
+  {
+   "source": "predictive-routers",
+   "target": "hybrid-llm"
+  },
+  {
+   "source": "predictive-routers",
+   "target": "irt-router"
+  },
+  {
+   "source": "predictive-routers",
+   "target": "knn-router"
+  },
+  {
+   "source": "predictive-routers",
+   "target": "nonparametric-routers"
+  },
+  {
+   "source": "predictive-routers",
+   "target": "p2l"
+  },
+  {
+   "source": "predictive-routers",
+   "target": "quality-estimation"
+  },
+  {
+   "source": "predictive-routers",
+   "target": "routellm"
+  },
+  {
+   "source": "predictive-routers",
+   "target": "routing-collapse"
+  },
+  {
+   "source": "predictive-routers",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "predictive-routers",
+   "target": "zooter"
+  },
+  {
+   "source": "quality-estimation",
+   "target": "arch-router"
+  },
+  {
+   "source": "quality-estimation",
+   "target": "cascade-routing"
+  },
+  {
+   "source": "quality-estimation",
+   "target": "cascades"
+  },
+  {
+   "source": "quality-estimation",
+   "target": "dart"
+  },
+  {
+   "source": "quality-estimation",
+   "target": "gap-query-only-signal-ceiling"
+  },
+  {
+   "source": "quality-estimation",
+   "target": "knn-router"
+  },
+  {
+   "source": "quality-estimation",
+   "target": "llms-encode-failures"
+  },
+  {
+   "source": "quality-estimation",
+   "target": "pandora-router"
+  },
+  {
+   "source": "quality-estimation",
+   "target": "prefill-activation-router"
+  },
+  {
+   "source": "quality-estimation",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "quality-estimation",
+   "target": "unified-routing-cascading"
+  },
+  {
+   "source": "reasoning-effort-routing",
+   "target": "agentic-routing"
+  },
+  {
+   "source": "reasoning-effort-routing",
+   "target": "best-route"
+  },
+  {
+   "source": "reasoning-effort-routing",
+   "target": "dart"
+  },
+  {
+   "source": "reasoning-effort-routing",
+   "target": "gap-unified-compute-allocation"
+  },
+  {
+   "source": "reasoning-effort-routing",
+   "target": "gpt5-router"
+  },
+  {
+   "source": "reasoning-effort-routing",
+   "target": "route-to-reason"
+  },
+  {
+   "source": "representation-matching-routers",
+   "target": "arch-router"
+  },
+  {
+   "source": "representation-matching-routers",
+   "target": "cold-start-and-model-representation"
+  },
+  {
+   "source": "representation-matching-routers",
+   "target": "dsc-robustness"
+  },
+  {
+   "source": "representation-matching-routers",
+   "target": "embedllm"
+  },
+  {
+   "source": "representation-matching-routers",
+   "target": "gateways-and-semantic-router-libs"
+  },
+  {
+   "source": "representation-matching-routers",
+   "target": "routerdc"
+  },
+  {
+   "source": "representation-matching-routers",
+   "target": "task-type-gap"
+  },
+  {
+   "source": "representation-matching-routers",
+   "target": "vllm-semantic-router"
+  },
+  {
+   "source": "router-evaluation",
+   "target": "dsc-robustness"
+  },
+  {
+   "source": "router-evaluation",
+   "target": "gap-evaluation-validity"
+  },
+  {
+   "source": "router-evaluation",
+   "target": "llmrouter-library"
+  },
+  {
+   "source": "router-evaluation",
+   "target": "llmrouterbench"
+  },
+  {
+   "source": "router-evaluation",
+   "target": "multimodal-routing"
+  },
+  {
+   "source": "router-evaluation",
+   "target": "oracle-gap"
+  },
+  {
+   "source": "router-evaluation",
+   "target": "routerarena"
+  },
+  {
+   "source": "router-evaluation",
+   "target": "routerbench"
+  },
+  {
+   "source": "router-evaluation",
+   "target": "routereval"
+  },
+  {
+   "source": "router-evaluation",
+   "target": "serving-aware-routing"
+  },
+  {
+   "source": "router-security",
+   "target": "dsc-robustness"
+  },
+  {
+   "source": "router-security",
+   "target": "gap-adversarial-robustness"
+  },
+  {
+   "source": "router-security",
+   "target": "gap-transparency-and-control"
+  },
+  {
+   "source": "router-security",
+   "target": "model-substitution-audit"
+  },
+  {
+   "source": "router-security",
+   "target": "rerouteguard"
+  },
+  {
+   "source": "router-security",
+   "target": "rerouting-llm-routers"
+  },
+  {
+   "source": "routing-vs-moe",
+   "target": "decision-aware-training"
+  },
+  {
+   "source": "routing-vs-moe",
+   "target": "llm-routing"
+  },
+  {
+   "source": "routing-vs-moe",
+   "target": "serving-aware-routing"
+  },
+  {
+   "source": "routing-vs-moe",
+   "target": "token-level-routing"
+  },
+  {
+   "source": "serving-aware-routing",
+   "target": "cascades"
+  },
+  {
+   "source": "serving-aware-routing",
+   "target": "gap-serving-coupling"
+  },
+  {
+   "source": "serving-aware-routing",
+   "target": "routerwise"
+  },
+  {
+   "source": "token-level-routing",
+   "target": "cascades"
+  },
+  {
+   "source": "token-level-routing",
+   "target": "citer"
+  },
+  {
+   "source": "token-level-routing",
+   "target": "gap-serving-coupling"
+  },
+  {
+   "source": "token-level-routing",
+   "target": "r2r"
+  },
+  {
+   "source": "gap-adversarial-robustness",
+   "target": "cascades"
+  },
+  {
+   "source": "gap-adversarial-robustness",
+   "target": "dsc-robustness"
+  },
+  {
+   "source": "gap-adversarial-robustness",
+   "target": "gap-transparency-and-control"
+  },
+  {
+   "source": "gap-adversarial-robustness",
+   "target": "rerouteguard"
+  },
+  {
+   "source": "gap-adversarial-robustness",
+   "target": "rerouting-llm-routers"
+  },
+  {
+   "source": "gap-adversarial-robustness",
+   "target": "vllm-semantic-router"
+  },
+  {
+   "source": "gap-agentic-credit-assignment",
+   "target": "agentic-routing"
+  },
+  {
+   "source": "gap-agentic-credit-assignment",
+   "target": "agentrouter-agentic"
+  },
+  {
+   "source": "gap-agentic-credit-assignment",
+   "target": "gap-unified-compute-allocation"
+  },
+  {
+   "source": "gap-agentic-credit-assignment",
+   "target": "replay-gap"
+  },
+  {
+   "source": "gap-agentic-credit-assignment",
+   "target": "router-r1"
+  },
+  {
+   "source": "gap-agentic-credit-assignment",
+   "target": "router-security"
+  },
+  {
+   "source": "gap-coverage",
+   "target": "06-research-proposals"
+  },
+  {
+   "source": "gap-coverage",
+   "target": "bedrock-intelligent-prompt-routing"
+  },
+  {
+   "source": "gap-coverage",
+   "target": "gap-evaluation-validity"
+  },
+  {
+   "source": "gap-coverage",
+   "target": "hydra-copilot-auto"
+  },
+  {
+   "source": "gap-coverage",
+   "target": "llmrouter-library"
+  },
+  {
+   "source": "gap-coverage",
+   "target": "multimodal-routing"
+  },
+  {
+   "source": "gap-coverage",
+   "target": "router-evaluation"
+  },
+  {
+   "source": "gap-evaluation-validity",
+   "target": "06-research-proposals"
+  },
+  {
+   "source": "gap-evaluation-validity",
+   "target": "knn-router"
+  },
+  {
+   "source": "gap-evaluation-validity",
+   "target": "llmrouterbench"
+  },
+  {
+   "source": "gap-evaluation-validity",
+   "target": "routerarena"
+  },
+  {
+   "source": "gap-evaluation-validity",
+   "target": "routing-gap-noise"
+  },
+  {
+   "source": "gap-evaluation-validity",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "gap-evaluation-validity",
+   "target": "task-type-gap"
+  },
+  {
+   "source": "gap-evaluation-validity",
+   "target": "unsolvability-ceiling"
+  },
+  {
+   "source": "gap-guarantees-under-shift",
+   "target": "carrot"
+  },
+  {
+   "source": "gap-guarantees-under-shift",
+   "target": "gateways-and-semantic-router-libs"
+  },
+  {
+   "source": "gap-guarantees-under-shift",
+   "target": "racer"
+  },
+  {
+   "source": "gap-guarantees-under-shift",
+   "target": "unified-routing-cascading"
+  },
+  {
+   "source": "gap-guarantees-under-shift",
+   "target": "uniroute"
+  },
+  {
+   "source": "gap-learning-from-logs",
+   "target": "06-research-proposals"
+  },
+  {
+   "source": "gap-learning-from-logs",
+   "target": "agentic-routing"
+  },
+  {
+   "source": "gap-learning-from-logs",
+   "target": "gpt5-router"
+  },
+  {
+   "source": "gap-learning-from-logs",
+   "target": "hydra-copilot-auto"
+  },
+  {
+   "source": "gap-learning-from-logs",
+   "target": "replay-gap"
+  },
+  {
+   "source": "gap-learning-from-logs",
+   "target": "user-retrials"
+  },
+  {
+   "source": "gap-nonstationary-pools",
+   "target": "06-research-proposals"
+  },
+  {
+   "source": "gap-nonstationary-pools",
+   "target": "decision-aware-training"
+  },
+  {
+   "source": "gap-nonstationary-pools",
+   "target": "embedllm"
+  },
+  {
+   "source": "gap-nonstationary-pools",
+   "target": "graphrouter"
+  },
+  {
+   "source": "gap-nonstationary-pools",
+   "target": "irt-router"
+  },
+  {
+   "source": "gap-nonstationary-pools",
+   "target": "uniroute"
+  },
+  {
+   "source": "gap-nonstationary-pools",
+   "target": "zerorouter"
+  },
+  {
+   "source": "gap-pool-design",
+   "target": "flexrouter"
+  },
+  {
+   "source": "gap-pool-design",
+   "target": "llmrouterbench"
+  },
+  {
+   "source": "gap-pool-design",
+   "target": "routereval"
+  },
+  {
+   "source": "gap-pool-design",
+   "target": "routing-gap-noise"
+  },
+  {
+   "source": "gap-pool-design",
+   "target": "routing-vs-moe"
+  },
+  {
+   "source": "gap-query-only-signal-ceiling",
+   "target": "06-research-proposals"
+  },
+  {
+   "source": "gap-query-only-signal-ceiling",
+   "target": "cascade-routing"
+  },
+  {
+   "source": "gap-query-only-signal-ceiling",
+   "target": "cascades"
+  },
+  {
+   "source": "gap-query-only-signal-ceiling",
+   "target": "dart"
+  },
+  {
+   "source": "gap-query-only-signal-ceiling",
+   "target": "gap-serving-coupling"
+  },
+  {
+   "source": "gap-query-only-signal-ceiling",
+   "target": "llmrouterbench"
+  },
+  {
+   "source": "gap-query-only-signal-ceiling",
+   "target": "llms-encode-failures"
+  },
+  {
+   "source": "gap-query-only-signal-ceiling",
+   "target": "pandora-router"
+  },
+  {
+   "source": "gap-query-only-signal-ceiling",
+   "target": "prefill-activation-router"
+  },
+  {
+   "source": "gap-query-only-signal-ceiling",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "gap-query-only-signal-ceiling",
+   "target": "unified-routing-cascading"
+  },
+  {
+   "source": "gap-serving-coupling",
+   "target": "routerwise"
+  },
+  {
+   "source": "gap-serving-coupling",
+   "target": "token-level-routing"
+  },
+  {
+   "source": "gap-serving-coupling",
+   "target": "user-retrials"
+  },
+  {
+   "source": "gap-session-level-routing",
+   "target": "06-research-proposals"
+  },
+  {
+   "source": "gap-session-level-routing",
+   "target": "dialrouter"
+  },
+  {
+   "source": "gap-session-level-routing",
+   "target": "gap-learning-from-logs"
+  },
+  {
+   "source": "gap-session-level-routing",
+   "target": "gpt5-router"
+  },
+  {
+   "source": "gap-session-level-routing",
+   "target": "serving-aware-routing"
+  },
+  {
+   "source": "gap-session-level-routing",
+   "target": "user-choice-stackelberg"
+  },
+  {
+   "source": "gap-transparency-and-control",
+   "target": "arch-router"
+  },
+  {
+   "source": "gap-transparency-and-control",
+   "target": "azure-model-router"
+  },
+  {
+   "source": "gap-transparency-and-control",
+   "target": "economics-and-incentives"
+  },
+  {
+   "source": "gap-transparency-and-control",
+   "target": "gpt5-router"
+  },
+  {
+   "source": "gap-transparency-and-control",
+   "target": "model-substitution-audit"
+  },
+  {
+   "source": "gap-transparency-and-control",
+   "target": "not-diamond"
+  },
+  {
+   "source": "gap-transparency-and-control",
+   "target": "router-security"
+  },
+  {
+   "source": "gap-transparency-and-control",
+   "target": "user-choice-stackelberg"
+  },
+  {
+   "source": "gap-unified-compute-allocation",
+   "target": "best-route"
+  },
+  {
+   "source": "gap-unified-compute-allocation",
+   "target": "collaborative-routing"
+  },
+  {
+   "source": "gap-unified-compute-allocation",
+   "target": "dart"
+  },
+  {
+   "source": "gap-unified-compute-allocation",
+   "target": "predictive-routers"
+  },
+  {
+   "source": "gap-unified-compute-allocation",
+   "target": "reasoning-effort-routing"
+  },
+  {
+   "source": "gap-unified-compute-allocation",
+   "target": "route-to-reason"
+  },
+  {
+   "source": "gap-unified-compute-allocation",
+   "target": "token-level-routing"
+  },
+  {
+   "source": "index",
+   "target": "00-research-plan"
+  },
+  {
+   "source": "index",
+   "target": "01-literature-review"
+  },
+  {
+   "source": "index",
+   "target": "02-timeline"
+  },
+  {
+   "source": "index",
+   "target": "03-taxonomy"
+  },
+  {
+   "source": "index",
+   "target": "04-projects-landscape"
+  },
+  {
+   "source": "index",
+   "target": "05-gaps-and-agenda"
+  },
+  {
+   "source": "index",
+   "target": "06-research-proposals"
+  },
+  {
+   "source": "index",
+   "target": "07-benchmark-comparison"
+  },
+  {
+   "source": "index",
+   "target": "agentic-routing"
+  },
+  {
+   "source": "index",
+   "target": "agentrouter-agentic"
+  },
+  {
+   "source": "index",
+   "target": "arch-router"
+  },
+  {
+   "source": "index",
+   "target": "automix"
+  },
+  {
+   "source": "index",
+   "target": "azure-model-router"
+  },
+  {
+   "source": "index",
+   "target": "bedrock-intelligent-prompt-routing"
+  },
+  {
+   "source": "index",
+   "target": "best-route"
+  },
+  {
+   "source": "index",
+   "target": "budgeted-online-routing"
+  },
+  {
+   "source": "index",
+   "target": "carrot"
+  },
+  {
+   "source": "index",
+   "target": "cascade-routing"
+  },
+  {
+   "source": "index",
+   "target": "cascades"
+  },
+  {
+   "source": "index",
+   "target": "citer"
+  },
+  {
+   "source": "index",
+   "target": "cold-start-and-model-representation"
+  },
+  {
+   "source": "index",
+   "target": "collaborative-routing"
+  },
+  {
+   "source": "index",
+   "target": "dart"
+  },
+  {
+   "source": "index",
+   "target": "decision-aware-training"
+  },
+  {
+   "source": "index",
+   "target": "design-space"
+  },
+  {
+   "source": "index",
+   "target": "dialrouter"
+  },
+  {
+   "source": "index",
+   "target": "dsc-robustness"
+  },
+  {
+   "source": "index",
+   "target": "economics-and-incentives"
+  },
+  {
+   "source": "index",
+   "target": "embedllm"
+  },
+  {
+   "source": "index",
+   "target": "flexrouter"
+  },
+  {
+   "source": "index",
+   "target": "frugalgpt"
+  },
+  {
+   "source": "index",
+   "target": "gap-adversarial-robustness"
+  },
+  {
+   "source": "index",
+   "target": "gap-agentic-credit-assignment"
+  },
+  {
+   "source": "index",
+   "target": "gap-coverage"
+  },
+  {
+   "source": "index",
+   "target": "gap-evaluation-validity"
+  },
+  {
+   "source": "index",
+   "target": "gap-guarantees-under-shift"
+  },
+  {
+   "source": "index",
+   "target": "gap-learning-from-logs"
+  },
+  {
+   "source": "index",
+   "target": "gap-nonstationary-pools"
+  },
+  {
+   "source": "index",
+   "target": "gap-pool-design"
+  },
+  {
+   "source": "index",
+   "target": "gap-query-only-signal-ceiling"
+  },
+  {
+   "source": "index",
+   "target": "gap-serving-coupling"
+  },
+  {
+   "source": "index",
+   "target": "gap-session-level-routing"
+  },
+  {
+   "source": "index",
+   "target": "gap-transparency-and-control"
+  },
+  {
+   "source": "index",
+   "target": "gap-unified-compute-allocation"
+  },
+  {
+   "source": "index",
+   "target": "gateways-and-semantic-router-libs"
+  },
+  {
+   "source": "index",
+   "target": "gpt5-router"
+  },
+  {
+   "source": "index",
+   "target": "graphrouter"
+  },
+  {
+   "source": "index",
+   "target": "hybrid-llm"
+  },
+  {
+   "source": "index",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "index",
+   "target": "irt-router"
+  },
+  {
+   "source": "index",
+   "target": "knn-router"
+  },
+  {
+   "source": "index",
+   "target": "llm-routing"
+  },
+  {
+   "source": "index",
+   "target": "llmrouter-library"
+  },
+  {
+   "source": "index",
+   "target": "llmrouterbench"
+  },
+  {
+   "source": "index",
+   "target": "llms-encode-failures"
+  },
+  {
+   "source": "index",
+   "target": "martian"
+  },
+  {
+   "source": "index",
+   "target": "model-substitution-audit"
+  },
+  {
+   "source": "index",
+   "target": "multimodal-routing"
+  },
+  {
+   "source": "index",
+   "target": "nonparametric-routers"
+  },
+  {
+   "source": "index",
+   "target": "not-diamond"
+  },
+  {
+   "source": "index",
+   "target": "nvidia-llm-router"
+  },
+  {
+   "source": "index",
+   "target": "openrouter"
+  },
+  {
+   "source": "index",
+   "target": "oracle-gap"
+  },
+  {
+   "source": "index",
+   "target": "p2l"
+  },
+  {
+   "source": "index",
+   "target": "pandora-router"
+  },
+  {
+   "source": "index",
+   "target": "personalized-routing"
+  },
+  {
+   "source": "index",
+   "target": "personalizedrouter"
+  },
+  {
+   "source": "index",
+   "target": "predictive-routers"
+  },
+  {
+   "source": "index",
+   "target": "prefill-activation-router"
+  },
+  {
+   "source": "index",
+   "target": "quality-estimation"
+  },
+  {
+   "source": "index",
+   "target": "r2r"
+  },
+  {
+   "source": "index",
+   "target": "racer"
+  },
+  {
+   "source": "index",
+   "target": "reasoning-effort-routing"
+  },
+  {
+   "source": "index",
+   "target": "replay-gap"
+  },
+  {
+   "source": "index",
+   "target": "representation-matching-routers"
+  },
+  {
+   "source": "index",
+   "target": "rerouteguard"
+  },
+  {
+   "source": "index",
+   "target": "rerouting-llm-routers"
+  },
+  {
+   "source": "index",
+   "target": "route-to-reason"
+  },
+  {
+   "source": "index",
+   "target": "routellm"
+  },
+  {
+   "source": "index",
+   "target": "router-evaluation"
+  },
+  {
+   "source": "index",
+   "target": "router-r1"
+  },
+  {
+   "source": "index",
+   "target": "router-security"
+  },
+  {
+   "source": "index",
+   "target": "routerarena"
+  },
+  {
+   "source": "index",
+   "target": "routerbench"
+  },
+  {
+   "source": "index",
+   "target": "routerdc"
+  },
+  {
+   "source": "index",
+   "target": "routereval"
+  },
+  {
+   "source": "index",
+   "target": "routerwise"
+  },
+  {
+   "source": "index",
+   "target": "routing-collapse"
+  },
+  {
+   "source": "index",
+   "target": "routing-gap-noise"
+  },
+  {
+   "source": "index",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "index",
+   "target": "routing-vs-moe"
+  },
+  {
+   "source": "index",
+   "target": "serving-aware-routing"
+  },
+  {
+   "source": "index",
+   "target": "task-type-gap"
+  },
+  {
+   "source": "index",
+   "target": "token-level-routing"
+  },
+  {
+   "source": "index",
+   "target": "unified-routing-cascading"
+  },
+  {
+   "source": "index",
+   "target": "uniroute"
+  },
+  {
+   "source": "index",
+   "target": "unsolvability-ceiling"
+  },
+  {
+   "source": "index",
+   "target": "user-choice-stackelberg"
+  },
+  {
+   "source": "index",
+   "target": "user-retrials"
+  },
+  {
+   "source": "index",
+   "target": "vllm-semantic-router"
+  },
+  {
+   "source": "index",
+   "target": "zerorouter"
+  },
+  {
+   "source": "index",
+   "target": "zooter"
+  },
+  {
+   "source": "agentrouter-agentic",
+   "target": "agentic-routing"
+  },
+  {
+   "source": "agentrouter-agentic",
+   "target": "frugalgpt"
+  },
+  {
+   "source": "agentrouter-agentic",
+   "target": "routellm"
+  },
+  {
+   "source": "arch-router",
+   "target": "gap-transparency-and-control"
+  },
+  {
+   "source": "arch-router",
+   "target": "personalized-routing"
+  },
+  {
+   "source": "arch-router",
+   "target": "representation-matching-routers"
+  },
+  {
+   "source": "automix",
+   "target": "cascades"
+  },
+  {
+   "source": "best-route",
+   "target": "gap-unified-compute-allocation"
+  },
+  {
+   "source": "best-route",
+   "target": "reasoning-effort-routing"
+  },
+  {
+   "source": "carrot",
+   "target": "budgeted-online-routing"
+  },
+  {
+   "source": "carrot",
+   "target": "gap-guarantees-under-shift"
+  },
+  {
+   "source": "carrot",
+   "target": "predictive-routers"
+  },
+  {
+   "source": "carrot",
+   "target": "routerarena"
+  },
+  {
+   "source": "citer",
+   "target": "gap-serving-coupling"
+  },
+  {
+   "source": "citer",
+   "target": "token-level-routing"
+  },
+  {
+   "source": "dart",
+   "target": "gap-query-only-signal-ceiling"
+  },
+  {
+   "source": "dart",
+   "target": "quality-estimation"
+  },
+  {
+   "source": "dart",
+   "target": "reasoning-effort-routing"
+  },
+  {
+   "source": "dialrouter",
+   "target": "gap-session-level-routing"
+  },
+  {
+   "source": "dialrouter",
+   "target": "personalized-routing"
+  },
+  {
+   "source": "dsc-robustness",
+   "target": "gap-adversarial-robustness"
+  },
+  {
+   "source": "dsc-robustness",
+   "target": "router-evaluation"
+  },
+  {
+   "source": "dsc-robustness",
+   "target": "router-security"
+  },
+  {
+   "source": "embedllm",
+   "target": "cold-start-and-model-representation"
+  },
+  {
+   "source": "embedllm",
+   "target": "routing-collapse"
+  },
+  {
+   "source": "flexrouter",
+   "target": "collaborative-routing"
+  },
+  {
+   "source": "flexrouter",
+   "target": "gap-pool-design"
+  },
+  {
+   "source": "flexrouter",
+   "target": "llmrouterbench"
+  },
+  {
+   "source": "frugalgpt",
+   "target": "agentrouter-agentic"
+  },
+  {
+   "source": "frugalgpt",
+   "target": "cascades"
+  },
+  {
+   "source": "frugalgpt",
+   "target": "routerwise"
+  },
+  {
+   "source": "frugalgpt",
+   "target": "serving-aware-routing"
+  },
+  {
+   "source": "graphrouter",
+   "target": "llmrouter-library"
+  },
+  {
+   "source": "graphrouter",
+   "target": "nonparametric-routers"
+  },
+  {
+   "source": "graphrouter",
+   "target": "personalizedrouter"
+  },
+  {
+   "source": "graphrouter",
+   "target": "router-r1"
+  },
+  {
+   "source": "graphrouter",
+   "target": "routing-collapse"
+  },
+  {
+   "source": "hybrid-llm",
+   "target": "predictive-routers"
+  },
+  {
+   "source": "hybrid-llm",
+   "target": "routellm"
+  },
+  {
+   "source": "irt-router",
+   "target": "predictive-routers"
+  },
+  {
+   "source": "irt-router",
+   "target": "reasoning-effort-routing"
+  },
+  {
+   "source": "irt-router",
+   "target": "routerarena"
+  },
+  {
+   "source": "irt-router",
+   "target": "routing-collapse"
+  },
+  {
+   "source": "knn-router",
+   "target": "nonparametric-routers"
+  },
+  {
+   "source": "knn-router",
+   "target": "oracle-gap"
+  },
+  {
+   "source": "knn-router",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "llmrouterbench",
+   "target": "gap-pool-design"
+  },
+  {
+   "source": "llmrouterbench",
+   "target": "oracle-gap"
+  },
+  {
+   "source": "llmrouterbench",
+   "target": "router-evaluation"
+  },
+  {
+   "source": "llms-encode-failures",
+   "target": "gap-query-only-signal-ceiling"
+  },
+  {
+   "source": "llms-encode-failures",
+   "target": "multimodal-routing"
+  },
+  {
+   "source": "llms-encode-failures",
+   "target": "prefill-activation-router"
+  },
+  {
+   "source": "llms-encode-failures",
+   "target": "quality-estimation"
+  },
+  {
+   "source": "model-substitution-audit",
+   "target": "06-research-proposals"
+  },
+  {
+   "source": "model-substitution-audit",
+   "target": "gap-transparency-and-control"
+  },
+  {
+   "source": "model-substitution-audit",
+   "target": "router-security"
+  },
+  {
+   "source": "p2l",
+   "target": "predictive-routers"
+  },
+  {
+   "source": "pandora-router",
+   "target": "cascade-routing"
+  },
+  {
+   "source": "pandora-router",
+   "target": "economics-and-incentives"
+  },
+  {
+   "source": "pandora-router",
+   "target": "gap-query-only-signal-ceiling"
+  },
+  {
+   "source": "pandora-router",
+   "target": "quality-estimation"
+  },
+  {
+   "source": "personalizedrouter",
+   "target": "gap-transparency-and-control"
+  },
+  {
+   "source": "personalizedrouter",
+   "target": "personalized-routing"
+  },
+  {
+   "source": "prefill-activation-router",
+   "target": "gap-query-only-signal-ceiling"
+  },
+  {
+   "source": "prefill-activation-router",
+   "target": "quality-estimation"
+  },
+  {
+   "source": "prefill-activation-router",
+   "target": "reasoning-effort-routing"
+  },
+  {
+   "source": "prefill-activation-router",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "r2r",
+   "target": "token-level-routing"
+  },
+  {
+   "source": "racer",
+   "target": "collaborative-routing"
+  },
+  {
+   "source": "racer",
+   "target": "gap-guarantees-under-shift"
+  },
+  {
+   "source": "replay-gap",
+   "target": "agentic-routing"
+  },
+  {
+   "source": "replay-gap",
+   "target": "gap-agentic-credit-assignment"
+  },
+  {
+   "source": "replay-gap",
+   "target": "gap-evaluation-validity"
+  },
+  {
+   "source": "replay-gap",
+   "target": "gap-learning-from-logs"
+  },
+  {
+   "source": "replay-gap",
+   "target": "router-evaluation"
+  },
+  {
+   "source": "rerouteguard",
+   "target": "gap-adversarial-robustness"
+  },
+  {
+   "source": "rerouteguard",
+   "target": "router-security"
+  },
+  {
+   "source": "rerouting-llm-routers",
+   "target": "rerouteguard"
+  },
+  {
+   "source": "rerouting-llm-routers",
+   "target": "router-security"
+  },
+  {
+   "source": "route-to-reason",
+   "target": "best-route"
+  },
+  {
+   "source": "route-to-reason",
+   "target": "gap-unified-compute-allocation"
+  },
+  {
+   "source": "route-to-reason",
+   "target": "reasoning-effort-routing"
+  },
+  {
+   "source": "routellm",
+   "target": "agentrouter-agentic"
+  },
+  {
+   "source": "routellm",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "routellm",
+   "target": "llmrouterbench"
+  },
+  {
+   "source": "routellm",
+   "target": "predictive-routers"
+  },
+  {
+   "source": "router-r1",
+   "target": "cold-start-and-model-representation"
+  },
+  {
+   "source": "router-r1",
+   "target": "collaborative-routing"
+  },
+  {
+   "source": "router-r1",
+   "target": "gap-agentic-credit-assignment"
+  },
+  {
+   "source": "routerarena",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "routerarena",
+   "target": "router-evaluation"
+  },
+  {
+   "source": "routerbench",
+   "target": "router-evaluation"
+  },
+  {
+   "source": "routerbench",
+   "target": "routing-gap-noise"
+  },
+  {
+   "source": "routerdc",
+   "target": "representation-matching-routers"
+  },
+  {
+   "source": "routerdc",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "routereval",
+   "target": "router-evaluation"
+  },
+  {
+   "source": "routerwise",
+   "target": "gap-serving-coupling"
+  },
+  {
+   "source": "routerwise",
+   "target": "serving-aware-routing"
+  },
+  {
+   "source": "routing-collapse",
+   "target": "decision-aware-training"
+  },
+  {
+   "source": "routing-gap-noise",
+   "target": "gap-evaluation-validity"
+  },
+  {
+   "source": "routing-gap-noise",
+   "target": "oracle-gap"
+  },
+  {
+   "source": "routing-gap-noise",
+   "target": "router-evaluation"
+  },
+  {
+   "source": "routing-plateau",
+   "target": "cascade-routing"
+  },
+  {
+   "source": "routing-plateau",
+   "target": "gap-query-only-signal-ceiling"
+  },
+  {
+   "source": "routing-plateau",
+   "target": "oracle-gap"
+  },
+  {
+   "source": "task-type-gap",
+   "target": "arch-router"
+  },
+  {
+   "source": "task-type-gap",
+   "target": "gap-evaluation-validity"
+  },
+  {
+   "source": "task-type-gap",
+   "target": "oracle-gap"
+  },
+  {
+   "source": "unified-routing-cascading",
+   "target": "cascade-routing"
+  },
+  {
+   "source": "unified-routing-cascading",
+   "target": "gap-query-only-signal-ceiling"
+  },
+  {
+   "source": "unified-routing-cascading",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "uniroute",
+   "target": "cold-start-and-model-representation"
+  },
+  {
+   "source": "uniroute",
+   "target": "gap-nonstationary-pools"
+  },
+  {
+   "source": "unsolvability-ceiling",
+   "target": "decision-aware-training"
+  },
+  {
+   "source": "unsolvability-ceiling",
+   "target": "gap-evaluation-validity"
+  },
+  {
+   "source": "unsolvability-ceiling",
+   "target": "oracle-gap"
+  },
+  {
+   "source": "user-choice-stackelberg",
+   "target": "cascades"
+  },
+  {
+   "source": "user-choice-stackelberg",
+   "target": "economics-and-incentives"
+  },
+  {
+   "source": "user-choice-stackelberg",
+   "target": "gap-transparency-and-control"
+  },
+  {
+   "source": "user-retrials",
+   "target": "budgeted-online-routing"
+  },
+  {
+   "source": "user-retrials",
+   "target": "gap-learning-from-logs"
+  },
+  {
+   "source": "zerorouter",
+   "target": "cold-start-and-model-representation"
+  },
+  {
+   "source": "zerorouter",
+   "target": "gap-nonstationary-pools"
+  },
+  {
+   "source": "zooter",
+   "target": "predictive-routers"
+  },
+  {
+   "source": "azure-model-router",
+   "target": "gap-transparency-and-control"
+  },
+  {
+   "source": "azure-model-router",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "azure-model-router",
+   "target": "routerarena"
+  },
+  {
+   "source": "bedrock-intelligent-prompt-routing",
+   "target": "gap-coverage"
+  },
+  {
+   "source": "bedrock-intelligent-prompt-routing",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "gateways-and-semantic-router-libs",
+   "target": "arch-router"
+  },
+  {
+   "source": "gateways-and-semantic-router-libs",
+   "target": "gap-evaluation-validity"
+  },
+  {
+   "source": "gateways-and-semantic-router-libs",
+   "target": "gap-learning-from-logs"
+  },
+  {
+   "source": "gateways-and-semantic-router-libs",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "gateways-and-semantic-router-libs",
+   "target": "representation-matching-routers"
+  },
+  {
+   "source": "gateways-and-semantic-router-libs",
+   "target": "serving-aware-routing"
+  },
+  {
+   "source": "gpt5-router",
+   "target": "gap-learning-from-logs"
+  },
+  {
+   "source": "gpt5-router",
+   "target": "gap-transparency-and-control"
+  },
+  {
+   "source": "gpt5-router",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "gpt5-router",
+   "target": "personalized-routing"
+  },
+  {
+   "source": "gpt5-router",
+   "target": "routerarena"
+  },
+  {
+   "source": "hydra-copilot-auto",
+   "target": "cold-start-and-model-representation"
+  },
+  {
+   "source": "hydra-copilot-auto",
+   "target": "gap-coverage"
+  },
+  {
+   "source": "hydra-copilot-auto",
+   "target": "gap-learning-from-logs"
+  },
+  {
+   "source": "hydra-copilot-auto",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "hydra-copilot-auto",
+   "target": "task-type-gap"
+  },
+  {
+   "source": "llmrouter-library",
+   "target": "graphrouter"
+  },
+  {
+   "source": "llmrouter-library",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "llmrouter-library",
+   "target": "personalizedrouter"
+  },
+  {
+   "source": "llmrouter-library",
+   "target": "router-evaluation"
+  },
+  {
+   "source": "llmrouter-library",
+   "target": "router-r1"
+  },
+  {
+   "source": "martian",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "martian",
+   "target": "prefill-activation-router"
+  },
+  {
+   "source": "martian",
+   "target": "routerbench"
+  },
+  {
+   "source": "not-diamond",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "not-diamond",
+   "target": "llmrouterbench"
+  },
+  {
+   "source": "not-diamond",
+   "target": "openrouter"
+  },
+  {
+   "source": "nvidia-llm-router",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "nvidia-llm-router",
+   "target": "prefill-activation-router"
+  },
+  {
+   "source": "nvidia-llm-router",
+   "target": "representation-matching-routers"
+  },
+  {
+   "source": "nvidia-llm-router",
+   "target": "task-type-gap"
+  },
+  {
+   "source": "openrouter",
+   "target": "economics-and-incentives"
+  },
+  {
+   "source": "openrouter",
+   "target": "gap-evaluation-validity"
+  },
+  {
+   "source": "openrouter",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "openrouter",
+   "target": "not-diamond"
+  },
+  {
+   "source": "openrouter",
+   "target": "serving-aware-routing"
+  },
+  {
+   "source": "vllm-semantic-router",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "vllm-semantic-router",
+   "target": "reasoning-effort-routing"
+  },
+  {
+   "source": "vllm-semantic-router",
+   "target": "router-security"
+  },
+  {
+   "source": "vllm-semantic-router",
+   "target": "routerarena"
+  },
+  {
+   "source": "00-research-plan",
+   "target": "01-literature-review"
+  },
+  {
+   "source": "00-research-plan",
+   "target": "02-timeline"
+  },
+  {
+   "source": "00-research-plan",
+   "target": "03-taxonomy"
+  },
+  {
+   "source": "00-research-plan",
+   "target": "04-projects-landscape"
+  },
+  {
+   "source": "00-research-plan",
+   "target": "05-gaps-and-agenda"
+  },
+  {
+   "source": "00-research-plan",
+   "target": "06-research-proposals"
+  },
+  {
+   "source": "00-research-plan",
+   "target": "llm-routing"
+  },
+  {
+   "source": "00-research-plan",
+   "target": "oracle-gap"
+  },
+  {
+   "source": "00-research-plan",
+   "target": "router-evaluation"
+  },
+  {
+   "source": "00-research-plan",
+   "target": "routing-vs-moe"
+  },
+  {
+   "source": "00-research-plan",
+   "target": "serving-aware-routing"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "02-timeline"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "03-taxonomy"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "04-projects-landscape"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "05-gaps-and-agenda"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "06-research-proposals"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "agentic-routing"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "agentrouter-agentic"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "arch-router"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "automix"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "azure-model-router"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "bedrock-intelligent-prompt-routing"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "best-route"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "budgeted-online-routing"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "carrot"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "cascades"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "citer"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "collaborative-routing"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "dart"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "design-space"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "dialrouter"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "dsc-robustness"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "embedllm"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "frugalgpt"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "gap-pool-design"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "gateways-and-semantic-router-libs"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "gpt5-router"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "graphrouter"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "hybrid-llm"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "hydra-copilot-auto"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "irt-router"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "knn-router"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "llm-routing"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "llmrouter-library"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "llmrouterbench"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "llms-encode-failures"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "model-substitution-audit"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "nvidia-llm-router"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "oracle-gap"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "p2l"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "pandora-router"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "personalized-routing"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "personalizedrouter"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "prefill-activation-router"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "quality-estimation"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "r2r"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "racer"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "reasoning-effort-routing"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "replay-gap"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "rerouteguard"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "rerouting-llm-routers"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "routellm"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "router-r1"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "routerarena"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "routerbench"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "routerdc"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "routereval"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "routerwise"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "routing-collapse"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "routing-gap-noise"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "routing-vs-moe"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "serving-aware-routing"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "task-type-gap"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "token-level-routing"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "unified-routing-cascading"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "uniroute"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "unsolvability-ceiling"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "user-choice-stackelberg"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "user-retrials"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "vllm-semantic-router"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "zerorouter"
+  },
+  {
+   "source": "01-literature-review",
+   "target": "zooter"
+  },
+  {
+   "source": "02-timeline",
+   "target": "automix"
+  },
+  {
+   "source": "02-timeline",
+   "target": "collaborative-routing"
+  },
+  {
+   "source": "02-timeline",
+   "target": "dialrouter"
+  },
+  {
+   "source": "02-timeline",
+   "target": "dsc-robustness"
+  },
+  {
+   "source": "02-timeline",
+   "target": "frugalgpt"
+  },
+  {
+   "source": "02-timeline",
+   "target": "gpt5-router"
+  },
+  {
+   "source": "02-timeline",
+   "target": "hybrid-llm"
+  },
+  {
+   "source": "02-timeline",
+   "target": "hydra-copilot-auto"
+  },
+  {
+   "source": "02-timeline",
+   "target": "knn-router"
+  },
+  {
+   "source": "02-timeline",
+   "target": "llmrouterbench"
+  },
+  {
+   "source": "02-timeline",
+   "target": "llms-encode-failures"
+  },
+  {
+   "source": "02-timeline",
+   "target": "pandora-router"
+  },
+  {
+   "source": "02-timeline",
+   "target": "personalizedrouter"
+  },
+  {
+   "source": "02-timeline",
+   "target": "predictive-routers"
+  },
+  {
+   "source": "02-timeline",
+   "target": "prefill-activation-router"
+  },
+  {
+   "source": "02-timeline",
+   "target": "rerouting-llm-routers"
+  },
+  {
+   "source": "02-timeline",
+   "target": "routellm"
+  },
+  {
+   "source": "02-timeline",
+   "target": "router-r1"
+  },
+  {
+   "source": "02-timeline",
+   "target": "routerarena"
+  },
+  {
+   "source": "02-timeline",
+   "target": "routerbench"
+  },
+  {
+   "source": "02-timeline",
+   "target": "routereval"
+  },
+  {
+   "source": "02-timeline",
+   "target": "routerwise"
+  },
+  {
+   "source": "02-timeline",
+   "target": "routing-collapse"
+  },
+  {
+   "source": "02-timeline",
+   "target": "routing-gap-noise"
+  },
+  {
+   "source": "02-timeline",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "02-timeline",
+   "target": "routing-vs-moe"
+  },
+  {
+   "source": "02-timeline",
+   "target": "task-type-gap"
+  },
+  {
+   "source": "02-timeline",
+   "target": "token-level-routing"
+  },
+  {
+   "source": "02-timeline",
+   "target": "unified-routing-cascading"
+  },
+  {
+   "source": "02-timeline",
+   "target": "uniroute"
+  },
+  {
+   "source": "02-timeline",
+   "target": "unsolvability-ceiling"
+  },
+  {
+   "source": "02-timeline",
+   "target": "zooter"
+  },
+  {
+   "source": "03-taxonomy",
+   "target": "agentic-routing"
+  },
+  {
+   "source": "03-taxonomy",
+   "target": "budgeted-online-routing"
+  },
+  {
+   "source": "03-taxonomy",
+   "target": "cascade-routing"
+  },
+  {
+   "source": "03-taxonomy",
+   "target": "cascades"
+  },
+  {
+   "source": "03-taxonomy",
+   "target": "collaborative-routing"
+  },
+  {
+   "source": "03-taxonomy",
+   "target": "design-space"
+  },
+  {
+   "source": "03-taxonomy",
+   "target": "nonparametric-routers"
+  },
+  {
+   "source": "03-taxonomy",
+   "target": "personalized-routing"
+  },
+  {
+   "source": "03-taxonomy",
+   "target": "predictive-routers"
+  },
+  {
+   "source": "03-taxonomy",
+   "target": "reasoning-effort-routing"
+  },
+  {
+   "source": "03-taxonomy",
+   "target": "representation-matching-routers"
+  },
+  {
+   "source": "03-taxonomy",
+   "target": "serving-aware-routing"
+  },
+  {
+   "source": "03-taxonomy",
+   "target": "token-level-routing"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "arch-router"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "azure-model-router"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "bedrock-intelligent-prompt-routing"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "gap-adversarial-robustness"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "gap-learning-from-logs"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "gap-transparency-and-control"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "gateways-and-semantic-router-libs"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "gpt5-router"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "graphrouter"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "hydra-copilot-auto"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "llmrouter-library"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "llmrouterbench"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "martian"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "not-diamond"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "nvidia-llm-router"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "openrouter"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "personalizedrouter"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "routellm"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "router-evaluation"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "router-r1"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "routerarena"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "routing-collapse"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "vllm-semantic-router"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "06-research-proposals"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "agentrouter-agentic"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "best-route"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "dart"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "dialrouter"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "dsc-robustness"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "flexrouter"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "gap-adversarial-robustness"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "gap-agentic-credit-assignment"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "gap-coverage"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "gap-evaluation-validity"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "gap-guarantees-under-shift"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "gap-learning-from-logs"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "gap-nonstationary-pools"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "gap-pool-design"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "gap-query-only-signal-ceiling"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "gap-serving-coupling"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "gap-session-level-routing"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "gap-transparency-and-control"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "gap-unified-compute-allocation"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "gpt5-router"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "llmrouterbench"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "llms-encode-failures"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "model-substitution-audit"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "multimodal-routing"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "oracle-gap"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "pandora-router"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "racer"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "reasoning-effort-routing"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "replay-gap"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "rerouting-llm-routers"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "routerwise"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "routing-gap-noise"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "uniroute"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "unsolvability-ceiling"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "user-retrials"
+  },
+  {
+   "source": "05-gaps-and-agenda",
+   "target": "zerorouter"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "05-gaps-and-agenda"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "agentic-routing"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "agentrouter-agentic"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "azure-model-router"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "best-route"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "budgeted-online-routing"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "cascade-routing"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "dart"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "dialrouter"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "dsc-robustness"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "gpt5-router"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "irt-router"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "knn-router"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "llms-encode-failures"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "model-substitution-audit"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "pandora-router"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "prefill-activation-router"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "replay-gap"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "rerouteguard"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "rerouting-llm-routers"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "route-to-reason"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "routellm"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "router-r1"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "router-security"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "routerarena"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "routing-gap-noise"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "uniroute"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "unsolvability-ceiling"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "user-choice-stackelberg"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "user-retrials"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "vllm-semantic-router"
+  },
+  {
+   "source": "06-research-proposals",
+   "target": "zerorouter"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "05-gaps-and-agenda"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "06-research-proposals"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "agentrouter-agentic"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "best-route"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "carrot"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "dart"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "dsc-robustness"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "gap-evaluation-validity"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "hydra-copilot-auto"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "knn-router"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "llmrouter-library"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "llmrouterbench"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "llms-encode-failures"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "replay-gap"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "route-to-reason"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "routellm"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "routerarena"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "routerbench"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "routereval"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "routing-collapse"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "routing-gap-noise"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "routing-plateau"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "task-type-gap"
+  },
+  {
+   "source": "07-benchmark-comparison",
+   "target": "unsolvability-ceiling"
+  }
+ ]
+}
