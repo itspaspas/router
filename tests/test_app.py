@@ -9,6 +9,8 @@ import pytest
 from gateway.app import create_app
 from gateway.config import Prices
 from gateway.decision_log import hash_user
+from gateway.hooshyar import UpstreamError
+from policies.auto_passthrough import AutoPassthrough
 from tests.conftest import (
     AUTH,
     BODY,
@@ -91,12 +93,23 @@ async def test_auth_failures_are_401_and_logged(app_client, respx_mock, log_line
     assert rec["status"] == 401 and rec["error_kind"] == "auth"
 
 
-@pytest.mark.parametrize("content", [b"{not json", b"[1, 2]", b'"hi"', b"", "ÿ".encode("latin-1")])
-async def test_non_object_body_is_400_before_policy(app_client, respx_mock, log_lines, content):
-    r = await app_client.post("/v1/chat/completions", content=content,
-                              headers={**AUTH, "content-type": "application/json"})
+class SpyPolicy(AutoPassthrough):
+    def __init__(self):
+        self.calls = 0
+
+    def decide(self, req):
+        self.calls += 1
+        return super().decide(req)
+
+
+@pytest.mark.parametrize("content", [b"{not json", b"[1, 2]", b'"hi"', b"", "\u00ff".encode("latin-1")])
+async def test_non_object_body_is_400_before_policy(app_factory, cfg_tiers, respx_mock, log_lines, content):
+    spy = SpyPolicy()
+    c = await app_factory(dataclasses.replace(cfg_tiers, shadow_enabled=False), spy)
+    r = await c.post("/v1/chat/completions", content=content,
+                     headers={**AUTH, "content-type": "application/json"})
     assert r.status_code == 400 and r.json()["error"]["type"] == "invalid_request_error"
-    assert len(respx_mock.calls) == 0
+    assert len(respx_mock.calls) == 0 and spy.calls == 0
     (rec,) = await log_lines()
     assert rec["status"] == 400 and rec["app_id"] == "chat" and rec["attempts"] == []
 
@@ -118,6 +131,57 @@ async def test_capped_chain_never_reaches_frontier(app_client_capped, respx_mock
     respx_mock.post(UP).respond(503)
     r = await app_client_capped.post("/v1/chat/completions", json=BODY, headers=AUTH)
     assert r.status_code == 503 and "f1" not in sent_models(respx_mock)
+
+
+async def test_capped_with_unconfigured_small_keeps_auto(app_factory, cfg_capped, respx_mock, log_lines):
+    cfg = dataclasses.replace(cfg_capped, shadow_enabled=False, tiers={"small": "", "medium": "", "frontier": ""})
+    c = await app_factory(cfg)
+    respx_mock.post(UP).respond(200, json={"model": "m1", "choices": []})
+    r = await c.post("/v1/chat/completions", json=BODY, headers=AUTH)
+    assert r.status_code == 200 and sent_models(respx_mock) == ["auto"]
+    (rec,) = await log_lines()
+    assert rec["target"] == "auto" and "budget_cap_unenforceable" in rec["reasons"]
+    assert "budget_cap" not in rec["reasons"] and rec["error_kind"] is None
+
+
+async def test_capped_with_unconfigured_small_goes_to_auto_not_medium(app_factory, cfg_capped, respx_mock, log_lines):
+    cfg = dataclasses.replace(cfg_capped, shadow_enabled=False, tiers={"small": "", "medium": "m1", "frontier": "f1"})
+    c = await app_factory(cfg)
+    respx_mock.post(UP).respond(200, json={"model": "m1", "choices": []})
+    r = await c.post("/v1/chat/completions", json=BODY, headers=AUTH)
+    assert r.status_code == 200 and sent_models(respx_mock) == ["auto"]
+    assert r.headers["x-router-served-by"] == "auto"
+    (rec,) = await log_lines()
+    assert rec["target"] == "auto" and "budget_cap_unenforceable" in rec["reasons"]
+
+
+async def test_capped_unenforceable_auto_fallback_skips_frontier(app_factory, cfg_capped, respx_mock):
+    cfg = dataclasses.replace(cfg_capped, shadow_enabled=False, tiers={"small": "", "medium": "m1", "frontier": "f1"})
+    c = await app_factory(cfg)
+    respx_mock.post(UP).respond(503)
+    r = await c.post("/v1/chat/completions", json=BODY, headers=AUTH)
+    assert r.status_code == 503 and sent_models(respx_mock) == ["auto", "m1"]
+
+
+async def test_capped_internal_error_reserve_excludes_frontier(app_client_capped, respx_mock, log_lines, monkeypatch):
+    from gateway import app as app_module
+
+    real = app_module.execute
+    calls = 0
+
+    async def flaky(*a, **k):
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            raise RuntimeError("executor glitch")
+        return await real(*a, **k)
+
+    monkeypatch.setattr(app_module, "execute", flaky)
+    respx_mock.post(UP).respond(503)
+    r = await app_client_capped.post("/v1/chat/completions", json=BODY, headers=AUTH)
+    assert r.status_code == 503 and sent_models(respx_mock) == ["auto", "m1"]   # no f1
+    (rec,) = await log_lines()
+    assert rec["target"] == "auto" and "internal_error" in rec["reasons"]
 
 
 async def test_cost_is_recorded_into_budget(app_factory, cfg_tiers, respx_mock):
@@ -180,6 +244,31 @@ async def test_unexpected_router_error_serves_via_auto(app_client_capped, respx_
     assert r.status_code == 200 and sent_models(respx_mock) == ["auto"]   # not "s1": the cap check broke
     (rec,) = await log_lines()
     assert rec["target"] == "auto" and "internal_error" in rec["reasons"] and rec["error_kind"] is None
+
+
+@pytest.mark.parametrize("target", ["gateway.app.request_features", "gateway.app.hash_user"])
+async def test_feature_extraction_failure_still_serves(app_client, respx_mock, log_lines, monkeypatch, target):
+    def boom(*a, **k):
+        raise RuntimeError("features broke")
+
+    monkeypatch.setattr(target, boom)
+    respx_mock.post(UP).respond(200, json={"model": "m1", "choices": []})
+    r = await app_client.post("/v1/chat/completions", json=BODY, headers={**AUTH, "X-User-Id": "u1"})
+    assert r.status_code == 200 and sent_models(respx_mock) == ["auto"]
+    (rec,) = await log_lines()
+    assert rec["status"] == 200 and rec["error_kind"] is None
+
+
+async def test_budget_record_failure_still_emits_record(app_client, respx_mock, log_lines, monkeypatch):
+    def boom(self, app_id, cost):
+        raise RuntimeError("guard broke")
+
+    monkeypatch.setattr("gateway.budget.BudgetGuard.record", boom)
+    respx_mock.post(UP).respond(200, json={"model": "m1", "choices": []})
+    r = await app_client.post("/v1/chat/completions", json=BODY, headers=AUTH)
+    assert r.status_code == 200
+    (rec,) = await log_lines()
+    assert rec["status"] == 200 and rec["response_model"] == "m1"
 
 
 async def test_unrecoverable_internal_error_is_500(app_client, respx_mock, log_lines, monkeypatch):
@@ -250,6 +339,13 @@ async def test_stream_parses_events_split_across_chunks(app_factory, cfg_tiers, 
     assert rec["text"] == {"query": "hi", "answer": "a"}
 
 
+def chat_scope() -> dict:
+    return {"type": "http", "asgi": {"version": "3.0"}, "http_version": "1.1", "method": "POST",
+            "scheme": "http", "path": "/v1/chat/completions", "raw_path": b"/v1/chat/completions",
+            "query_string": b"", "root_path": "", "client": ("t", 1), "server": ("gw", 80),
+            "headers": [(b"authorization", b"Bearer k1"), (b"content-type", b"application/json")]}
+
+
 async def test_client_disconnect_closes_upstream_stream_and_logs(tmp_path, cfg_tiers):
     fake = FakeStreamClient([b'data: {"choices":[{"delta":{"content":"x"}}]}\n\n'], endless=True)
     app = create_app(app_settings(tmp_path), dataclasses.replace(cfg_tiers, shadow_enabled=False), client=fake)
@@ -269,16 +365,53 @@ async def test_client_disconnect_closes_upstream_stream_and_logs(tmp_path, cfg_t
             first_body.set()
         await asyncio.sleep(0)
 
-    scope = {"type": "http", "asgi": {"version": "3.0"}, "http_version": "1.1", "method": "POST",
-             "scheme": "http", "path": "/v1/chat/completions", "raw_path": b"/v1/chat/completions",
-             "query_string": b"", "root_path": "", "client": ("t", 1), "server": ("gw", 80),
-             "headers": [(b"authorization", b"Bearer k1"), (b"content-type", b"application/json")]}
     async with app.router.lifespan_context(app):
-        await asyncio.wait_for(app(scope, receive, send), 5)
+        await asyncio.wait_for(app(chat_scope(), receive, send), 5)
         assert fake.closed
         await app.state.gateway.drain()
     recs = [json.loads(line) for line in (tmp_path / "d.jsonl").read_text().splitlines()]
     assert len(recs) == 1 and recs[0]["stream"] is True
+
+
+class MidStreamErrorClient(FakeStreamClient):
+    """Yields one chunk, then fails like an upstream read timeout."""
+
+    async def open_stream(self, body):
+        try:
+            yield self.chunks[0]
+            raise UpstreamError("timeout")
+        finally:
+            self.closed = True
+
+
+async def test_mid_stream_upstream_error_cuts_stream_and_logs_kind(tmp_path, cfg_tiers):
+    first = b'data: {"choices":[{"delta":{"content":"x"}}]}\n\n'
+    fake = MidStreamErrorClient([first])
+    app = create_app(app_settings(tmp_path), dataclasses.replace(cfg_tiers, shadow_enabled=False), client=fake)
+    sent = []
+    received = 0
+
+    async def receive():
+        nonlocal received
+        received += 1
+        if received == 1:
+            return {"type": "http.request", "body": json.dumps({**BODY, "stream": True}).encode(), "more_body": False}
+        await asyncio.sleep(10)
+        return {"type": "http.disconnect"}
+
+    async def send(msg):
+        sent.append(msg)
+
+    async with app.router.lifespan_context(app):
+        with pytest.raises(UpstreamError):
+            await asyncio.wait_for(app(chat_scope(), receive, send), 5)
+        assert fake.closed
+        await app.state.gateway.drain()
+    assert sent[0]["type"] == "http.response.start" and sent[0]["status"] == 200
+    bodies = [m for m in sent if m["type"] == "http.response.body"]
+    assert bodies[0]["body"] == first and all(m.get("more_body") for m in bodies)   # cut, never completed
+    (rec,) = [json.loads(line) for line in (tmp_path / "d.jsonl").read_text().splitlines()]
+    assert rec["status"] == 200 and rec["error_kind"] == "timeout" and rec["stream"] is True
 
 
 # --- shadow (decision 7) -----------------------------------------------------------------------

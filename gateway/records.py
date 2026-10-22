@@ -189,10 +189,14 @@ class RequestTrace:
         if self._finished:
             return
         self._finished = True
+        cost = None
         try:
-            d, usage = self.decision, self.usage or {}
             cost = compute_cost(self.response_model, self.usage, self._prices)
             self._budget.record(self.app_id, cost)
+        except Exception as e:  # budget accounting failure must not drop the record
+            log.error("budget record failed: %s", type(e).__name__)
+        try:
+            d, usage = self.decision, self.usage or {}
             last = self.features.last_user_text
             rec = DecisionRecord(
                 request_id=self.request_id, ts=self.ts, app_id=self.app_id,

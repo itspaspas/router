@@ -17,6 +17,7 @@ class UpstreamError(Exception):
     def __init__(self, kind: str, status: int | None = None):
         self.kind = kind
         self.status = status
+        self.attempts: list[str] = []  # set by the executor: chain entries tried before giving up
         self.retryable = kind in ("timeout", "connection") or (status is not None and status >= 500)
         super().__init__(f"upstream {kind}" + (f" (status {status})" if status is not None else ""))
 

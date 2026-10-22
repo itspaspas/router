@@ -91,9 +91,12 @@ class _Gateway:
         self.logger = DecisionLogger(settings.log_path, settings.log_text)
         self.tasks: set[asyncio.Task] = set()
         self.known_models = {m for m in cfg.tiers.values() if m}
-        # R7: an over-cap app's auto request goes to small, and its chain never reaches frontier.
-        small_chain = [t for t in cfg.fallback.get("small", []) if t != "frontier"]
-        self.capped_cfg = dataclasses.replace(cfg, fallback={**cfg.fallback, "small": small_chain})
+        # R7: an over-cap app's auto request goes to small, and its chain never reaches frontier
+        # (also when a router failure re-serves it via auto).
+        self.capped_cfg = dataclasses.replace(cfg, fallback={
+            **cfg.fallback,
+            **{t: [x for x in cfg.fallback.get(t, []) if x != "frontier"] for t in ("small", "auto")},
+        })
 
     # --- background work ---------------------------------------------------------------------
 
@@ -158,12 +161,17 @@ class _Gateway:
             d = dataclasses.replace(d, reasons=(*d.reasons, "policy_error"))
         trace.decision = d
         if d.target == "auto" and self.budget.over_cap(trace.app_id):
+            if self.cfg.model_for("small") is None:  # R8: cannot downgrade; never fail for it
+                trace.decision = dataclasses.replace(
+                    d, reasons=(*d.reasons, "budget_cap_unenforceable"))
+                return self.capped_cfg  # still auto; its fallback chain skips frontier
             trace.decision = dataclasses.replace(d, target="small",
                                                  reasons=(*d.reasons, "budget_cap"))
             return self.capped_cfg
         return self.cfg
 
     async def _execute(self, body: dict, trace: RequestTrace) -> ExecResult:
+        cfg = self.cfg
         try:
             cfg = self._route(body, trace)
             return await execute(trace.decision, body, self.client, cfg, trace.stream)
@@ -174,12 +182,15 @@ class _Gateway:
             reasons = trace.decision.reasons if trace.decision else ()
             trace.decision = Decision("auto", AutoPassthrough.name, {"auto": 1.0},
                                       (*reasons, "internal_error"))
-            return await execute(trace.decision, body, self.client, self.cfg, trace.stream)
+            return await execute(trace.decision, body, self.client, cfg, trace.stream)
 
     async def chat(self, request: Request, trace: RequestTrace):
         headers = request.headers
-        trace.user_hash = hash_user(headers.get("x-user-id"), self.settings.log_salt)
         trace.conversation_id = headers.get("x-conversation-id")
+        try:
+            trace.user_hash = hash_user(headers.get("x-user-id"), self.settings.log_salt)
+        except Exception as e:  # a logging feature must never fail the request
+            log.error("user hash failed: %s", type(e).__name__)
         app_id = self._app_id(headers.get("authorization"))
         if app_id is None:
             return _error_response(trace, 401, "invalid or missing API key",
@@ -192,13 +203,16 @@ class _Gateway:
         if not isinstance(body, dict):
             return _error_response(trace, 400, "request body must be a JSON object",
                                    "invalid_request_error", None)
-        trace.features = request_features(body)
+        try:
+            trace.features = request_features(body)
+        except Exception as e:  # keep neutral features and serve anyway
+            log.error("feature extraction failed: %s", type(e).__name__)
         trace.stream = body.get("stream") is True
         self._start_shadow(trace, body)
         try:
             result = await self._execute(body, trace)
         except UpstreamError as e:
-            trace.attempts = list(getattr(e, "attempts", []))
+            trace.attempts = list(e.attempts)
             status = e.status if isinstance(e.status, int) and 400 <= e.status <= 599 else 502
             return _error_response(trace, status, "upstream request failed", e.kind, e.kind,
                                    {"X-Router-Policy": _header(trace.decision.policy)})
