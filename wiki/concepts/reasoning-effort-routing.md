@@ -12,6 +12,7 @@ Since 2025, frontier models have exposed *effort knobs* (thinking on/off, thinki
 - **Budget-aware IRT**: RADAR treats (model, budget) pairs as respondents in an IRT model.
 - **Samples as a dimension**: [[best-route]] routes jointly over model and best-of-n (up to 60% cost cut, <1% drop).
 - **Strategy as a dimension**: [[route-to-reason]] routes jointly over model and reasoning strategy (>60% token cut).
+- **Output length as a dimension**: R2-Router (ICML 2026) routes over (LLM, length budget).
 - **Precision as a dimension**: DMR routes across quantization levels of one model.
 - **Step-level effort in agents**: per-step high/medium/low effort selection ([[agentic-routing]]).
 
