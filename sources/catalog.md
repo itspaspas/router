@@ -1,6 +1,6 @@
 # Source catalog
 
-202 works. Generated from `sources/catalog.csv` by `scripts/build_graph.py`; edit the CSV, not this file.
+203 works. Generated from `sources/catalog.csv` by `scripts/build_graph.py`; edit the CSV, not this file.
 
 Verification column: **V** = verified this session (abstract-level web check); **K** = well-known prior knowledge, not re-checked this session; **I** = indexed from the curated Awesome-Routing-LLMs list only.
 
@@ -23,7 +23,7 @@ Verification column: **V** = verified this session (abstract-level web check); *
 | leviathan2023spec | Fast Inference from Transformers via Speculative Decoding | 2023 | ICML | [arXiv:2211.17192](https://arxiv.org/abs/2211.17192) | K | Small-large collaboration at token level without quality loss |
 | routingllm2026 | RoutingLLM: Boosting LLM Performance for Network Routing | 2026 | ICASSP | ieee:11461033 | I | Name clash: network routing not model routing |
 
-## Pre-generation routers: predictive scoring (30)
+## Pre-generation routers: predictive scoring (28)
 
 | id | Title | Year | Venue | Link | V | Note |
 |---|---|---|---|---|---|---|
@@ -45,15 +45,13 @@ Verification column: **V** = verified this session (abstract-level web check); *
 | frick2025p2l | Prompt-to-Leaderboard (P2L) | 2025 | ICML | [arXiv:2502.14855](https://arxiv.org/abs/2502.14855) | V | Prompt-specific Bradley-Terry leaderboard; used as a router |
 | jitkrittum2025uniroute | Universal Model Routing for Efficient LLM Inference (UniRoute) | 2025 | arXiv/ICLR WS | [arXiv:2502.08773](https://arxiv.org/abs/2502.08773) | V | Represent each LLM by its error vector on a small set of prompts -> handles unseen models |
 | zerorouter2026 | Breaking Model Lock-in: Cost-Efficient Zero-Shot LLM Routing via a Universal Latent Space (ZeroRouter) | 2026 | arXiv | [arXiv:2601.06220](https://arxiv.org/abs/2601.06220) | V | Model-agnostic difficulty latent space; onboard new models with anchor queries |
-| consroute2026 | ConsRoute | 2026 | arXiv | [arXiv:2603.21237](https://arxiv.org/abs/2603.21237) | I |  |
-| dars2026 | DARS: From Sampled Outcomes to Capability Distributions | 2026 | arXiv | [arXiv:2606.06924](https://arxiv.org/abs/2606.06924) | I | Models stochastic correctness as distributions rather than single labels |
 | dmr2026 | DMR: Dynamic Mix Precision Routing | 2026 | arXiv | [arXiv:2602.02711](https://arxiv.org/abs/2602.02711) | I | Routes across quantization levels of same model |
+| dars2026 | From Sampled Outcomes to Capability Distributions: Rethinking Supervision for LLM Routing (DARS) | 2026 | arXiv | [arXiv:2606.06924](https://arxiv.org/abs/2606.06924) | V | Repeated observations: meaning-preserving query rewrites x repeated stochastic decoding -> distributional capability estimates -> risk-aware supervision -> policy; directly addresses single-draw label noise |
 | haps2026 | HAPS | 2026 | arXiv | [arXiv:2601.05903](https://arxiv.org/abs/2601.05903) | I |  |
 | ir3de2026 | IR3DE | 2026 | ICML WS | [arXiv:2606.06098](https://arxiv.org/abs/2606.06098) | I |  |
 | nvidia2026prefill | LLM Router: Rethinking Routing with Prefill Activations | 2026 | arXiv | [arXiv:2603.20895](https://arxiv.org/abs/2603.20895) | V | Uses internal prefill activations instead of semantic embeddings as routing signal |
 | lugoloobi2026encode | LLMs Encode Their Failures: Predicting Success from Pre-Generation Activations | 2026 | ICLR | [arXiv:2602.09924](https://arxiv.org/abs/2602.09924) | V | Linear probes on pre-generation activations predict success; model-specific difficulty differs from human; routing beats best single model, up to 70% cost cut on MATH |
 | logrouter2026 | LogRouter | 2026 | arXiv | [arXiv:2605.18015](https://arxiv.org/abs/2605.18015) | I |  |
-| odar2026 | ODAR | 2026 | arXiv | [arXiv:2602.23681](https://arxiv.org/abs/2602.23681) | I |  |
 | routerhgc2026 | ROUTERHGC | 2026 | ACL Findings | aclanthology:2026.findings-acl.1589 | I |  |
 | switchcraft2026 | Switchcraft | 2026 | arXiv | [arXiv:2605.07112](https://arxiv.org/abs/2605.07112) | I |  |
 | trouter2026 | TRouter: Task-Aware LLM Routing (cold start) | 2026 | ACL | aclanthology:2026.acl-long.1007 | I |  |
@@ -98,7 +96,7 @@ Verification column: **V** = verified this session (abstract-level web check); *
 | routeprofile2026 | RouteProfile: graph-based profiling for cold-start routing | 2026 | arXiv | [arXiv:2605.00180](https://arxiv.org/abs/2605.00180) | V | New models lack interaction data; graph profiling |
 | vdar2026 | VDAR-Router | 2026 | arXiv | [arXiv:2607.18098](https://arxiv.org/abs/2607.18098) | I |  |
 
-## Constrained, budgeted and online (bandit) routing (23)
+## Constrained, budgeted and online (bandit) routing (22)
 
 | id | Title | Year | Venue | Link | V | Note |
 |---|---|---|---|---|---|---|
@@ -118,12 +116,11 @@ Verification column: **V** = verified this session (abstract-level web check); *
 | omnirouter2025 | OmniRouter: Budget and Performance Controllable Multi-LLM Routing | 2025 | arXiv (KDD 2025 per curated list; unconfirmed) | [arXiv:2502.20576](https://arxiv.org/abs/2502.20576) | V | Rutgers; global budget via Lagrangian dual decomposition + retrieval-augmented capability/cost predictor; +6.3% accuracy, >=10.15% cost cut (authors); QA tasks only |
 | sparellm2025 | SpareLLM | 2025 | SIGMOD | doi:10.1145/3725356 | I |  |
 | generalized2025 | Towards Generalized Routing: Model and Agent Orchestration | 2025 | arXiv | [arXiv:2509.07571](https://arxiv.org/abs/2509.07571) | I |  |
-| boute2026 | BOUTE | 2026 | arXiv | [arXiv:2602.10729](https://arxiv.org/abs/2602.10729) | I |  |
+| boute2026 | BOUTE | 2026 | arXiv | [arXiv:2602.10729](https://arxiv.org/abs/2602.10729) | I | Search by ID found nothing (iteration 7) |
 | bicsrouter2026 | BiCSRouter | 2026 | ACL Findings | aclanthology:2026.findings-acl.947 | I |  |
 | tryageaco2026 | Efficient and Interpretable Multi-Agent LLM Routing via Ant Colony Optimization | 2026 | arXiv | [arXiv:2603.12933](https://arxiv.org/abs/2603.12933) | I |  |
 | flexrouter2026 | FlexRouter: Learning Complementary Model Sets for Flexible LLM Routing | 2026 | COLM | [link](https://research.adobe.com/publication/flexrouter-learning-complementary-model-sets-for-flexible-llm-routing/) | V | DPP subset selection balancing competence and redundancy; maximizes P(at least one correct); adaptive set size |
-| hydra2026 | HyDRA | 2026 | arXiv | [arXiv:2605.17106](https://arxiv.org/abs/2605.17106) | I |  |
-| oats2026 | OATS | 2026 | arXiv | [arXiv:2603.13426](https://arxiv.org/abs/2603.13426) | I |  |
+| oats2026 | OATS | 2026 | arXiv | [arXiv:2603.13426](https://arxiv.org/abs/2603.13426) | I | Search by ID found nothing (iteration 7) |
 | seqroute2026 | SeqRoute | 2026 | arXiv | [arXiv:2605.25424](https://arxiv.org/abs/2605.25424) | V | Multi-turn routing as finite-horizon MDP, offline RL under global budget |
 
 ## Cascades, deferral and self-assessment (17)
@@ -148,7 +145,7 @@ Verification column: **V** = verified this session (abstract-level web check); *
 | ror2026 | Resample or Reroute (RoR) | 2026 | arXiv | [arXiv:2607.08665](https://arxiv.org/abs/2607.08665) | I | When to resample same model vs reroute to another |
 | xrouter2026acl | X-Router | 2026 | ACL Findings | aclanthology:2026.findings-acl.994 | I |  |
 
-## Reasoning-effort and test-time-compute routing (7)
+## Reasoning-effort and test-time-compute routing (8)
 
 | id | Title | Year | Venue | Link | V | Note |
 |---|---|---|---|---|---|---|
@@ -157,6 +154,7 @@ Verification column: **V** = verified this session (abstract-level web check); *
 | pan2025rtr | Route to Reason: Adaptive Routing for LLM and Reasoning Strategy Selection | 2025 | arXiv | [arXiv:2505.19435](https://arxiv.org/abs/2505.19435) | V | Jointly routes (model, reasoning strategy) under budget; >60% token cut with higher accuracy than best single model |
 | routereason2025 | Route-and-Reason: Scaling LLM Reasoning with Reinforced Model Router | 2025 | arXiv | [arXiv:2506.05901](https://arxiv.org/abs/2506.05901) | I |  |
 | dart2026 | DART: Draft-Agreement Routing for Training-Free Adaptive Thinking Budgets | 2026 | arXiv | [arXiv:2606.23181](https://arxiv.org/abs/2606.23181) | V | Two cheap no-think drafts; agreement -> answer; else thinking budget from entropy |
+| odar2026 | ODAR: Principled Adaptive Routing for LLM Reasoning via Active Inference | 2026 | arXiv | [arXiv:2602.23681](https://arxiv.org/abs/2602.23681) | V | Amortized active-inference difficulty estimator routes fast vs slow agent; free-energy answer fusion with varentropy; 82% compute cut on open stack (authors) |
 | r2router2026 | R2-Router: A New Paradigm for LLM Routing with Reasoning | 2026 | ICML | [arXiv:2602.02823](https://arxiv.org/abs/2602.02823) | V | Routes jointly over (LLM, output-length budget) enforced via length-constrained instructions; R2-Bench; ~4-5x lower cost than prior routers (authors); plug-in to existing routers |
 | thinkwhenneeded2026 | Think When Needed: Model-Aware Reasoning Routing | 2026 | arXiv (SIGIR 2026) | [arXiv:2601.18146](https://arxiv.org/abs/2601.18146) | V | Per-instance decide whether an LLM should reason |
 
@@ -219,20 +217,22 @@ Verification column: **V** = verified this session (abstract-level web check); *
 |---|---|---|---|---|---|---|
 | nofits2026 | No One Fits All: From Fixed Prompting to Learned Routing in Multilingual LLMs | 2026 | ACL Findings | [arXiv:2604.16937](https://arxiv.org/abs/2604.16937) | V | Routes prompting strategy (native vs translate) per instance, not models; translation helps low-resource languages |
 
-## Serving systems, edge and energy (11)
+## Serving systems, edge and energy (13)
 
 | id | Title | Year | Venue | Link | V | Note |
 |---|---|---|---|---|---|---|
 | cloudedge2025 | Efficient Routing of Inference Requests across LLM Instances in Cloud-Edge Computing | 2025 | arXiv | [arXiv:2507.15553](https://arxiv.org/abs/2507.15553) | I |  |
 | ipw2025 | Intelligence per Watt | 2025 | arXiv | [arXiv:2511.07885](https://arxiv.org/abs/2511.07885) | V | Stanford; IPW=accuracy/power; local models answer 88.7% of queries; oracle local/cloud routing cuts energy 80%, cost 74%; 80%-accurate router captures 80% of gains |
 | netgpt2025 | Optimizing NetGPT via Routing-Based Synergy and RL | 2025 | arXiv | [arXiv:2511.22217](https://arxiv.org/abs/2511.22217) | I |  |
+| consroute2026 | ConsRoute: Consistency-Aware Adaptive Query Routing for Cloud-Edge-Device LLMs | 2026 | arXiv | [arXiv:2603.21237](https://arxiv.org/abs/2603.21237) | V | Reranker-scored cross-tier answer consistency as soft labels; prefill hidden states as features; per-cluster Bayesian-optimized thresholds; >=95% of cloud quality at ~40% lower latency and cost |
 | federate2026 | Federate the Router: Learning Language Model Routers with Sparse and Decentralized Evaluations | 2026 | arXiv | [arXiv:2601.22318](https://arxiv.org/abs/2601.22318) | V | CMU; federated MLP and k-means routers beat any single-client router; suboptimality theory |
-| greenserv2026 | GreenServ | 2026 | arXiv | [arXiv:2601.17551](https://arxiv.org/abs/2601.17551) | I | Energy-aware routing |
+| greenserv2026 | GreenServ: Energy-Efficient Context-Aware Dynamic Routing for Multi-Model LLM Inference | 2026 | arXiv | [arXiv:2601.17551](https://arxiv.org/abs/2601.17551) | V | Bandit over 16 open LLMs with task/cluster/complexity features; +22% accuracy and -31% energy vs random routing |
 | hwrouter2026 | HW-Router: Hardware-Aware Routing for Scalable Multi-LLM Serving | 2026 | arXiv | [arXiv:2608.14575](https://arxiv.org/abs/2608.14575) | V | 3.4-3.9x lower e2e latency under overload vs static routing |
 | lqm2026 | LQM-CONTEXTROUTE: Latency-Quality Routing for Tools | 2026 | arXiv | [arXiv:2605.14241](https://arxiv.org/abs/2605.14241) | I |  |
 | lodestar2026 | Lodestar: learning-based request router for GPU clusters | 2026 | arXiv | [arXiv:2606.00946](https://arxiv.org/abs/2606.00946) | V | Instance-level (same model) request routing; batching/KV-reuse aware |
 | proteus2026 | PROTEUS: SLA-Aware Routing via Lagrangian RL for Multi-LLM Serving Systems | 2026 | arXiv | [arXiv:2601.19402](https://arxiv.org/abs/2601.19402) | V | Constrained RL (Lagrangian) for SLA-aware routing |
-| robatch2026 | RoBatch: Towards Cost-effective LLMs Routing with Batch Prompting | 2026 | arXiv | [arXiv:2605.28268](https://arxiv.org/abs/2605.28268) | I | Routing aware of batch prompting economics |
+| robatch2026 | RoBatch: Towards Cost-effective LLMs Routing with Batch Prompting | 2026 | arXiv | [arXiv:2605.28268](https://arxiv.org/abs/2605.28268) | V | Joint route + batch-size under budget (NP-hard); batch-aware utility proxy + greedy Pareto upgrades; Qwen3/Gemma3 on 6 benchmarks |
+| batchrouting2026 | Robust Batch-Level Query Routing for LLMs under Cost and Capacity Constraints | 2026 | CAIS 2026 | [arXiv:2603.26796](https://arxiv.org/abs/2603.26796) | V | LinkedIn; routes whole batches under cost and GPU capacity constraints |
 | routerwise2026 | RouterWise: Joint Resource Allocation and Routing for Latency-Aware Multi-Model LLM Serving | 2026 | arXiv | [arXiv:2604.10907](https://arxiv.org/abs/2604.10907) | V | FrugalGPT cascade overloads cheapest model queue; joint placement+routing meets TTFT SLO |
 
 ## Benchmarks, evaluation platforms and libraries (14)
@@ -285,9 +285,10 @@ Verification column: **V** = verified this session (abstract-level web check); *
 | rerouteguard2026 | RerouteGuard: Understanding and Mitigating Adversarial Risks for LLM Routing | 2026 | arXiv | [arXiv:2601.21380](https://arxiv.org/abs/2601.21380) | V | Real routing systems vulnerable (cost escalation); embedding-based detector >99% |
 | youragent2026 | Your Agent Is Mine: Measuring Malicious Intermediary Attacks on the LLM Supply Chain | 2026 | ACM CCS | [arXiv:2604.08407](https://arxiv.org/abs/2604.08407) | V | Measured 28 paid + 400 free API routers: 9 injected malicious code, 17 touched planted credentials; defenses: fail-closed gating, anomaly screening, transparency logs |
 
-## Industry disclosures (1)
+## Industry disclosures (2)
 
 | id | Title | Year | Venue | Link | V | Note |
 |---|---|---|---|---|---|---|
 | openai2025gpt5 | GPT-5 System Card (real-time router across main/thinking models) | 2025 | system card | [link](https://openai.com/index/gpt-5-system-card/) | V | Router trained on model switches / preference / correctness signals; user backlash over control |
+| hydra2026 | HyDRA: Hybrid Dynamic Routing Architecture for Heterogeneous LLM Pools | 2026 | arXiv | [arXiv:2605.17106](https://arxiv.org/abs/2605.17106) | V | ModernBERT with 4 capability heads (reasoning, codegen, debugging, tool use) + shortfall matching to cheapest capable model; config-only model changes; 86ms CPU; SWE-Bench Verified: matches Claude Sonnet 4.6 at 54% cost savings; deployed in GitHub Copilot VS Code Chat auto-mode |
 

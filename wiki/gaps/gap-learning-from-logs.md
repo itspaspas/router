@@ -1,7 +1,7 @@
 ---
 type: gap
 title: G4 Learning and evaluating from production logs
-sources: [tsiourvas2025causal, bae2026retrials, openai2025gpt5, panda2025pilot, barp2025, gonuguntla2026replay]
+sources: [hydra2026, tsiourvas2025causal, bae2026retrials, openai2025gpt5, panda2025pilot, barp2025, gonuguntla2026replay]
 ---
 # G4: Off-policy learning and evaluation for routers is almost absent
 
@@ -17,3 +17,6 @@ sources: [tsiourvas2025causal, bae2026retrials, openai2025gpt5, panda2025pilot, 
 - **Bandit-feedback training exists**: PILOT (preference-prior LinUCB plus knapsack budget, EMNLP-F 2025), MixLLM, BaRP (2025, trains only on the chosen model's outcome), and Causal LLM Routing (NeurIPS 2025, surrogate regret losses with causal adjustment for the logging policy). Learning *from* logs is therefore started.
 - **Still missing**: (a) **off-policy *evaluation*** validated for routers, so that a new router can be ranked from old logs; (b) logged propensities, which production systems rarely record; (c) a public logged dataset; (d) long-horizon settings, where [[replay-gap]] shows replay-based evaluation of agent model switching is unsound and importance weights collapse.
 - No public A/B results for learned routers on live traffic were found this session. Practitioner material is guidance only. This supports the claim that academia lacks deployment evidence.
+
+## Iteration 7 addition
+[[hydra-copilot-auto]] is a learned router *deployed to all users* of GitHub Copilot VS Code Chat auto-mode, with a published method. Its evaluation is still offline benchmarks with no live outcome data. This sharpens the gap: deployed learned routers exist, but **published evidence from their own traffic** does not.

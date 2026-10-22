@@ -1,7 +1,7 @@
 ---
 type: gap
 title: G1 Evaluation validity
-sources: [chen2026gapreal, garg2026unsolvability, lu2026plateau, li2026llmrouterbench, lee2026tasktype, li2025knn]
+sources: [dars2026, chen2026gapreal, garg2026unsolvability, lu2026plateau, li2026llmrouterbench, lee2026tasktype, li2025knn]
 ---
 # G1: We cannot yet measure router progress reliably
 
@@ -16,3 +16,6 @@ sources: [chen2026gapreal, garg2026unsolvability, lu2026plateau, li2026llmrouter
 6. Metrics for **gap recovered beyond task type**, which isolates real instance-level routing.
 
 **Proposal.** See P1 in [[06-research-proposals]].
+
+## Prior art (iteration 7)
+DARS (2026) builds router supervision from *repeated observations*, crossing meaning-preserving query rewrites with repeated stochastic decoding to get distributional capability estimates. Together with [[routing-gap-noise]], this means multi-sample labels are already proposed. P1's remaining novelty is the **full protocol** (artifact audit, task-type oracle, real prices, confidence intervals, living pool) and its adoption as a benchmark standard, not multi-sampling itself.

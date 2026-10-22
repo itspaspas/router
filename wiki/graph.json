@@ -38,7 +38,7 @@
    "type": "index",
    "path": "research/04-projects-landscape.md",
    "in_degree": 4,
-   "out_degree": 22
+   "out_degree": 23
   },
   {
    "id": "05-gaps-and-agenda",
@@ -157,7 +157,7 @@
    "title": "Cold start, unseen models and model representation",
    "type": "concept",
    "path": "wiki/concepts/cold-start-and-model-representation.md",
-   "in_degree": 10,
+   "in_degree": 11,
    "out_degree": 7
   },
   {
@@ -261,7 +261,7 @@
    "title": "G12 Coverage \u2014 languages, modalities, long context, domains",
    "type": "gap",
    "path": "wiki/gaps/gap-coverage.md",
-   "in_degree": 4,
+   "in_degree": 5,
    "out_degree": 4
   },
   {
@@ -285,8 +285,8 @@
    "title": "G4 Learning and evaluating from production logs",
    "type": "gap",
    "path": "wiki/gaps/gap-learning-from-logs.md",
-   "in_degree": 9,
-   "out_degree": 5
+   "in_degree": 10,
+   "out_degree": 6
   },
   {
    "id": "gap-nonstationary-pools",
@@ -377,6 +377,14 @@
    "out_degree": 2
   },
   {
+   "id": "hydra-copilot-auto",
+   "title": "HyDRA in GitHub Copilot auto-mode (2026)",
+   "type": "system",
+   "path": "wiki/systems/hydra-copilot-auto.md",
+   "in_degree": 3,
+   "out_degree": 5
+  },
+  {
    "id": "index",
    "title": "Wiki index",
    "type": "index",
@@ -389,8 +397,8 @@
    "title": "Industry and open-source landscape",
    "type": "concept",
    "path": "wiki/concepts/industry-landscape.md",
-   "in_degree": 16,
-   "out_degree": 15
+   "in_degree": 17,
+   "out_degree": 16
   },
   {
    "id": "irt-router",
@@ -741,7 +749,7 @@
    "title": "Most of the LLM Routing Gap Is Task Type (2026)",
    "type": "paper",
    "path": "wiki/papers/task-type-gap.md",
-   "in_degree": 7,
+   "in_degree": 8,
    "out_degree": 3
   },
   {
@@ -1089,6 +1097,10 @@
   {
    "source": "industry-landscape",
    "target": "gpt5-router"
+  },
+  {
+   "source": "industry-landscape",
+   "target": "hydra-copilot-auto"
   },
   {
    "source": "industry-landscape",
@@ -1713,6 +1725,10 @@
   {
    "source": "gap-learning-from-logs",
    "target": "gpt5-router"
+  },
+  {
+   "source": "gap-learning-from-logs",
+   "target": "hydra-copilot-auto"
   },
   {
    "source": "gap-learning-from-logs",
@@ -2875,6 +2891,26 @@
    "target": "routerarena"
   },
   {
+   "source": "hydra-copilot-auto",
+   "target": "cold-start-and-model-representation"
+  },
+  {
+   "source": "hydra-copilot-auto",
+   "target": "gap-coverage"
+  },
+  {
+   "source": "hydra-copilot-auto",
+   "target": "gap-learning-from-logs"
+  },
+  {
+   "source": "hydra-copilot-auto",
+   "target": "industry-landscape"
+  },
+  {
+   "source": "hydra-copilot-auto",
+   "target": "task-type-gap"
+  },
+  {
    "source": "llmrouter-library",
    "target": "graphrouter"
   },
@@ -3509,6 +3545,10 @@
   {
    "source": "04-projects-landscape",
    "target": "graphrouter"
+  },
+  {
+   "source": "04-projects-landscape",
+   "target": "hydra-copilot-auto"
   },
   {
    "source": "04-projects-landscape",

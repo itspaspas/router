@@ -18,6 +18,7 @@ Each proposal targets one or more gaps from [[05-gaps-and-agenda]] and is scoped
 5. Metrics: utility at real prices, *gap recovered beyond task type*, and bootstrap confidence intervals.
 6. A living protocol: quarterly pool refresh with versioned price tables, reusing the [[routerarena]] update mechanics.
 **Expected contribution.** The reference evaluation protocol for routing papers in 2027.
+**Prior art to build on.** DARS (2026) already uses multi-sample plus paraphrase supervision for *training*, and [[routing-gap-noise]] proposes a multi-sample oracle. P1's novelty is the integrated, audited, living *evaluation protocol*.
 **Risk.** Compute cost of k samples. Mitigate with adaptive sampling, drawing more samples only where p̂ is uncertain.
 
 ## P2: Value-of-information routing, learning what to look at (G2, G7)
