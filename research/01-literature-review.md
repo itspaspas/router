@@ -90,6 +90,7 @@ The **oracle router**, which picks the cheapest correct model for every query, i
 - *Cold start*: ZeroRouter ([[zerorouter]]) and RouteProfile.
 - *Economics*: Stackelberg provider–user games ([[user-choice-stackelberg]]), learning from user retrials ([[user-retrials]]), truthful auctions.
 - *Security*: RerouteGuard ([[rerouteguard]]), R2A, and malicious intermediaries: of 428 measured API routers, 9 injected code and 17 touched planted credentials. Software-only detection of model substitution is unreliable ([[model-substitution-audit]]).
+- *Production*: **HyDRA** ([[hydra-copilot-auto]]) is reported deployed to all users of GitHub Copilot's VS Code Chat auto-mode. It is a published learned router at scale: capability-requirement heads plus cheapest-capable matching, about 54% savings at iso-quality on SWE-Bench Verified, with model changes made by config.
 - *Infrastructure*: the LLMRouter library and xRouteBench ([[llmrouter-library]]) put 16+ routers behind one interface. Its conclusion is that no single router wins everywhere.
 - *Surveys*: Moslem & Kelleher's routing-and-cascading survey (Feb 2026), and a unified survey of routing, cascades and test-time scaling as adaptive computation (Jun 2026). The latter finds reported savings often incomparable because router, verifier and queue costs are counted inconsistently.
 

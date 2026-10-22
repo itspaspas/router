@@ -32,7 +32,8 @@ title: Timeline of LLM routing
 | Mar 2026 | Prefill-activation router (NVIDIA); vLLM SR paper; RACER (ICML 2026) | [[prefill-activation-router]] |
 | Apr 2026 | DialRouter, MTRouter (sequential multi-turn routing) | [[dialrouter]] |
 | Apr 2026 | RouterWise (joint serving + routing); R2A attack; malicious intermediaries | [[routerwise]] |
-| May 2026 | Unsolvability ceiling = artifacts; RouteProfile | [[unsolvability-ceiling]] |
+| May 2026 | Unsolvability ceiling = artifacts; RouteProfile; TwinRouterBench; HyDRA (GitHub Copilot auto-mode) | [[unsolvability-ceiling]] |
+| May 2026 | HyDRA deployed in GitHub Copilot VS Code Chat auto-mode | [[hydra-copilot-auto]] |
 | Jun 2026 | The Routing Plateau; DART thinking-budget routing | [[routing-plateau]] |
 | Jul 2026 | How much of the gap is real (label noise); agentic routing flywheel; AgentRouter (ICML WS) | [[routing-gap-noise]] |
 | Aug 2026 | Most of the gap is task type; LLMRouter library + xRouteBench; HW-Router | [[task-type-gap]] |
