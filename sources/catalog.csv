@@ -86,7 +86,7 @@ llmrank2025,LLMRank,2025,arXiv,arXiv:2510.01234,optimization,I,
 metallm2024,MetaLLM: A High-performant and Cost-efficient Dynamic Framework for Wrapping LLMs,2024,arXiv,arXiv:2407.10834,optimization,V,LinUCB contextual bandit with reward a_i(x) - p*c_i; routes without querying LLMs; classification and MCQ tasks
 proteus2026,PROTEUS: SLA-Aware Routing via Lagrangian RL for Multi-LLM Serving Systems,2026,arXiv,arXiv:2601.19402,systems,V,Constrained RL (Lagrangian) for SLA-aware routing
 r2router2026,R2-Router: A New Paradigm for LLM Routing with Reasoning,2026,ICML,arXiv:2602.02823,reasoning-effort,V,"Routes jointly over (LLM, output-length budget) enforced via length-constrained instructions; R2-Bench; ~4-5x lower cost than prior routers (authors); plug-in to existing routers"
-mohammadshahi2024routoo,Routoo: Learning to Route to LLMs Effectively,2024,arXiv,arXiv:2401.13979,optimization,I,
+mohammadshahi2024routoo,Routoo: Learning to Route to LLMs Effectively,2024,arXiv,arXiv:2401.13979,optimization,V,Leeroo; lightweight-LLM performance predictor + cost-aware selector + universe constructor for complementary pool; matches Mixtral-8x7B at 1/3 cost on MMLU
 auction2026,Truthful Reverse Auctions for Adaptive Selection,2026,AAMAS,arXiv:2602.14476,theory,I,Mechanism design: providers bid; router as auctioneer
 tryageaco2026,Efficient and Interpretable Multi-Agent LLM Routing via Ant Colony Optimization,2026,arXiv,arXiv:2603.12933,optimization,I,
 panda2025pilot,Adaptive LLM Routing under Budget Constraints (PILOT),2025,EMNLP Findings,arXiv:2508.21141,optimization,V,Preference-prior LinUCB (PILOT) + online multi-choice-knapsack budget policy; ~93% of GPT-4 at 25% cost (secondary summary)
@@ -127,12 +127,12 @@ routeprofile2026,RouteProfile: graph-based profiling for cold-start routing,2026
 feng2024graphrouter,GraphRouter: A Graph-based Router for LLM Selections,2024,ICLR 2025,arXiv:2410.03834,retrieval,K,Heterogeneous task-query-LLM graph; edge prediction; generalizes to new LLMs
 gmtrouter2025,GMTRouter: Personalized LLM Router over Multi-turn User Interactions,2025,arXiv,arXiv:2511.08590,personalization,V,Heterogeneous user-LLM-query-response graph
 dai2025personalized,PersonalizedRouter: Personalized LLM Routing via Graph-based User Preference Modeling,2025,TMLR,arXiv:2511.16883,personalization,V,PersonaRoute-Bench (1000 users)
-feng2025swarms,Heterogeneous Swarms: Jointly Optimizing Model Roles and Weights for Multi-LLM Systems,2025,NeurIPS,arXiv:2502.04510,collaborative,I,
-mot2025,Mixture of Thoughts: Learning to Aggregate What Experts Think,2025,ICLR 2026,arXiv:2509.21164,collaborative,I,Latent-level collaboration among experts
+feng2025swarms,Heterogeneous Swarms: Jointly Optimizing Model Roles and Weights for Multi-LLM Systems,2025,NeurIPS,arXiv:2502.04510,collaborative,V,UW/Google; multi-LLM DAGs; particle-swarm search over roles (adjacency) and weights (JFK-score); +18.5% avg over baselines on 12 tasks
+mot2025,"Mixture of Thoughts: Learning to Aggregate What Experts Think, Not Just What They Say",2025,arXiv (ICLR 2026 per curated list; unconfirmed),arXiv:2509.21164,collaborative,V,"Router picks top-K frozen experts + primary; cross-attention over shared latent space; one generation pass; small gains over Avengers (+0.38% ID, +2.92% OOD)"
 fu2025r2r,R2R: Efficiently Navigating Divergent Reasoning Paths with Small-Large Model Token Routing,2025,NeurIPS,arXiv:2505.21600,collaborative,K,Route only path-divergent tokens to the large reasoning model
 zheng2025citer,CITER: Collaborative Inference for Efficient LLM Decoding with Token-Level Routing,2025,arXiv (NeurIPS 2024 WS),arXiv:2502.01976,collaborative,V,RL-trained token router between SLM and LLM
 shen2024coll,Learning to Decode Collaboratively with Multiple Language Models (Co-LLM),2024,ACL,arXiv:2403.03870,collaborative,K,Latent variable decides which model emits each token
-relayllm2026,RelayLLM,2026,arXiv,arXiv:2601.05167,collaborative,I,
+relayllm2026,RelayLLM: Efficient Reasoning via Collaborative Decoding,2026,arXiv,arXiv:2601.05167,collaborative,V,Small model is the controller and emits a command token to call the large model for a few tokens; GRPO; large model writes ~1.07% of tokens; 42.5 -> 49.5% avg on 6 math benchmarks
 budgetagentic2026,Budget-Aware Agentic Routing via Boundary-Guided Training,2026,arXiv,arXiv:2602.21227,collaborative,I,
 budgetmem2026,BudgetMem,2026,ICML,arXiv:2602.06025,collaborative,I,
 netgpt2025,Optimizing NetGPT via Routing-Based Synergy and RL,2025,arXiv,arXiv:2511.22217,systems,I,
@@ -140,12 +140,12 @@ atlas2026,Atlas,2026,arXiv,arXiv:2601.03872,collaborative,I,
 rema2025,ReMA: Learning to Meta-think for LLMs with Multi-agent RL,2025,NeurIPS,arXiv:2503.09501,collaborative,I,
 centralmas2025,Controlling Performance and Budget of a Centralized Multi-Agent LLM System,2025,arXiv,arXiv:2511.02755,collaborative,I,
 zhang2025routerr1,Router-R1: Teaching LLMs Multi-Round Routing and Aggregation via RL,2025,NeurIPS,arXiv:2506.09033,collaborative,V,LLM router interleaves think/route; format+outcome+cost rewards; conditions on model descriptors
-skillorch2026,SkillOrchestra,2026,arXiv,arXiv:2602.19672,collaborative,I,
+skillorch2026,SkillOrchestra: Learning to Route Agents via Skill Transfer,2026,arXiv (NeurIPS 2026),arXiv:2602.19672,collaborative,V,Learns fine-grained skills and per-agent competence/cost per skill instead of end-to-end RL; notes RL orchestrators suffer routing collapse in multi-turn; up to +22.5% and 700x/300x lower learning cost vs Router-R1/ToolOrchestra
 lightrouter2025,LightRouter,2025,arXiv,arXiv:2505.16221,collaborative,I,
-fusionroute2026,FusionRoute,2026,ICML,arXiv:2601.05106,collaborative,I,Token-level routing + fusion
+fusionroute2026,Token-Level LLM Collaboration via FusionRoute,2026,ICML,arXiv:2601.05106,collaborative,V,Router picks expert per decoding step AND adds a complementary logit; proves expert-only routing cannot realize optimal policy without coverage assumptions; supervision only where experts disagree
 taro2026,TARo,2026,arXiv,arXiv:2603.18411,collaborative,I,
 ncots2026,NCoTs: Neural Chain-of-Thought Search,2026,arXiv,arXiv:2601.11340,collaborative,I,
-steer2026,STEER: Confidence-Guided Stepwise Model Routing,2026,AAAI,https://github.com/helmsman12/STEER,collaborative,I,Step-level routing within a reasoning chain
+steer2026,STEER: Confidence-Guided Stepwise Model Routing for Cost-Efficient Reasoning,2026,AAAI,arXiv:2511.06190,collaborative,V,"SNU; small model drafts each step, large model called when logit confidence low; up to +20% accuracy over large model on AIME with 48% fewer FLOPs; per-step thresholds need grid search"
 agentrouter2026icml,AgentRouter: Heterogeneous Model Routing for Cost-Optimal Multi-Step Agentic Workflows,2026,ICML WS (AdaptFM),https://icml.cc/virtual/2026/68040,collaborative,V,12M classifier per step; reported 72% cost cut <3% task drop vs frontier-only
 agenticrouting2026,Agentic Routing: The Harness-Native Data Flywheel,2026,arXiv,arXiv:2607.11399,collaborative,V,Step-level routing from harness state; routing logs become training data
 pricellm2025,PriLLM: Stackelberg routing game,2025,AAAI,arXiv:2511.09062,theory,I,
@@ -157,7 +157,7 @@ lu2026plateau,The Routing Plateau: Understanding and Breaking the Accuracy Limit
 garg2026unsolvability,Unsolvability Ceiling in Multi-LLM Routing: An Empirical Study of Evaluation Artifacts,2026,arXiv,arXiv:2605.07395,theory,V,Truncation/judge/format artifacts inflate 'unsolvable'; routers collapse to majority class
 medrec2025,Multi-LLM Collaboration for Medication Recommendation,2025,arXiv,arXiv:2512.05066,benchmark,I,
 amongus2026,AmongUs (agent deception benchmark used for routing),2026,ICML,arXiv:2602.05176,benchmark,I,
-agentselect2026,AgentSelect,2026,arXiv,arXiv:2603.03761,benchmark,I,
+agentselect2026,AgentSelect: Benchmark for Narrative Query-to-Agent Recommendation,2026,ICML 2026,arXiv:2603.03761,benchmark,V,"111K queries, 108K deployable agent configs (backbone + toolkit), 251K interactions; CF/GNN fragile on long tail; content-aware matching needed"
 kassem2025robust,How Robust Are Router-LLMs? Analysis of the Fragility of LLM Routing Capabilities (DSC),2025,EACL 2026,arXiv:2504.07113,security,V,Category-driven routing; jailbreaks routed to weak models; privacy/safety checks
 ipw2025,Intelligence per Watt,2025,arXiv,arXiv:2511.07885,systems,V,"Stanford; IPW=accuracy/power; local models answer 88.7% of queries; oracle local/cloud routing cuts energy 80%, cost 74%; 80%-accurate router captures 80% of gains"
 li2026llmrouterbench,LLMRouterBench: A Massive Benchmark and Unified Framework for LLM Routing,2026,ACL Findings,arXiv:2601.07206,benchmark,V,400K instances 21 datasets 33 models 10 baselines; many routers incl. commercial fail to beat simple baseline; model-recall failures
@@ -199,3 +199,5 @@ barp2025,"Learning to Route LLMs from Bandit Feedback: One Policy, Many Trade-of
 cai2025substitution,Are You Getting What You Pay For? Auditing Model Substitution in LLM APIs,2025,NeurIPS,arXiv:2504.04715,security,V,"Software-only detection (output stats, benchmarks, logprobs) unreliable vs quantization/random substitution; argues for TEE attestation"
 nofits2026,No One Fits All: From Fixed Prompting to Learned Routing in Multilingual LLMs,2026,ACL Findings,arXiv:2604.16937,coverage,V,"Routes prompting strategy (native vs translate) per instance, not models; translation helps low-resource languages"
 zeng2026metarouter,Learning to Route LLMs from Implicit Cost-Performance Preferences via Meta-Learning (MetaRouter),2026,IJCAI,arXiv:2606.06178,personalization,V,Distinct from Meta-Router (ICLR 2026); learns user cost-performance preferences implicitly
+roro2026,Rubric-Guided Process Reward for Stepwise Model Routing (RoRo),2026,arXiv,arXiv:2605.29310,collaborative,V,Critiques STEER: per-step independent uncertainty and grid-searched thresholds; trajectory-aware process reward
+policystep2026,Policy-Guided Stepwise Model Routing for Cost-Effective Reasoning,2026,arXiv,arXiv:2605.06116,collaborative,I,

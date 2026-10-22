@@ -7,7 +7,7 @@ A complete, interlinked picture of **LLM routing**: systems that decide which mo
 2. [`research/05-gaps-and-agenda.md`](research/05-gaps-and-agenda.md): 13 gaps, how they depend on each other, priorities, and five theses
 3. [`research/06-research-proposals.md`](research/06-research-proposals.md): nine concrete research projects (P1–P9)
 
-Supporting documents: [plan and method](research/00-research-plan.md) · [timeline](research/02-timeline.md) · [taxonomy](research/03-taxonomy.md) · [projects and systems landscape](research/04-projects-landscape.md) · [wiki index](wiki/index.md) · [full bibliography (200 works)](sources/catalog.md)
+Supporting documents: [plan and method](research/00-research-plan.md) · [timeline](research/02-timeline.md) · [taxonomy](research/03-taxonomy.md) · [projects and systems landscape](research/04-projects-landscape.md) · [wiki index](wiki/index.md) · [full bibliography (202 works)](sources/catalog.md)
 
 ## Layout
 ```
