@@ -41,17 +41,62 @@ async def test_creates_parent_dir_and_appends_lines(tmp_path):
 
 
 async def test_writer_survives_unserializable_record(tmp_path, caplog):
+    # json.dumps's TypeError message embeds the offending type's name, so str(e) would leak it.
+    leaky = type("SENTINEL-LEAK", (), {})
     log = DecisionLogger(tmp_path / "d.jsonl", log_text=False)
     task = asyncio.create_task(log.run())
     with caplog.at_level(logging.ERROR):
-        log.emit(make_record(request_id="bad", probs={"x": object()}))
+        log.emit(make_record(request_id="bad", probs={"x": leaky()}))
         log.emit(make_record(request_id="good"))
         await log.close()
     task.cancel()
-    lines = (tmp_path / "d.jsonl").read_text(encoding="utf-8").splitlines()
-    assert [json.loads(line)["request_id"] for line in lines] == ["good"]
+    raw = (tmp_path / "d.jsonl").read_text(encoding="utf-8")
+    assert [json.loads(line)["request_id"] for line in raw.splitlines()] == ["good"]
     assert "TypeError" in caplog.text
-    assert "object at 0x" not in caplog.text  # never the record content
+    assert "SENTINEL-LEAK" not in caplog.text and "SENTINEL-LEAK" not in raw
+
+
+async def test_writer_survives_unwritable_path_and_close_returns(tmp_path, caplog):
+    blocker = tmp_path / "afile"
+    blocker.write_text("x")  # parent of the log path is a regular file: mkdir/open must fail
+    log = DecisionLogger(blocker / "d.jsonl", log_text=False)
+    task = asyncio.create_task(log.run())
+    with caplog.at_level(logging.ERROR):
+        log.emit(make_record(request_id="a"))
+        log.emit(make_record(request_id="b"))
+        await asyncio.wait_for(log.close(), 1)
+    assert not task.done()  # the writer loop is still alive
+    assert caplog.text.count("decision log write failed") == 2
+    assert "afile" not in caplog.text and "Errno" not in caplog.text
+    task.cancel()
+
+
+async def test_close_returns_when_run_never_started(tmp_path):
+    log = DecisionLogger(tmp_path / "d.jsonl", log_text=False)
+    log.emit(make_record())
+    await asyncio.wait_for(log.close(), 1)
+
+
+async def test_close_returns_after_writer_cancelled(tmp_path):
+    log = DecisionLogger(tmp_path / "d.jsonl", log_text=False)
+    task = asyncio.create_task(log.run())
+    await asyncio.sleep(0)
+    task.cancel()
+    await asyncio.gather(task, return_exceptions=True)
+    log.emit(make_record())
+    await asyncio.wait_for(log.close(), 1)
+
+
+async def test_error_kind_revalidated_at_serialization(tmp_path):
+    log = DecisionLogger(tmp_path / "d.jsonl", log_text=False)
+    task = asyncio.create_task(log.run())
+    rec = make_record()
+    rec.error_kind = "Traceback: user text"  # set after construction, bypassing __post_init__
+    log.emit(rec)
+    await log.close(); task.cancel()
+    raw = (tmp_path / "d.jsonl").read_text(encoding="utf-8")
+    assert json.loads(raw)["error_kind"] == "internal"
+    assert "Traceback" not in raw
 
 
 def test_hash_user_stable_and_salted():

@@ -65,6 +65,8 @@ class DecisionLogger:
         self.path = Path(path)
         self.log_text = log_text
         self._queue: asyncio.Queue[DecisionRecord] = asyncio.Queue()
+        self._running = False
+        self._stopped = asyncio.Event()
 
     def emit(self, rec: DecisionRecord) -> None:
         """Non-blocking enqueue; never touches the disk."""
@@ -72,28 +74,54 @@ class DecisionLogger:
 
     def _serialize(self, rec: DecisionRecord) -> str:
         data = dataclasses.asdict(rec)  # a copy: the caller's record is never mutated
+        # error_kind may have been set after construction: re-check so a bad value never reaches disk.
+        if data["error_kind"] is not None and data["error_kind"] not in ERROR_KINDS:
+            data["error_kind"] = "internal"
         if not self.log_text:
             data["text"] = None
         return json.dumps(data, ensure_ascii=False)
 
     def _append(self, line: str) -> None:
+        self.path.parent.mkdir(parents=True, exist_ok=True)
         with self.path.open("a", encoding="utf-8") as f:
             f.write(line + "\n")
 
     async def run(self) -> None:
-        """Background writer: append one JSON line per emitted record, forever (cancel to stop)."""
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        while True:
-            rec = await self._queue.get()
-            try:
-                line = self._serialize(rec)
-                await asyncio.to_thread(self._append, line)
-            except Exception as e:
-                # Exception type only: messages and record content may carry user text.
-                logger.error("decision log write failed: %s", type(e).__name__)
-            finally:
-                self._queue.task_done()
+        """Background writer: append one JSON line per emitted record, forever (cancel to stop).
+
+        Nothing in the loop can kill it: any per-record failure (serialization, mkdir, disk) is
+        logged by exception type only and the record is skipped.
+        """
+        self._running = True
+        self._stopped.clear()
+        try:
+            while True:
+                rec = await self._queue.get()
+                try:
+                    line = self._serialize(rec)
+                    await asyncio.to_thread(self._append, line)  # also creates the parent dir
+                except Exception as e:
+                    # Exception type only: messages and record content may carry user text.
+                    logger.error("decision log write failed: %s", type(e).__name__)
+                finally:
+                    self._queue.task_done()
+        finally:
+            self._running = False
+            self._stopped.set()
 
     async def close(self) -> None:
-        """Wait until everything already emitted has been written. Requires `run()` to be active."""
-        await self._queue.join()
+        """Wait until everything already emitted has been written.
+
+        Returns immediately if no writer is alive (never started, cancelled, or dead), and stops
+        waiting if the writer dies mid-drain, so shutdown can never hang.
+        """
+        await asyncio.sleep(0)  # let a just-created run() task reach its first step
+        if not self._running:
+            return
+        join = asyncio.ensure_future(self._queue.join())
+        stopped = asyncio.ensure_future(self._stopped.wait())
+        try:
+            await asyncio.wait({join, stopped}, return_when=asyncio.FIRST_COMPLETED)
+        finally:
+            join.cancel()
+            stopped.cancel()
